@@ -11,25 +11,27 @@
 	<section>
 		<div>
 			<h3>Bienvenido al sistema</h3>
-			<form id="FormInicio">
+			<form id="FormInicio" method="POST" action="controladores/login_controller.php">
 				<div class="row div-inicio">
 					<div class="input-field col m6 offset-m3">
-						<input id="usuario" type="text" class="validate" required>
+						<input id="usuario" type="text" class="validate" name="usuario" required>
 						<label for="usuario">Usuario</label>
 					</div>
 					<div class="input-field col m6 offset-m3">
-						<input id="contrasenia" type="password" class="validate" required>
+						<input id="contrasenia" type="password" class="validate" name="contrasenia" required>
 						<label for="contrasenia">Contraseña</label>
 					</div>
-					<div class="col m12 offset-m8">
-						<a class="btn-floating btn-large waves-effect waves-light green accent-2" href="vistas/vista_general.php"><i class="material-icons">done</i></a>
-					</div>
+					 <div class="col m12 offset-m8">
+                        <button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" type="submit" name="action">
+                            <i class="material-icons right">done</i>
+                        </button>
+                    </div>
 				</div>
 			</form>
 		</div>
 	</section>
-	<script src="js/script.js"></script>
 	<script src="js/jquery-3.3.1.js"></script>
+	<script src="js/script.js"></script>
 	<script src="js/materialize.js"></script>
 </body>
 </html>

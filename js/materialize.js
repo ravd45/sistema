@@ -8727,7 +8727,7 @@ $jscomp.polyfill = function (e, r, p, m) {
     autoClose: false,
 
     // the default output format for the input field value
-    format: 'mmm dd, yyyy',
+    format: 'yyyy-mm-dd',
 
     // Used to create date object from current input string
     parse: null,
@@ -8751,11 +8751,11 @@ $jscomp.polyfill = function (e, r, p, m) {
     maxDate: null,
 
     // Number of years either side, or array of upper/lower range
-    yearRange: 10,
+    yearRange: 100,
 
     // used internally (don't config outside)
-    minYear: 0,
-    maxYear: 9999,
+    minYear: 1890,
+    maxYear: 2100,
     minMonth: undefined,
     maxMonth: undefined,
 
@@ -8778,16 +8778,16 @@ $jscomp.polyfill = function (e, r, p, m) {
 
     // internationalization
     i18n: {
-      cancel: 'Cancel',
-      clear: 'Clear',
+      cancel: 'Cancelar',
+      clear: 'Limpiar',
       done: 'Ok',
       previousMonth: '‹',
       nextMonth: '›',
-      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      weekdaysAbbrev: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+      months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septimbre', 'Octubre', 'Noviembre', 'Dicimbre'],
+      monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+      weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sabádo'],
+      weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sab'],
+      weekdaysAbbrev: ['D', 'L', 'M', 'X', 'J', 'V', 'S']
     },
 
     // events array

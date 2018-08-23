@@ -1,13 +1,18 @@
 <?php 
-
-$server = "localhost";
-$user = "root";
-$pass = "desarrollo_1";
-$dbname = "sistema";
-
-$conn = new mysqli($server, $user, $pass, $dbname);
-
-if ($conn->connect_error) {
-	die("Conexión fallida ". $conn->connect_error);
+/**
+ * 
+ */
+class Conexion{
+	
+	function conectar(){
+		$server = "localhost";
+		$user = "root";
+		$pass = "desarrollo_1";
+		$dbname = "sistema";
+		
+		$conn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
+		return $conn;
+		
+	}
 }
 ?>

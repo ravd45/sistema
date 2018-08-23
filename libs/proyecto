@@ -1,0 +1,17 @@
+<?php 
+
+include 'conexionCat.php';
+
+$sql = "SELECT * FROM proyecto ORDER BY idproyecto DESC";
+$result = $conn->query($sql);
+
+while ($row=$result->fetch_assoc()){
+	$proyecto = $row['proyecto'];
+	$id = $row['idproyecto'];
+
+	  echo '<option value="'.$id.'">'.$proyecto.'</option>';
+     
+
+
+}
+ ?>
