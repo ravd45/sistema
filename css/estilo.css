@@ -1,11 +1,37 @@
 body{
-	background-color: #e6e6e6;
+	background-color: #B2EBF2;
 }
 
 h3{
 	text-align: center;
 }
 
+h6{
+	padding-left: 12%;
+	padding-top: 25%;
+}
+
 .div-inicio{
 	margin-top: 15%;
 }
+
+img:hover{
+	transform: scale(2);
+	transition: all .2s ease-in-out;
+}
+
+.img-menu{
+	width: 35%;
+	padding-top: 7%;
+	padding-left: 10%;
+}
+
+.dark-primario-color    { background: #0097A7; }
+.default-primario-color { background: #00BCD4; }
+.light-primario-color   { background: #B2EBF2; }
+.text-primario-color    { color: #FFFFFF; }
+.accent-color          { background: #8BC34A; }
+.primario-text-color    { color: #212121; }
+.secondario-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; }
+

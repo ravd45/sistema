@@ -13,12 +13,12 @@
 				</select>
 				<label>Proyecto</label>
 			</div>
-			<!-- fecha de apartado -->
+			<!-- fecha de apartado 
 			<div class="input-field col m4">
 				<i class="material-icons prefix">home</i>
 				<input id="fecha_apartado" name="fecha_apartado" type="text" class="validate datepicker" required>
 				<label>Fecha de apartado</label>
-			</div>
+			</div>-->
 			<!-- nombre -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">home</i>

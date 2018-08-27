@@ -15,7 +15,7 @@ class InicioSesion{
 		if (empty($response) || is_null($response)) {
 			echo "Datos invalidos";
 		} else{
-			echo "";
+			echo "<script>window.location='../vistas/vista_general.php';</script>";
 		}
 	}
 }
