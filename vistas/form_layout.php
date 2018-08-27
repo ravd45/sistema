@@ -1,51 +1,49 @@
-<?php include '../libs/header.php'; ?>
+<?php include '../libs/header.php';
+ 			include '../controladores/main_controller.php'?>
 
 <h3>LLenar formulario</h3>
 <form action="../controladores/layout_controller.php" method="POST">
 	<div class="row">
 		<div class="col m12">
 			<!-- proyecto -->
-			<div class="input-field col m12"> 
+			<div class="input-field col m12">
 				<i class="material-icons prefix">build</i>
 				<select name="proyecto" onchange="alerta()">
 					<option value="" disabled selected>Selecciona el proyecto</option>
-					<?php include '../libs/proyecto.php'; ?>
+					<?php
+						$main = new MainController();
+						$main->obtenerProyectos();
+					?>
 				</select>
 				<label>Proyecto</label>
 			</div>
-			<!-- fecha de apartado 
-			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
-				<input id="fecha_apartado" name="fecha_apartado" type="text" class="validate datepicker" required>
-				<label>Fecha de apartado</label>
-			</div>-->
 			<!-- nombre -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">account_circle</i>
 				<input id="nombre" name="nombre" type="text" class="validate" required>
 				<label>Nombre</label>
 			</div>
 			<!-- apellido paterno -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">account_circle</i>
 				<input id="apellido_p" name="apellido_p" type="text" class="validate" required>
 				<label>Apellido paterno</label>
 			</div>
 			<!-- apellido materno -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">account_circle</i>
 				<input id="apellido_m" name="apellido_m" type="text" class="validate" required>
 				<label>Apellido materno</label>
 			</div>
 			<!-- curp -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
-				<input id="CURP" name="curp" type="text" class="validate" required>
+				<i class="material-icons prefix">recent_actors</i>
+				<input id="CURP" name="curp" maxlength="18" type="text" class="validate" required>
 				<label>CURP</label>
 			</div>
 			<!-- genero -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">account_circle</i>
 				<select class="" name="genero" required>
 					<option value="" disabled selected>Selecciona el genero</option>
 					<option value="Femenino">Femenino</option>
@@ -56,7 +54,7 @@
 			</div>
 			<!-- estado civil -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">favorite</i>
 				<select class="" name="estado_civil" required>
 					<option value="" disabled selected>Selecciona el estado civil</option>
 					<option value="Soltero">Soltero</option>
@@ -71,63 +69,63 @@
 			</div>
 			<!-- fecha de nacimiento -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">cake</i>
 				<input name="fecha_nacimiento" type="text" class="validate datepicker">
 				<label>Fecha de nacimiento</label>
 			</div>
 			<!-- ingreso -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">attach_money</i>
 				<input name="ingreso" type="text" class="validate" required>
 				<label>Ingreso</label>
 			</div>
 			<!-- antiguedad -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
-				<input name="antiguedad" type="text" class="validate">
+				<i class="material-icons prefix">hourglass_full</i>
+				<input name="antiguedad" type="number" class="validate">
 				<label>Antigüedad</label>
 			</div>
 			<!-- ocupación -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">work</i>
 				<input name="ocupacion" type="text" class="validate" required>
 				<label>Ocupación</label>
 			</div>
 			<!-- teléfono -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
-				<input name="telefono" type="text" class="validate" required>
+				<i class="material-icons prefix">phone</i>
+				<input name="telefono" maxlength="10" type="number" class="validate" required>
 				<label>Teléfono</label>
 			</div>
 			<!-- solución -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">attach_money</i>
 				<input name="solucion" type="text" class="validate" required>
 				<label>Solución</label>
 			</div>
 			<!-- subsidio -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">attach_money</i>
 				<input name="subsidio" type="text" class="validate" required>
 				<label>Subsidio</label>
 			</div>
 			<!-- credito -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">attach_money</i>
 				<input name="credito" type="text" class="validate" required>
 				<label>Credito</label>
 			</div>
 			<!-- enganche en efectivo -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">attach_money</i>
 				<input name="enganche_efectivo" type="text" class="validate" required>
 				<label>Enganche en efectivo</label>
 			</div>
 			<!-- enganche en especie -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">list</i>
 				<select multiple name="enganche_especie">
-					<option value="" disabled selected>Selecciona el tipo de enganche</option>
+					<option value="" disabled>Selecciona el tipo de enganche</option>
 					<option value="Mano de obra">Mano de obra</option>
 					<option value="Material">Material</option>
 					<option value="Efectivo">Efectivo</option>
@@ -137,13 +135,13 @@
 			</div>
 			<!-- otros apoyos -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">attach_money</i>
 				<input name="otros_apoyos" type="text" class="validate" required>
 				<label>Otros apoyos</label>
 			</div>
 			<!-- modalidad -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">list</i>
 				<select class="" name="modalidad">
 					<option value="" disabled selected>Selecciona la modalidad</option>
 					<option value="Autoproduccion">Autoproducción</option>
@@ -154,92 +152,103 @@
 			</div>
 			<!-- CUV -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">assignment_turned_in</i>
 				<input name="cuv" type="text" class="validate" required>
 				<label>CUV</label>
 			</div>
 			<!-- puntaje -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
-				<input name="puntaje" type="text" class="validate" required>
+				<i class="material-icons prefix">exposure_plus</i>
+				<input name="puntaje" type="number" class="validate" required>
 				<label>Puntaje</label>
 			</div>
 			<!-- estado de méxico -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">location_city</i>
 				<select class="" name="estado">
 					<option value="" disabled selected>Selecciona el estado</option>
-					<?php include '../libs/estado.php'; ?>
+					<?php $main->catalogoEstado(); ?>
 				</select>
 				<label>Estado</label>
 			</div>
 			<!-- municipio -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">location_city</i>
 				<select class="" name="municipio">
 					<option value="" disabled selected>Selecciona el Municipio</option>
-					<?php include '../libs/municipios.php'; ?>
+					<?php $main->catalogoMunicipio(); ?>
 				</select>
 				<label>Municipio/Localidad</label>
 			</div>
 			<!-- código postal -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
-				<input name="cp" type="text" class="validate" required>
+				<i class="material-icons prefix">local_post_office</i>
+				<input name="cp" type="number" maxlength="5" class="validate" required>
 				<label>Código Postal</label>
 			</div>
 			<!-- colonia -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">location_city</i>
 				<input name="colonia" type="text" class="validate" required>
 				<label>Colonia</label>
 			</div>
 			<!-- domicilio del beneficiario -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">place</i>
 				<input name="domicilio_beneficiario" type="text" class="validate">
 				<label>Domicilio del beneficiario</label>
 			</div>
 			<!-- tipo_asentamiento -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">domain</i>
 				<select class="" name="tipo_asentamiento"></a>>
 					<option value="" disabled selected>Selecciona el tipo de asentamiento</option>
-					<option value="U1">U1</option>
-					<option value="U2">U2</option>
-					<option value="U3">U3</option>
+					<option value="U1">Rural</option>
+					<option value="U2">Urbano</option>
 				</select>
 				<label>Tipo de asentamiento</label>
 			</div>
 			<!-- latitud -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
-				<input name="latitud" type="text" class="validate" required>
+				<i class="material-icons prefix">map</i>
+				<input name="latitud" type="number" class="validate" required>
 				<label>Latitud</label>
 			</div>
 			<!-- longitud -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
-				<input name="Longitud" type="text" class="validate" required>
+				<i class="material-icons prefix">map</i>
+				<input name="longitud" type="number" class="validate" required>
 				<label>Longitud</label>
 			</div>
 			<!-- domicilio del terreno -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
+				<i class="material-icons prefix">place</i>
 				<input name="domicilio_terreno" type="text" class="validate" required>
 				<label>Domicilio del terreno</label>
 			</div>
 			<!-- PCU -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">home</i>
-				<input name="pcu" type="text" class="validate" required>
+				<i class="material-icons prefix">list</i>
+        <select class="" name="tipo_asentamiento"></a>>
+					<option value="" disabled selected>Selecciona el tipo de asentamiento</option>
+					<option value="U1">U1</option>
+					<option value="U2">U2</option>
+					<option value="U3">U3</option>
+				</select>
 				<label>PCU</label>
 			</div>
-			<div class="input-field col m5 offset-m7">
-				<button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" type="submit" name="action">
-					<i class="material-icons right">done</i>
-				</button>
-			</div>
+      <div class="row">
+      	<div class="col m12">
+      		<div class="col m8 offset-m1">
+              <a class="btn-floating btn-large waves-effect waves-light default-primario-color" href="checklist.php"><i class="material-icons">arrow_back</i></a>
+      		</div>
+      		<div class="col m2 offset-m1">
+            <button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" type="submit" name="action">
+              <i class="material-icons right">done</i>
+      		</div>
+        </button>
+      	</div>
+      </div>
 		</div>
 	</div>
 </form>

@@ -13,13 +13,19 @@
 	$(document).ready(function(){
 		$('select').formSelect();
 	});
-	
+
 </script>
 
 <script>
 	$(document).ready(function(){
 		$('.datepicker').datepicker();
 	});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $('.modal').modal();
+});
 </script>
 </body>
 </html>

@@ -11,9 +11,9 @@
 		<div class="col m4 offset-m1">
 			<h6 class="dark-pimario-color"> Lista de Proyectos</h6>
 			<br>
-			<a href="checklist.php"><img class="img-menu" src="../img/lista_proyecto.png" title="Lista de proyectos" alt="lista de proyectos"></a>
+			<a href="proyectos.php"><img class="img-menu" src="../img/lista_proyecto.png" title="Lista de proyectos" alt="lista de proyectos"></a>
 		</div>
-	</div>	
+	</div>
 </div>
 <!-- <ol>
 	<li><a href="checklist.php">CheckList</a></li>
