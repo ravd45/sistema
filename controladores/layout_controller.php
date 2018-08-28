@@ -6,20 +6,15 @@ require_once '../modelo/main_model.php';
  *
  */
 class LayoutController{
-	function entidades(){
+	function entidades($localidad, $municipio, $proyecto,$estado,$layout){
 	#variables manipuladas
-		$data = ['id' => $_POST['municipio']];
-		$result = MainModelo::obtenerMunicipio($data);
 
-		foreach ($result as $row => $item) {
-			$localidad = $item['municipio'];
-			}
 			$nom_comp = $_POST['nombre']." ".$_POST['apellido_p']." ".$_POST['apellido_m'];
 			$coordenada = $_POST['latitud']." -".$_POST['longitud'];
 			$rfc = substr($_POST['curp'], 0, 10);
 
 	#Arreglo traido del formulario
-			$data = ['proyecto' => $_POST['proyecto'],
+			$data = ['proyecto' => $proyecto,
 			'curp' => $_POST['curp'],
 			'nombre' => $_POST['nombre'],
 			'apellido_p' => $_POST['apellido_p'],
@@ -42,8 +37,8 @@ class LayoutController{
 			'modalidad' => $_POST['modalidad'],
 			'cuv' => $_POST['cuv'],
 			'puntaje' => $_POST['puntaje'],
-			'estado' => $_POST['estado'],
-			'municipio' => $_POST['municipio'],
+			'estado' => $estado,
+			'municipio' => $municipio,
 			'cp' => $_POST['cp'],
 			'localidad'=>$localidad,
 			'colonia' => $_POST['colonia'],
@@ -53,15 +48,23 @@ class LayoutController{
 			'latitud' => $_POST['latitud'],
 			'longitud' => "-".$_POST['longitud'],
 			'domicilio_terreno' => $_POST['domicilio_terreno'],
-			'pcu' => $_POST['pcu']];
+			'pcu' => $_POST['pcu'],
+			'layout'=>$layout];
 
 			return $data;
 	}
 	function guardaLayout(){
-		$data = $this->entidades();
+			$data = ['id' => $_POST['municipio']];
+			$result = MainModelo::obtenerMunicipio($data);
+
+			foreach ($result as $row => $item) {
+				$localidad = $item['municipio'];
+					$data = $this->entidades($localidad, $_POST['municipio'], $_POST['proyecto'], $_POST['estado'],"0");
+				}
+
 
 		$response = LayoutModelo::insertaLayout($data);
-print_r($data);
+
 		if ($response==1) {
 			echo "<script>window.location = '../vistas/proyectos.php';</script>";
 		}else{
@@ -73,16 +76,46 @@ print_r($data);
 
 	public function actualizaLayout()
 	{
-		// code...
+		$data = ['municipio' => $_POST['municipio'], 'proyecto'=>$_POST['proyecto'], 'estado'=>$_POST['estado']];
+		$result = MainModelo::obtenerIdMunicipio($data);
+		$response = MainModelo::obtenerIdProyecto($data);
+		$resultadoestado = MainModelo::obtenerIdEstado($data);
+
+		foreach ($resultadoestado as $row => $item) {
+			$idestado = $item['idestado'];
+		}
+
+		foreach ($response as $row => $item) {
+			$idproyecto = $item['idproyecto'];
+		}
+		foreach ($result as $row => $item) {
+			$idmunicipio = $item['idmunicipio'];
+				$data = $this->entidades($_POST['municipio'],$idmunicipio,$idproyecto, $idestado, $_POST['layout']);
+			}
+
+
+	$response = LayoutModelo::actualizaLayout($data);
+
+	if ($response==1) {
+		echo "<script>window.location = '../vistas/proyectos.php';</script>";
+	}else{
+
+		echo "datos no insertado<br>";
+		var_dump($data);
+
+	}
 	}
 }
 
-if(isset($_POST['curp'])){
+if(isset($_POST['curp']) && is_numeric($_POST['municipio']) && is_numeric($_POST['proyecto'])){
 	$layout = new LayoutController();
 	$layout->guardaLayout();
-}
-if (isset($_POST['actualizacion'])) {
+}else{
 	$layout = new LayoutController();
 	$layout->actualizaLayout();
 }
+
+
+
+
 ?>

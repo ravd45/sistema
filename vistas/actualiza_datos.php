@@ -3,6 +3,10 @@
 ?>
       <h3>Actualizar datos</h3>
 <?php
+
+$usuario = $_POST['id'];
       $actualizar = new ActualizarController();
-      $actualizar->obtenerDatos(2);
-      include '../libs/footer.php'; ?>
+      $actualizar->obtenerDatos($usuario);
+      include '../libs/footer.php';
+
+?>

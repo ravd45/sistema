@@ -52,9 +52,14 @@ class MainController
     $data = ['id'=>$id];
     $result = MainModelo::listaProyectos($data);
 
-    echo"<a class=' btn-small btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2' href='../vistas/form_layout.php' type='submit' name='action'>
-          <i class='material-icons right'>add</i></a>";
-
+    echo"<a class=' btn-small btn waves-effect waves-light btn-floating btn-large waves-effect waves-light blue accent-3' href='../vistas/form_layout.php' type='submit' name='action'>
+          <i class='material-icons right'>add</i></a>
+          			<form method='POST' action='../controladores/excel_controller.php'>
+          			<input type='number' value='".$id."' style='display: none;' name='folio'>
+          			<button class='btn-small btn waves-effect waves-light btn-floating waves-effect waves-light green accent-4' type='submit' name='action'>
+          			<i class='material-icons right'>print</i>
+          			</button>
+          			</form>";
     foreach ($result as $row => $item) {
       echo "
       <table>
@@ -63,9 +68,17 @@ class MainController
             <td>".$item['nombre_completo']."</a></td>
             <td></td>
             <td>
-              <a class='waves-effect waves-light modal-trigger'><i class='material-icons'>check_circle</i></a>
-              <a class='waves-effect waves-light modal-trigger' href='#cancelacion'><i class='material-icons'>cancel</i></a>
-              <a class='waves-effect waves-light modal-trigger' href='#sustitucion'><i class='material-icons'>compare_arrows</i></a>
+            	<form method='POST' action='../controladores/excel_controller.php'>
+              <input type='number' value='".$item['id_layout']."' style='display: none;' name='folio'>
+              <button class='btn-small btn waves-effect waves-light btn-floating waves-effect waves-light green accent-4' type='submit' name='action'>
+              <i class='material-icons'>done</i>
+              </form>
+              <button class='btn-small btn waves-effect waves-light btn-floating waves-effect waves-light green accent-3 modal-trigger' data-target='cancelacion' type='submit' name='action'><i class='material-icons'>cancel</i></button>
+              <form method='POST' action='../vistas/actualiza_datos.php'>
+              <input name='id' value='actualizacion' name='actualizacion' style='display:none;'>
+              <input name='id' value='".$item['id_layout']."' style='display:none;'>
+              <button class='btn-small btn waves-effect waves-light btn-floating waves-effect waves-light green accent-2' ><i class='material-icons'>update</i></button>
+              </form>
             </td>
           </tr>
         </tbody>
@@ -82,17 +95,17 @@ class MainController
              <label for='textarea1'>Motivo de cancelación</label>
            </div>
            <div>
-            <input name='id' value='".$item['id_layout']."' >
-            <input name='fecha' ".$fecha." >
+            <input name='id' value='".$item['id_layout']."' style='display:none;'>
+            <input name='fecha' ".$fecha." style='display:none;'>
            </div>
          </div>
-       </form>
      </div>
         </div>
         <div class='modal-footer'>
 
     <button class='btn-flat waves-effect waves-light waves-green' type='submit' name='action'>Aceptar
     </button>
+    </form>
         </div>
       </div>";
     }

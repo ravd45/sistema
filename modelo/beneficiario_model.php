@@ -16,6 +16,11 @@
 
       $result = ($stmt->execute()) ? 1 : 0;
 
+      if($result == 1){
+        $stmt = Conexion::conectar()->prepare("UPDATE layout SET estado_contrato = 'cancelado' where id_layout = :id");
+          $stmt -> bindParam(":id", $data['id'], PDO::PARAM_STR);
+          $stmt->execute();
+      }
       return $result;
       $stmt->close();
     }
