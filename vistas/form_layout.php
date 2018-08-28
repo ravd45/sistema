@@ -1,7 +1,7 @@
 <?php include '../libs/header.php';
  			include '../controladores/main_controller.php'?>
 
-<h3>LLenar formulario</h3>
+<h3>Llenar formulario</h3>
 <form action="../controladores/layout_controller.php" method="POST">
 	<div class="row">
 		<div class="col m12">
@@ -211,13 +211,13 @@
 			<!-- latitud -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">map</i>
-				<input name="latitud" type="number" class="validate" required>
+				<input name="latitud" type="text" class="validate" required>
 				<label>Latitud</label>
 			</div>
 			<!-- longitud -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">map</i>
-				<input name="longitud" type="number" class="validate" required>
+				<input name="longitud" type="text" class="validate" required>
 				<label>Longitud</label>
 			</div>
 			<!-- domicilio del terreno -->
@@ -229,7 +229,7 @@
 			<!-- PCU -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">list</i>
-        <select class="" name="tipo_asentamiento"></a>>
+        <select class="" name="pcu"></a>>
 					<option value="" disabled selected>Selecciona el tipo de asentamiento</option>
 					<option value="U1">U1</option>
 					<option value="U2">U2</option>
@@ -240,7 +240,7 @@
       <div class="row">
       	<div class="col m12">
       		<div class="col m8 offset-m1">
-              <a class="btn-floating btn-large waves-effect waves-light default-primario-color" href="checklist.php"><i class="material-icons">arrow_back</i></a>
+              <a class="btn-floating btn-large waves-effect waves-light default-primario-color" href="proyectos.php"><i class="material-icons">arrow_back</i></a>
       		</div>
       		<div class="col m2 offset-m1">
             <button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" type="submit" name="action">

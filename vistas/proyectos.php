@@ -9,25 +9,6 @@
 </div>
 </div>
 
-  <div id="cancelacion" class="modal">
-    <div class="modal-content">
-      <h4>Cancelación</h4>
-      <div class="row">
-   <form class="col s12">
-     <div class="row">
-       <div class="input-field col s12">
-         <textarea id="textarea1" class="materialize-textarea"></textarea>
-         <label for="textarea1">Motivo de cancelación</label>
-       </div>
-     </div>
-   </form>
- </div>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col m12">
       <div class="col m8 offset-m1">

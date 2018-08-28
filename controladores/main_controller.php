@@ -48,15 +48,15 @@ class MainController
 
   public function obtenesBeneficiarios($id)
   {
+    $fecha = include '../libs/fecha.php';
     $data = ['id'=>$id];
     $result = MainModelo::listaProyectos($data);
 
+    echo"<a class=' btn-small btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2' href='../vistas/form_layout.php' type='submit' name='action'>
+          <i class='material-icons right'>add</i></a>";
+
     foreach ($result as $row => $item) {
       echo "
-      <div class='col m2 offset-m10'>
-      <button class='btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2' href='../vistas/form_layout.php' type='submit' name='action'>
-        <i class='material-icons right'>add</i>
-      </div>
       <table>
         <tbody>
           <tr>
@@ -69,7 +69,32 @@ class MainController
             </td>
           </tr>
         </tbody>
-      </table>";
+      </table>
+
+      <div id='cancelacion' class='modal'>
+        <div class='modal-content'>
+          <h4>Cancelación</h4>
+          <div class='row'>
+       <form class='col m12' action='../controladores/actualizar_datos_controller.php' method='POST'>
+         <div class='row'>
+           <div class='input-field col m12'>
+             <textarea id='textarea1' name='motivo' class='materialize-textarea'></textarea>
+             <label for='textarea1'>Motivo de cancelación</label>
+           </div>
+           <div>
+            <input name='id' value='".$item['id_layout']."' >
+            <input name='fecha' ".$fecha." >
+           </div>
+         </div>
+       </form>
+     </div>
+        </div>
+        <div class='modal-footer'>
+
+    <button class='btn-flat waves-effect waves-light waves-green' type='submit' name='action'>Aceptar
+    </button>
+        </div>
+      </div>";
     }
   }
 
@@ -90,7 +115,31 @@ class MainController
     </ul>';
     }
   }
+
+  public function cancelarBeneficiario()
+  {
+    $data = ['motivo'=>$_POST['motivo'],
+             'id'=>$_POST['id'],
+             'fecha'=>$_POST['fecha']];
+    $result = MainModelo::cancelarBeneficiario($data);
+
+    if ($result==1) {
+      echo "<script>window.location='../vistas/proyectos.php';</script>";
+    }else{
+      echo "Error";
+    }
+  }
 }
 
+if(isset($_POST['motivo'])){
+  // $cancelacion = new MainController();
+  // $cancelacion->cancelarBeneficiario();
+
+  echo "<script>
+  	function alerta() {
+  		alert('Auch');
+  	}
+  </script>";
+}
 
 ?>

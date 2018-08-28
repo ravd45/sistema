@@ -34,9 +34,10 @@ class ProyectoModelo{
   public function obtenerDatos($id)
   {
     $stmt = Conexion::conectar()->prepare("
-    SELECT l.curp, l.nombre, l.apellido_paterno, l.apellido_materno, l.genero, l.estado_civil, l.fecha_nacimiento, l.ingreso, l.antiguedad, l.ocupacion, l.telefono, l.solucion, l.subsidio, l.credito, l.enganche_efectivo, l.enganche_especie, l.otros_apoyos, l.modalidad, l.cuv, l.puntaje, e.estado, m.municipio, l.codigo_postal, l.localidad, l.colonia, l.domicilio_beneficiario, l.tipo_asentamiento, l.latitud, l.longitud, l.domicilio_terreno, l.pcu FROM layout l
+    SELECT p.proyecto, l.curp, l.nombre, l.apellido_paterno, l.apellido_materno, l.genero, l.estado_civil, l.fecha_nacimiento, l.ingreso, l.antiguedad, l.ocupacion, l.telefono, l.solucion, l.subsidio, l.credito, l.enganche_efectivo, l.enganche_especie, l.otros_apoyos, l.modalidad, l.cuv, l.puntaje, e.estado, m.municipio, l.codigo_postal, l.localidad, l.colonia, l.domicilio_beneficiario, l.tipo_asentamiento, l.latitud, l.longitud, l.domicilio_terreno, l.pcu FROM layout l
     INNER JOIN municipio m on m.idmunicipio = l.id_municipio
     INNER JOIN estado e on e.idestado = l.id_estado
+    INNER JOIN proyecto p on p.idproyecto = l.id_proyecto
     WHERE l.id_layout = :id;");
 
     $stmt -> bindParam(":id", $id['id'], PDO::PARAM_STR);
