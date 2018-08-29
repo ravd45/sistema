@@ -19,10 +19,21 @@ class ActualizarController
           		<div class='col m12'>
               <!-- layout -->
               <div class='input-field col m12'>
-                <i class='material-icons prefix'>build</i>
-                  <input id='proyecto' name='layout' type='text' class='validate' value='".$item['id_layout']."' readonly required>
-                <label>Proyecto</label>
+                  <input style='display:none;' id='layout' name='layout' type='text' class='validate' value='".$item['id_layout']."' readonly required>
               </div>
+              <!-- motivo -->
+                <div class='input-field col m6'>
+                  <i class='material-icons prefix'>compare_arrows</i>
+                   <select onchange='otros()' id='motivo' name='motivo'>
+                      <option value='' disabled>Seleccion el motivo</option>
+                      <option value='Terreno no valido'>Terreno no valido</option>
+                      <option value='Subsidio previo'>Subsidio previo</option>
+                      <option value='Otro'>Otro</option>
+                   </select>
+                  <label>Motivo de sustitución</label>
+                </div>
+                <div class='input-field col m6' id='observacion'>
+                </div>
           			<!-- proyecto -->
           			<div class='input-field col m12'>
           				<i class='material-icons prefix'>build</i>
@@ -200,13 +211,13 @@ class ActualizarController
           			<!-- latitud -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>map</i>
-          				<input name='latitud' type='number' value='".$item['latitud']."' class='validate'  required>
+          				<input name='latitud' type='text' value='".$item['latitud']."' class='validate'  required>
           				<label>Latitud</label>
           			</div>
           			<!-- longitud -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>map</i>
-          				<input name='longitud' type='number' value='".$item['longitud']."' class='validate' required>
+          				<input name='longitud' type='text' value='".$item['longitud']."' class='validate' required>
           				<label>Longitud</label>
           			</div>
           			<!-- domicilio del terreno -->
@@ -224,7 +235,7 @@ class ActualizarController
                 <div class='row'>
                 	<div class='col m12'>
                 		<div class='col m8 offset-m1'>
-                        <a class='btn-floating btn-large waves-effect waves-light default-primario-color' href='checklist.php'><i class='material-icons'>arrow_back</i></a>
+                        <a class='btn-floating btn-large waves-effect waves-light default-primario-color' href='proyectos.php'><i class='material-icons'>arrow_back</i></a>
                 		</div>
                 		<div class='col m2 offset-m1'>
                       <button class='btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2' type='submit' name='action'>
@@ -239,28 +250,28 @@ class ActualizarController
       }
   }
 
-  public function cancelarBeneficiario()
-  {
-    $data = ['id' => $_POST['id'],
-             'fecha' => $_POST['fecha'],
-             'motivo' => $_POST['motivo']];
-    $result = BeneficiarioModelo::cancelarBeneficiario($data);
+  // public function cancelarBeneficiario()
+  // {
+  //   $data = ['id' => $_POST['id'],
+  //            'fecha' => $_POST['fecha'],
+  //            'motivo' => $_POST['motivo']];
+  //   $result = BeneficiarioModelo::cancelarBeneficiario($data);
 
-    $response = ($result==1) ? "<script>window.location='../vistas/proyectos.php';</script>" : "Error al insertar";
+  //   $response = ($result==1) ? "<script>window.location='../vistas/proyectos.php';</script>" : "Error al insertar";
 
-    echo $response;
+  //   echo $response;
 
-  }
+  // }
 }
 
-if (isset($_POST['motivo'])) {
-  $cancelacion = new ActualizarController();
-  $cancelacion -> cancelarBeneficiario();
-}
+// if (isset($_POST['motivo'])) {
+//   $cancelacion = new ActualizarController();
+//   $cancelacion -> cancelarBeneficiario();
+// }
 
-if (isset($_POST['motivo'])) {
-  $cancelacion = new ActualizarController();
-  $cancelacion -> cancelarBeneficiario();
-}
+// if (isset($_POST['motivo'])) {
+//   $cancelacion = new ActualizarController();
+//   $cancelacion -> cancelarBeneficiario();
+// }
 
 ?>

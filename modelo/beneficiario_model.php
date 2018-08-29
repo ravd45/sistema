@@ -9,9 +9,9 @@
 
     function cancelarBeneficiario($data)
     {
-      $stmt = Conexion::conectar()->prepare("INSERT INTO cancelacion (motivo, fecha_cancelacion, idlayout) VALUES (:motivo, :fecha, :id)");
+      $stmt = Conexion::conectar()->prepare("INSERT INTO cancelacion (motivo, idlayout) VALUES (:motivo,  :id)");
       $stmt -> bindParam(":motivo", $data['motivo'], PDO::PARAM_STR);
-      $stmt -> bindParam(":fecha", $data['fecha'], PDO::PARAM_STR);
+     
       $stmt -> bindParam(":id", $data['id'], PDO::PARAM_STR);
 
       $result = ($stmt->execute()) ? 1 : 0;

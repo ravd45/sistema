@@ -38,7 +38,7 @@ class ExcelModelo
 
         if(!empty($filas)) {
 
-            $filename = "libros.xls";
+            $filename = "layout.xls";
 
             header("Content-Type: application/vnd.ms-excel");
 

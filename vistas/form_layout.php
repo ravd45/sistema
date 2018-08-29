@@ -8,7 +8,7 @@
 			<!-- proyecto -->
 			<div class="input-field col m12">
 				<i class="material-icons prefix">build</i>
-				<select name="proyecto" onchange="alerta()">
+				<select name="proyecto" onchange="alerta()" required="true">
 					<option value="" disabled selected>Selecciona el proyecto</option>
 					<?php
 						$main = new MainController();
@@ -153,7 +153,7 @@
 			<!-- CUV -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">assignment_turned_in</i>
-				<input name="cuv" type="text" class="validate" required>
+				<input name="cuv" type="number" class="validate" required>
 				<label>CUV</label>
 			</div>
 			<!-- puntaje -->

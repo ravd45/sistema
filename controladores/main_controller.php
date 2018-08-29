@@ -13,7 +13,7 @@ class MainController
     foreach ($result as $row => $item) {
       $proyecto = $item['proyecto'];
       $id = $item['idproyecto'];
-        echo '<option value="'.$id.'">'.$proyecto.'</option>';
+      echo '<option value="'.$id.'">'.$proyecto.'</option>';
     }
   }
 
@@ -25,7 +25,7 @@ class MainController
       $estado = $item['estado'];
       $id = $item['idestado'];
 
-        echo '<option value="'.$id.'">'.$estado.'</option>';
+      echo '<option value="'.$id.'">'.$estado.'</option>';
     }
   }
 
@@ -37,7 +37,7 @@ class MainController
       $municipio = $item['municipio'];
       $id = $item['idmunicipio'];
 
-        echo '<option value="'.$id.'">'.$municipio.'</option>';
+      echo '<option value="'.$id.'">'.$municipio.'</option>';
     }
   }
 
@@ -48,66 +48,87 @@ class MainController
 
   public function obtenesBeneficiarios($id)
   {
-    $fecha = include '../libs/fecha.php';
+    // $fecha = include '../libs/fecha.php';
     $data = ['id'=>$id];
     $result = MainModelo::listaProyectos($data);
 
-    echo"<a class=' btn-small btn waves-effect waves-light btn-floating btn-large waves-effect waves-light blue accent-3' href='../vistas/form_layout.php' type='submit' name='action'>
-          <i class='material-icons right'>add</i></a>
-          			<form method='POST' action='../controladores/excel_controller.php'>
-          			<input type='number' value='".$id."' style='display: none;' name='folio'>
-          			<button class='btn-small btn waves-effect waves-light btn-floating waves-effect waves-light green accent-4' type='submit' name='action'>
-          			<i class='material-icons right'>print</i>
-          			</button>
-          			</form>";
-    foreach ($result as $row => $item) {
-      echo "
-      <table>
-        <tbody>
-          <tr>
-            <td>".$item['nombre_completo']."</a></td>
-            <td></td>
-            <td>
-            	<form method='POST' action='../controladores/excel_controller.php'>
-              <input type='number' value='".$item['id_layout']."' style='display: none;' name='folio'>
-              <button class='btn-small btn waves-effect waves-light btn-floating waves-effect waves-light green accent-4' type='submit' name='action'>
-              <i class='material-icons'>done</i>
-              </form>
-              <button class='btn-small btn waves-effect waves-light btn-floating waves-effect waves-light green accent-3 modal-trigger' data-target='cancelacion' type='submit' name='action'><i class='material-icons'>cancel</i></button>
-              <form method='POST' action='../vistas/actualiza_datos.php'>
-              <input name='id' value='actualizacion' name='actualizacion' style='display:none;'>
-              <input name='id' value='".$item['id_layout']."' style='display:none;'>
-              <button class='btn-small btn waves-effect waves-light btn-floating waves-effect waves-light green accent-2' ><i class='material-icons'>update</i></button>
-              </form>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div id='cancelacion' class='modal'>
-        <div class='modal-content'>
-          <h4>Cancelación</h4>
-          <div class='row'>
-       <form class='col m12' action='../controladores/actualizar_datos_controller.php' method='POST'>
-         <div class='row'>
-           <div class='input-field col m12'>
-             <textarea id='textarea1' name='motivo' class='materialize-textarea'></textarea>
-             <label for='textarea1'>Motivo de cancelación</label>
-           </div>
-           <div>
-            <input name='id' value='".$item['id_layout']."' style='display:none;'>
-            <input name='fecha' ".$fecha." style='display:none;'>
-           </div>
-         </div>
-     </div>
-        </div>
-        <div class='modal-footer'>
-
-    <button class='btn-flat waves-effect waves-light waves-green' type='submit' name='action'>Aceptar
+    echo"
+    <div class='row'>
+    <div class='col m12'>
+    <div class='col m2'>
+    <a class=' btn-small btn waves-effect waves-light btn-large waves-effect waves-light blue accent-3' href='../vistas/form_layout.php' type='submit' name='action'>
+    <i class='material-icons right'>add</i>Agregar</a>
+    </div>
+    <div class='col m2 offset-m10'>  
+    <form method='POST' action='../controladores/excel_controller.php'>
+    <input type='number' value='".$id."' style='display: none;' name='folio'>
+    <button class='btn-small btn waves-effect waves-light waves-effect waves-light green accent-4' type='submit' name='action'>
+    <i class='material-icons right'>print</i>Exportar
     </button>
     </form>
-        </div>
-      </div>";
+    </div>
+    </div>
+    </div>";
+
+    foreach ($result as $row => $item) {
+      echo "
+ <table class=''>
+      <tbody>
+        <tr>
+          <td style='width:250px;'>".$item['nombre_completo']."</td>
+          <td>
+            <div class='row'>
+              <div class='col m10 offset-m6'>
+                <div class='col m2'>";
+                if($item['estatus']=='Solicitante'){
+                 echo" <form method='POST' action='../controladores/layout_controller.php'>
+                    <input type='number' value='ejecuta' style='display: none;' name='ejecuta'>
+                    <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
+                    <button class='btn-small btn waves-effect waves-light  waves-effect waves-light teal accent-4' type='submit' name='action'>Ejecución 
+                      <i class='material-icons'>done</i>
+                    </button>
+                  </form>";
+                } else {
+                  if ($item['estatus']=='EN EJECUCION') {
+                  echo " <form method='POST' action='../controladores/layout_controller.php'>
+                    <input type='text' value='aparta' style='display: none;' name='aparta'>
+                    <!-- fecha de apartado -->
+                    <div class='input-field'>
+                      <i class='material-icons prefix'>cake</i>
+                      <input name='fecha_apartado' type='text' class='validate datepicker' required>
+                      <label>Fecha de apartado</label>
+                    </div>
+                    <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
+                    <button class='btn-small btn waves-effect waves-light  waves-effect waves-light blue accent-4' type='submit' name='action'>Apartado 
+                      <i class='material-icons'>done</i>
+                    </button>
+                  </form>";
+                  }else{
+                    echo "APARTADO: ".$item['fecha_apartado'];
+                  }
+                }
+                echo "</div>
+                <div class='col m2'>
+                <form method='POST' action='../vistas/cancela_beneficiario.php'>
+                    <input name='id' value='".$item['id_layout']."' style='display:none;'>
+                  <button class='btn-small btn waves-effect waves-light waves-effect waves-light green darken-4 ' onclick='cancelacion()' type='submit' name='action'>Cancelar <i class='material-icons'>cancel</i></button>
+                </form>
+                </div>
+                <div class='col m2'>
+                  <form method='POST' action='../vistas/actualiza_datos.php'>
+                    <input value='actualizacion' name='actualizacion' style='display:none;'>
+                    <input name='id' value='".$item['id_layout']."' style='display:none;'>
+                    <button class='btn-small btn waves-effect waves-light  waves-effect waves-light light-green darken-4' >Sustituir <i class='material-icons'>update</i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+     </table>
+";
     }
   }
 
@@ -117,23 +138,23 @@ class MainController
 
     foreach ($result as $row => $item) {
       echo'<ul class="collapsible">
-        <li>
-          <div class="collapsible-header"><i class="material-icons">build</i>'.$item["proyecto"].'</div>
-          <div class="collapsible-body">
-            <span>';
-              $this->obtenesBeneficiarios($item['idproyecto']);
-        echo'</span>
-          </div>
-        </li>
-    </ul>';
+      <li>
+      <div class="collapsible-header"><i class="material-icons">build</i>'.$item["proyecto"].'</div>
+      <div class="collapsible-body">
+      <span>';
+      $this->obtenesBeneficiarios($item['idproyecto']);
+      echo'</span>
+      </div>
+      </li>
+      </ul>';
     }
   }
 
   public function cancelarBeneficiario()
   {
     $data = ['motivo'=>$_POST['motivo'],
-             'id'=>$_POST['id'],
-             'fecha'=>$_POST['fecha']];
+    'id'=>$_POST['id'],
+    'fecha'=>$_POST['fecha']];
     $result = MainModelo::cancelarBeneficiario($data);
 
     if ($result==1) {
@@ -149,9 +170,9 @@ if(isset($_POST['motivo'])){
   // $cancelacion->cancelarBeneficiario();
 
   echo "<script>
-  	function alerta() {
-  		alert('Auch');
-  	}
+  function alerta() {
+    alert('Auch');
+  }
   </script>";
 }
 

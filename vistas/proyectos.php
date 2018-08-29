@@ -16,4 +16,15 @@
       </div>
     </div>
   </div>
+  <div>
+   
+  </div>
+  <script>
+    function cancelacion() {
+      var id = document.getElementById('btn-cancel').val;
+      console.log(id);
+       // document.getElementById('cancelacion'+id).innerHTML = ("<font color=\"red\">Este texto se verá en rojo</font>");
+    }
+  </script>
+
 <?php include '../libs/footer.php'; ?>

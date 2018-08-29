@@ -94,10 +94,42 @@ class LayoutModelo{
 		if($result == 1){
 			$stmt = Conexion::conectar()->prepare("UPDATE layout SET estado_contrato = 'sustituido' where id_layout = :id");
 				$stmt -> bindParam(":id", $data['layout'], PDO::PARAM_STR);
-				$stmt->execute();
+				$result = ($stmt->execute()) ? 1 : 0;
+
+				if ($result == 1) {
+					$stmt = Conexion::conectar()->prepare("INSERT INTO sustitucion (motivo, id_layout) VALUES (:motivo, :id)");
+					$stmt -> bindParam(":motivo", $data['motivo'], PDO::PARAM_STR);
+					$stmt -> bindParam(":id", $data['layout'], PDO::PARAM_STR);
+					$stmt->execute();
+				}
 		}
 		return $result;
 		$stmt->close();
+	}
+
+	function ejecucionLayout($data){
+		$stmt = Conexion::conectar()->prepare("UPDATE layout SET estatus = 'EN EJECUCION' WHERE id_layout = :id");
+		$stmt -> bindParam(":id", $data['id'], PDO::PARAM_STR);
+		
+		$result = ($stmt->execute()) ? 1 : 0;
+
+		return $result;
+
+		$stmt->close();
+
+	}
+
+	function apartaLayout($data){
+		$stmt = Conexion::conectar()->prepare("UPDATE layout SET estatus = 'APARTADO', fecha_apartado = :fecha WHERE id_layout = :id");
+		$stmt -> bindParam(":id", $data['id'], PDO::PARAM_STR);
+		$stmt -> bindParam(":fecha", $data['fecha'], PDO::PARAM_STR);
+		
+		$result = ($stmt->execute()) ? 1 : 0;
+
+		return $result;
+
+		$stmt->close();
+
 	}
 }
 ?>

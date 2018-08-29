@@ -20,7 +20,7 @@
 			</div>
 			<div class="input-field col m6 offset-m4">
 				<i class="material-icons prefix">schedule</i>
-				<input id="proyecto" name="fecha" type="text" <?php include '../libs/fecha.php'; ?> readonly = "true" class="validate" required>
+				<input id="proyecto" name="fecha" type="text" value="<?php include '../libs/fecha.php'; ?>" class="validate" required readonly>
 				<label>Fecha de creación</label>
 			</div>
 			<div class="row">
