@@ -78,13 +78,20 @@ class MainController
           <td style='width:250px;'>".$item['nombre_completo']."</td>
           <td>
             <div class='row'>
-              <div class='col m10 offset-m6'>
+              <div class='col m9 offset-m4'>
+                <div class='col m2'>
+                   <form method='POST' action='../vistas/checklist.php'>
+                      <input name='id' value='".$item['id_layout']."' style='display:none;'>
+                      <button class='btn-small btn waves-effect waves-light  waves-effect waves-light  cyan darken-4' >checklist <i class='material-icons'>playlist_add_check</i>
+                      </button>
+                    </form>
+                </div>
                 <div class='col m2'>";
                 if($item['estatus']=='Solicitante'){
                  echo" <form method='POST' action='../controladores/layout_controller.php'>
                     <input type='number' value='ejecuta' style='display: none;' name='ejecuta'>
                     <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
-                    <button class='btn-small btn waves-effect waves-light  waves-effect waves-light teal accent-4' type='submit' name='action'>Ejecución 
+                    <button class='btn-small btn waves-effect waves-light  waves-effect waves-light teal darken-4' type='submit' name='action'>Ejecución 
                       <i class='material-icons'>done</i>
                     </button>
                   </form>";
@@ -93,15 +100,15 @@ class MainController
                   echo " <form method='POST' action='../controladores/layout_controller.php'>
                     <input type='text' value='aparta' style='display: none;' name='aparta'>
                     <!-- fecha de apartado -->
+                    <button class='btn-small btn waves-effect waves-light  waves-effect waves-light teal darken-2' type='submit' name='action'>Apartado 
+                      <i class='material-icons'>done</i>
+                    </button>
                     <div class='input-field'>
-                      <i class='material-icons prefix'>cake</i>
+                      <i class='material-icons prefix'>schedule</i>
                       <input name='fecha_apartado' type='text' class='validate datepicker' required>
                       <label>Fecha de apartado</label>
                     </div>
                     <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
-                    <button class='btn-small btn waves-effect waves-light  waves-effect waves-light blue accent-4' type='submit' name='action'>Apartado 
-                      <i class='material-icons'>done</i>
-                    </button>
                   </form>";
                   }else{
                     echo "APARTADO: ".$item['fecha_apartado'];
