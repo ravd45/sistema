@@ -8,6 +8,7 @@ if ($_POST["action"] == "upload")
     $tipo = $_FILES["archivo"]['type'];
     $archivo = $_FILES["archivo"]['name'];
     $usuario = $_POST['usuario'];
+    $alias = $_POST['alias'];
     
     if ($archivo != "") 
     {
@@ -25,11 +26,11 @@ if ($_POST["action"] == "upload")
             die("Connection failed: " . $conn->connect_error);
         } 
 
-        $sql = "INSERT INTO documento (documento, id_layout) VALUES ('".$destino."', $usuario)";
+        $sql = "INSERT INTO documento (documento, id_layout, alias) VALUES ('".$destino."', $usuario, '".$alias."')";
         if (!$inserta = mysqli_query($conn, $sql)) {
             echo " no insertado";
         }else{
-            echo "insertado";
+            echo "<script>alert('Archivo subido correctamente');window.location='../vistas/proyectos.php?i=1';</script>";
         }
     } 
     else 

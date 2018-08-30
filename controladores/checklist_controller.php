@@ -70,7 +70,7 @@ require_once '../modelo/checklist_model.php';
 									<input type='checkbox' checked='checked'  value='1' name='ife'/>
 									<span>Identificación Oficial Vigente (IFE/INE)</span>
 								</label>
-								<a class='btn-floating blue' href='../libs/archivos/subirArchivos.php'><i class='material-icons'>attach_file</i></a>
+								
 							</p>";
 					}else{
 						echo " <p>
@@ -78,7 +78,7 @@ require_once '../modelo/checklist_model.php';
 						<input type='checkbox' name='ife' value='1'/>
 						<span>Identificación Oficial Vigente (IFE/INE)</span>
 						</label>
-						<a class='btn-floating blue' href='../libs/archivos/subirArchivos.php'><i class='material-icons'>attach_file</i></a>
+						
 						</p>";
 					}
 
@@ -88,7 +88,7 @@ require_once '../modelo/checklist_model.php';
 						<input type='checkbox' checked='checked'  value='1' name='curp'/>
 						<span>CURP (Clave Unica de Registro de Población)</span>
 						</label>
-						<a class='btn-floating blue' href='../libs/archivos/subirArchivos.php'><i class='material-icons'>attach_file</i></a>
+						
 						</p>";
 					}else{
 						echo "<p>
@@ -96,7 +96,7 @@ require_once '../modelo/checklist_model.php';
 						<input type='checkbox' value='1' name='curp'/>
 						<span>CURP (Clave Unica de Registro de Población)</span>
 						</label>
-						<a class='btn-floating blue' href='../libs/archivos/subirArchivos.php'><i class='material-icons'>attach_file</i></a>
+						
 						</p>";
 					}
 
@@ -106,7 +106,7 @@ require_once '../modelo/checklist_model.php';
 						<input type='checkbox' checked='checked'  value='1' name='domicilio'/>
 						<span>Comprobante de Domicilio (No mayor a 2 meses)</span>
 						</label>
-						<a class='btn-floating blue' href='../libs/archivos/subirArchivos.php'><i class='material-icons'>attach_file</i></a>
+						
 						</p>";
 					}else{
 						echo "<p>
@@ -114,7 +114,7 @@ require_once '../modelo/checklist_model.php';
 						<input type='checkbox'  value='1' name='domicilio'/>
 						<span>Comprobante de Domicilio (No mayor a 2 meses)</span>
 						</label>
-						<a class='btn-floating blue' href='../libs/archivos/subirArchivos.php'><i class='material-icons'>attach_file</i></a>
+						
 						</p>";
 					}
 
@@ -124,7 +124,7 @@ require_once '../modelo/checklist_model.php';
 						<input type='checkbox' checked='checked'  value='1' name='acta'/>
 						<span>Acta de nacimiento</span>
 						</label>
-						<a class='btn-floating blue' href='../libs/archivos/subirArchivos.php'><i class='material-icons'>attach_file</i></a>
+						
 						</p>";
 					}else{
 						echo "<p>
@@ -132,7 +132,7 @@ require_once '../modelo/checklist_model.php';
 						<input type='checkbox' value='1' name='acta'/>
 						<span>Acta de nacimiento</span>
 						</label>
-						<a class='btn-floating blue' href='../libs/archivos/subirArchivos.php'><i class='material-icons'>attach_file</i></a>
+						
 						</p>";
 					}
 
@@ -142,7 +142,7 @@ require_once '../modelo/checklist_model.php';
 						<input type='checkbox' checked='checked' value='1'  name='terreno'/>
 						<span>Comprobante de propiedad o posesión del terreno a nombre del beneficiario</span>
 						</label>
-						<a class='btn-floating blue' href='../libs/archivos/subirArchivos.php'><i class='material-icons'>attach_file</i></a>
+						
 						</p>";
 					}else{
 						echo "<p>
@@ -150,7 +150,7 @@ require_once '../modelo/checklist_model.php';
 						<input type='checkbox' value='1' name='terreno'/>
 						<span>Comprobante de propiedad o posesión del terreno a nombre del beneficiario</span>
 						</label>
-						<a class='btn-floating blue' href='../libs/archivos/subirArchivos.php'><i class='material-icons'>attach_file</i></a>
+						
 						</p>";
 					}
 				}
@@ -176,10 +176,18 @@ require_once '../modelo/checklist_model.php';
 						
 						echo '<script>
 								function subir(){
-									document.getElementById("up").innerHTML = \'  <form action="../libs/subir2.php" method="post" enctype="multipart/form-data"><table width="445" height="55" border="0" cellpadding="0" cellspacing="0"><tr><input name="archivo" type="file"  id="archivo" size="35" /><input name="enviar" type="submit"  id="enviar" value="colgar" /><input name="action" style="display:none;" value="upload" /><input name="usuario" style="display:none;" value="'.$id.'" /> </td></tr></table></form> \';
+									document.getElementById("up").innerHTML = \' <br> <form action="../libs/subir2.php" method="post" enctype="multipart/form-data"><table width="445" height="55" border="0" cellpadding="0" cellspacing="0"><tr><input name="archivo" type="file"  id="archivo" size="35" /><input name="alias" type="text" placeholder="Nombre del documento"><input name="enviar" type="submit" class="btn-small grey"  id="enviar" value="colgar" /><input name="action" style="display:none;" value="upload" /><input name="usuario" style="display:none;" value="'.$id.'" /> </td></tr></table></form> \';
 								}
 							</script>';
 						
+		
+			$archivos = ChecklistModelo::obtenerDocumentos($data);
+
+			foreach ($archivos as $key => $value) {
+				echo '<ul>
+						<li><a href="../libs/'.$value['documento'].'" target="_blank">'.$value['alias'].'</a></li>
+					  </ul>';
+			}
 				echo"	</div>
 					</div>";
 		}

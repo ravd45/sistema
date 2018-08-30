@@ -66,6 +66,17 @@ class ChecklistModelo{
 		return $stmt->fetchAll();
 		$stmt-close();
 	}
+
+	function obtenerDocumentos($data)
+	{
+		$stmt = Conexion::conectar()->prepare("SELECT * from documento where id_layout = :id;");
+		$stmt->bindParam(":id", $data['id'], PDO::PARAM_STR);
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+	}
 }
 
 $checklist = new ChecklistModelo();
