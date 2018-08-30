@@ -2,6 +2,7 @@
 
 require_once '../modelo/layout_model.php';
 require_once '../modelo/beneficiario_model.php';
+require_once '../modelo/main_model.php';
 /**
  *
  */

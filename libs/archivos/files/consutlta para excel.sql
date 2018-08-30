@@ -1,0 +1,8 @@
+SELECT UPPER( l.estatus) as 'STATUS', UPPER(l.fecha_apartado) as 'FECHA APARTADO', UPPER(l.curp) AS 'CURP', UPPER(l.nombre) AS 'NOMBRE', UPPER(l.apellido_paterno) AS 'APELLIDO PATERNO', UPPER(l.apellido_materno) AS 'APELLIDO MATERNO', UPPER(l.nombre_completo) AS 'NOMBRE COMPLETO', UPPER(l.genero) AS 'GENERO', UPPER(l.estado_civil) AS 'ESTADO CIVIL', UPPER(l.fecha_nacimiento) AS 'FECHA DE NACIMIENTO', UPPER(l.rfc) AS 'RFC', UPPER(l.ingreso) AS 'INGRESO',
+    UPPER(l.antiguedad) AS 'ANTIGÜEDAD', UPPER(l.ocupacion) AS 'OCUPACIÓN', UPPER(l.telefono) AS 'TELÉFONO', UPPER(l.solucion) AS 'SOLUCIÓN', UPPER(l.subsidio) AS 'SUBSIDIO', UPPER(l.credito) AS 'CRÉDITO', UPPER(l.enganche_efectivo) AS 'ENGANCHE EN EFECTIVO', UPPER(l.enganche_especie) AS 'ENGANCHE EN ESPECIE', UPPER(l.otros_apoyos) AS 'OTROS APOYOS', UPPER(l.modalidad) AS 'MODALIDAD',
+    UPPER(l.cuv) AS 'CUV', UPPER(l.puntaje) AS 'PUNTAQJE', e.estado) AS 'ESTADO', m.municipio) AS 'MUNICIPIO', UPPER(l.codigo_postal) AS 'CÓDIGO POSTAL', UPPER(l.localidad) AS 'LOCALIDAD', UPPER(l.colonia) AS 'COLONIA', UPPER(l.domicilio_beneficiario) AS 'DOMICILIO DEL BENEFICIARIO', UPPER(l.tipo_asentamiento) AS 'TIPO DE ASENTAMIENTO', UPPER(l.coordenadas) AS 'COORDENADAS', UPPER(l.latitud) AS 'LATITUD', UPPER(l.longitud) AS 'LONGITUD', UPPER(l.domicilio_terreno) AS 'DOMICILIO DEL TERRENO', UPPER(l.pcu) AS 'PCU'
+    FROM layout l
+    INNER JOIN municipio m on m.idmunicipio = l.id_municipio
+    INNER JOIN estado e on e.idestado = l.id_estado
+    INNER JOIN proyecto p on p.idproyecto = l.id_proyecto
+    WHERE l.id_proyecto = 8;

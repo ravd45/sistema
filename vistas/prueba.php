@@ -1,17 +1,11 @@
-<?php 
-/**
- * 
- */
+<?php include '../libs/header.php';?>
+<?php $x = 7;?>
+  <a class="waves-effect waves-light modal-trigger btn" onclick="alert()">Modal</a>
 
-class Ajax{
-	
-	function login()
-	{
-		print_r("Hola desde php");
-	}
-}
-if (isset($_POST["usuario"])) {
-	$a = new Ajax();
-	$a->login();
-}
- ?>
+
+  <?php
+ 
+  echo '<script language="javascript">alert("No hay datos para exportar");</script>'; 
+      include '../libs/footer.php';
+
+?>

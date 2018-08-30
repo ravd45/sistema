@@ -38,7 +38,7 @@
 			<!-- curp -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">recent_actors</i>
-				<input id="CURP" name="curp" maxlength="18" type="text" class="validate" required>
+				<input id="CURP" name="curp" maxlength="18" type="text" class="curp validate" required>
 				<label>CURP</label>
 			</div>
 			<!-- genero -->

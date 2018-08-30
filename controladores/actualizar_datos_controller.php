@@ -61,7 +61,7 @@ class ActualizarController
           			<!-- curp -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>recent_actors</i>
-          				<input id='CURP' name='curp' value='". $item['curp']."' maxlength='18' type='text'value='".$item['curp']."' class='validate' required>
+          				<input id='CURP' name='curp' data-length='18' maxlength='18' type='text'value='".$item['curp']."' class='validate' required>
           				<label>CURP</label>
           			</div>
           			<!-- genero -->
@@ -144,7 +144,7 @@ class ActualizarController
           					<option value='Mano de obra'>Mano de obra</option>
           					<option value='Material'>Material</option>
           					<option value='Efectivo'>Efectivo</option>
-          					<option value='Pendiente'>Pendiente</option>
+          					<option value='Pendiente' selected>Pendiente</option>
           				</select>
           				<label>Enganche en especie</label>
           			</div>
