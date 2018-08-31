@@ -1,5 +1,5 @@
 
-<script src="../js/script.js"></script>
+<!-- <script src="../js/script.js"></script> -->
 <script src="../js/jquery-3.3.1.js"></script>
 <script src="../js/materialize.js"></script>
 
@@ -16,7 +16,9 @@
 
 <script>
 	$(document).ready(function(){
-		$('.datepicker').datepicker();
+		// $('.datepicker').datepicker();
+		$('#datep').datepicker();
+			
 	});
 </script>
 

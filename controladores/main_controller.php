@@ -6,14 +6,19 @@ require_once '../modelo/main_model.php';
 class MainController
 {
 
-  public function obtenerProyectos()
+  public function obtenerProyectos($proyectoGET)
   {
     $result = MainModelo::obtenerProyectos();
 
     foreach ($result as $row => $item) {
       $proyecto = $item['proyecto'];
       $id = $item['idproyecto'];
+      if($id == $proyectoGET){
+        echo '<option value="'.$id.'" selected>'.$proyecto.'</option>';
+      }else{
+
       echo '<option value="'.$id.'">'.$proyecto.'</option>';
+      }
     }
   }
 
@@ -46,8 +51,11 @@ class MainController
     echo "adíos";
   }
 
-  public function obtenesBeneficiarios($id)
+  public function obtenerBeneficiarios($id)
   {
+     date_default_timezone_set('America/Mexico_city');
+        $fecha = date('Y-m-d');
+       
     // $fecha = include '../libs/fecha.php';
     $data = ['id'=>$id];
     $result = MainModelo::listaProyectos($data);
@@ -56,7 +64,7 @@ class MainController
     <div class='row'>
     <div class='col m12'>
     <div class='col m2'>
-    <a class=' btn-small btn waves-effect waves-light btn-large waves-effect waves-light blue accent-3' href='../vistas/form_layout.php' type='submit' name='action'>
+    <a class=' btn-small btn waves-effect waves-light btn-large waves-effect waves-light blue accent-3' href='../vistas/form_layout.php?w=$id' type='submit' name='action'>
     <i class='material-icons right'>add</i>Agregar</a>
     </div>
     <div class='col m2 offset-m10'>  
@@ -103,10 +111,14 @@ class MainController
                     <button class='btn-small btn waves-effect waves-light  waves-effect waves-light teal darken-2' type='submit' name='action'>Apartado 
                       <i class='material-icons'>done</i>
                     </button>
-                    <div class='input-field'>
+                    <div class = 'row'>                    
+                    <div class = 'col m12'>                      
+                    <div class=''>
                       <i class='material-icons prefix'>schedule</i>
-                      <input name='fecha_apartado' type='text' class='validate datepicker' required>
-                      <label>Fecha de apartado</label>
+                      <input type='date' name='fecha_apartado' max='".$fecha."' placeholder='Fecha de apartado'>
+                      
+                    </div>
+                    </div>
                     </div>
                     <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
                   </form>";
@@ -149,7 +161,7 @@ class MainController
       <div class="collapsible-header"><i class="material-icons">build</i>'.$item["proyecto"].'</div>
       <div class="collapsible-body">
       <span>';
-      $this->obtenesBeneficiarios($item['idproyecto']);
+      $this->obtenerBeneficiarios($item['idproyecto']);
       echo'</span>
       </div>
       </li>

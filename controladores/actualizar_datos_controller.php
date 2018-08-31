@@ -79,7 +79,7 @@ class ActualizarController
           			<!-- estado civil -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>favorite</i>
-          				<input name='estado_civil' type='text' value='".$item['estado_civil']."' readonly required>
+          				<input name='estado_civil' type='text' value='".$item['estado_civil']."'  required>
           				<label>Estado civil</label>
           			</div>
           			<!-- fecha de nacimiento -->
@@ -139,7 +139,7 @@ class ActualizarController
           			<!-- enganche en especie -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>list</i>
-          				<select multiple name='enganche_especie'>
+          				<select multiple name='enganche_especie' readonly>
           					<option value='' disabled>Selecciona el tipo de enganche</option>
           					<option value='Mano de obra'>Mano de obra</option>
           					<option value='Material'>Material</option>
@@ -163,7 +163,7 @@ class ActualizarController
           			<!-- CUV -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>assignment_turned_in</i>
-          				<input name='cuv' type='text' value='".$item['cuv']."' class='validate' requiredreadonly >
+          				<input name='cuv' type='text' value='".$item['cuv']."' class='validate' required readonly >
           				<label>CUV</label>
           			</div>
           			<!-- puntaje -->
@@ -199,7 +199,7 @@ class ActualizarController
           			<!-- domicilio del beneficiario -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>place</i>
-          				<input name='domicilio_beneficiario' type='text' value='".$item['domicilio_beneficiario']."' class='validate' >
+          				<input name='domicilio_beneficiario' type='text' value='".$item['domicilio_beneficiario']."' class='validate' readonly>
           				<label>Domicilio del beneficiario</label>
           			</div>
           			<!-- tipo_asentamiento -->
@@ -211,25 +211,25 @@ class ActualizarController
           			<!-- latitud -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>map</i>
-          				<input name='latitud' type='text' value='".$item['latitud']."' class='validate'  required>
+          				<input name='latitud' type='text' value='".$item['latitud']."' class='validate'  required readonly>
           				<label>Latitud</label>
           			</div>
           			<!-- longitud -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>map</i>
-          				<input name='longitud' type='text' value='".$item['longitud']."' class='validate' required>
+          				<input name='longitud' type='text' value='".$item['longitud']."' class='validate' required readonly>
           				<label>Longitud</label>
           			</div>
           			<!-- domicilio del terreno -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>place</i>
-          				<input name='domicilio_terreno' type='text' value='".$item['domicilio_terreno']."' class='validate' required>
+          				<input name='domicilio_terreno' type='text' value='".$item['domicilio_terreno']."' class='validate' required readonly>
           				<label>Domicilio del terreno</label>
           			</div>
           			<!-- PCU -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>list</i>
-                  <input name='pcu' type='text' value='".$item['pcu']."' class='validate' readonly required>
+                  <input name='pcu' type='text' value='".$item['pcu']."' class='validate' readonly required readonly>
           				<label>PCU</label>
           			</div>
                 <div class='row'>
@@ -250,28 +250,7 @@ class ActualizarController
       }
   }
 
-  // public function cancelarBeneficiario()
-  // {
-  //   $data = ['id' => $_POST['id'],
-  //            'fecha' => $_POST['fecha'],
-  //            'motivo' => $_POST['motivo']];
-  //   $result = BeneficiarioModelo::cancelarBeneficiario($data);
-
-  //   $response = ($result==1) ? "<script>window.location='../vistas/proyectos.php';</script>" : "Error al insertar";
-
-  //   echo $response;
-
-  // }
 }
 
-// if (isset($_POST['motivo'])) {
-//   $cancelacion = new ActualizarController();
-//   $cancelacion -> cancelarBeneficiario();
-// }
-
-// if (isset($_POST['motivo'])) {
-//   $cancelacion = new ActualizarController();
-//   $cancelacion -> cancelarBeneficiario();
-// }
 
 ?>

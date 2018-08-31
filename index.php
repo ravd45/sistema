@@ -9,6 +9,9 @@
 </head>
 <body>
 	<section>
+		<img src="../sistema/img/logo .png" style="width: 170px; height: 85px; margin-left: 50px; margin-top: 12px;" alt="">
+	</section>
+	<section>
 		<div>
 			<h3>Bienvenido al sistema</h3>
 			<form id="FormInicio" method="POST" action="controladores/login_controller.php">
@@ -21,7 +24,7 @@
 						<input id="contrasenia" type="password" class="validate" name="contrasenia" required>
 						<label for="contrasenia">Contraseña</label>
 					</div>
-					 <div class="col m12 offset-m8">
+					 <div class="col m2 offset-m8">
                         <button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" type="submit" name="action">
                             <i class="material-icons right">done</i>
                         </button>
@@ -29,9 +32,37 @@
 				</div>
 			</form>
 		</div>
+		<div id="error">
+			
+		</div>
 	</section>
 	<script src="js/jquery-3.3.1.js"></script>
 	<script src="js/script.js"></script>
 	<script src="js/materialize.js"></script>
+
+	<script>
+		 $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  });
+   
+	</script>
+
+	<script type="text/javascript">
+   	window.onload=function(){
+   		<?php
+   		$i=$_GET['i'];
+   		if(isset($i)){
+   			if($i==1){
+   				echo"M.toast({html:'Bienvenido', classes: 'rounded'});";
+   			}
+   			if($i==0){
+   				echo"M.toast({html:'Datos erroenos', classes: 'rounded red'});";
+   			}if($e==5){
+               echo"Materialize.toast('Archivo cargado correctamente', 3000, 'rounded purple');";
+            }
+   		}
+   		?>
+   	}
+   </script>
 </body>
 </html>

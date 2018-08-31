@@ -9,6 +9,28 @@ if ($_POST["action"] == "upload")
     $archivo = $_FILES["archivo"]['name'];
     $usuario = $_POST['usuario'];
     $alias = $_POST['alias'];
+
+    switch ($alias) {
+        case 1:
+            $nombre = "IFE / INE";
+            break;
+         case 2:
+            $nombre = "CURP";
+            break;
+         case 3:
+            $nombre = "Comprobande de domicilio";
+            break;
+         case 4:
+            $nombre = "Acta de nacimiento";
+            break;
+         case 5:
+            $nombre = "Comprobante de posesión";
+            break;
+        
+        default:
+            $nombre = "Otro documento";
+            break;
+    }
     
     if ($archivo != "") 
     {
@@ -26,11 +48,11 @@ if ($_POST["action"] == "upload")
             die("Connection failed: " . $conn->connect_error);
         } 
 
-        $sql = "INSERT INTO documento (documento, id_layout, alias) VALUES ('".$destino."', $usuario, '".$alias."')";
+        $sql = "INSERT INTO documento (documento, id_layout, alias) VALUES ('".$destino."', $usuario, '".$nombre."')";
         if (!$inserta = mysqli_query($conn, $sql)) {
             echo " no insertado";
         }else{
-            echo "<script>alert('Archivo subido correctamente');window.location='../vistas/proyectos.php?i=1';</script>";
+            echo "<script>alert('Archivo subido correctamente');window.location='../vistas/checklist.php?q=$usuario';</script>";
         }
     } 
     else 

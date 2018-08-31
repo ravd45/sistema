@@ -52,7 +52,8 @@ class LayoutController{
 		'domicilio_terreno' => $_POST['domicilio_terreno'],
 		'pcu' => $_POST['pcu'],
 		'layout'=>$layout,
-		'motivo'=>$motivo];
+		'motivo'=>$motivo,
+		'zona'=>$_POST['zona']];
 
 		return $data;
 	}
@@ -65,17 +66,50 @@ class LayoutController{
 			$data = $this->entidades($localidad, $_POST['municipio'], $_POST['proyecto'], $_POST['estado'],"0", "0");
 		}
 
+		if ($data['modalidad']=='Autoproduccion') {
+			if ($data['ingreso']>=6900 && $data['ingreso']<=11000){
 
-		$response = LayoutModelo::insertaLayout($data);
+				$x = $data['ingreso'];
+				if(strlen($x)<5){
+	$x1 = substr($x, 0,1);
+$x2 = substr($x, -3);
+$arr = array($x1, $x2);
+$ingreso = implode(",",$arr);
+$data['ingreso'] = $ingreso;
+}else{
+$x1 = substr($x, 0,2);
+$x2 = substr($x, 2);
+$arr = array($x1, $x2);
+$ingreso = implode(",",$arr);
+$data['ingreso'] = $ingreso;
 
-		if ($response==1) {
-			echo "<script>window.location = '../vistas/proyectos.php';</script>";
+}
+
+				$response = LayoutModelo::insertaLayout($data);
+
+				if ($response==1) {
+					echo "<script>window.location = '../vistas/proyectos.php';</script>";
+				}else{
+					var_dump($response);
+					echo "<br>";
+					var_dump($data);
+				}
+			} else{
+				echo "<script>alert('Ingreso no válido'); window.location = '../vistas/form_layout.php?w=".$data['proyecto']."';</script>";
+			}
+			
 		}else{
-			var_dump($response);
-			echo "<br>";
-			var_dump($data);
+			$response = LayoutModelo::insertaLayout($data);
+
+				if ($response==1) {
+					echo "<script>window.location = '../vistas/proyectos.php';</script>";
+				}else{
+					var_dump($response);
+					echo "<br>";
+					var_dump($data);
 		}
 	}
+}
 
 	public function actualizaLayout()
 	{
@@ -161,24 +195,24 @@ if (isset($_POST['cancelacion'])) {
 	$layout->cancelacionLayout();
 }else{
 
-if(isset($_POST['ejecuta'])){
-	$layout = new LayoutController();
-	$layout->ejecucionLayout();
-}
+	if(isset($_POST['ejecuta'])){
+		$layout = new LayoutController();
+		$layout->ejecucionLayout();
+	}
 
-if(isset($_POST['aparta'])){
-	$layout = new LayoutController();
-	$layout->apartaLayout();
-}
+	if(isset($_POST['aparta'])){
+		$layout = new LayoutController();
+		$layout->apartaLayout();
+	}
 
 
-if(isset($_POST['curp']) && is_numeric($_POST['municipio']) && is_numeric($_POST['proyecto'])){
-	$layout = new LayoutController();
-	$layout->guardaLayout();
-}else{
-	$layout = new LayoutController();
-	$layout->actualizaLayout();
-}
+	if(isset($_POST['curp']) && is_numeric($_POST['municipio']) && is_numeric($_POST['proyecto'])){
+		$layout = new LayoutController();
+		$layout->guardaLayout();
+	}else{
+		$layout = new LayoutController();
+		$layout->actualizaLayout();
+	}
 
 }
 

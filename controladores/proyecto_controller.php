@@ -31,8 +31,11 @@ class ProyectoController
 #Se invoca el modelo y se mandan los datos
 		$response = ProyectoModelo::creaProyecto($data);
 
-		if ($response == 1) {
-			echo "<script language='javascript'>window.location='../vistas/form_layout.php';</script>";
+		if (!is_null($response)) {
+			foreach ($response as $key => $value) {
+				$id = $value['idproyecto'];
+			}
+			echo "<script language='javascript'>window.location='../vistas/form_layout.php?w=$id';</script>";
 		} else {
 			echo "Error al crear el proyecto";
 		}

@@ -28,6 +28,12 @@ class ProyectoModelo{
 #Ejecución de consulta si es true, entonces se insertó, sino, hubo un error
   $result = ($stmt->execute()) ? 1 : 0; #Esta línea es un if () <- condicion ? <- then : <- else
 
+  if ($result == 1) {
+    $stmt = Conexion::conectar()->prepare("SELECT idproyecto FROM proyecto ORDER BY fecha_alta DESC LIMIT 1");
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
   return $result;
   }
 

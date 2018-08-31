@@ -30,7 +30,7 @@ class ChecklistModelo{
 		$result = ($stmt->execute()) ? 1 : 0;
 
 		if ($result == 1) {
-			 echo '<script>window.location = "../vistas/proyectos.php";</script>';
+			echo '<script>window.location = "../vistas/checklist.php?q='.$usuario.'";</script>';
 		}
 
 		return $result;
@@ -39,19 +39,65 @@ class ChecklistModelo{
 	}
 
 	function actualizaDocumentos()
-	{
+	{	
+
 		$ife = (isset($_POST['ife'])) ? 1 : 0;
 		$curp = (isset($_POST['curp'])) ? 1 : 0;
 		$domicilio = (isset($_POST['domicilio'])) ? 1 : 0;
 		$terreno = (isset($_POST['terreno'])) ? 1 : 0;
 		$acta = (isset($_POST['acta'])) ? 1 : 0;
 		$usuario = $_POST['id'];
+		$uIfe = "";
+		$uDomicilio = "";
+		$uTerreno = "";
+		$uActa = "";
 
-		$stmt = Conexion::conectar()->prepare("UPDATE checklist SET ife = $ife, curp = $curp, comprobante_domicilio = $domicilio, posesion_terreno = $terreno, acta_nacimiento = $acta WHERE id_layout = $usuario");
+
+		if ($ife == 1) {
+			$uIfe = " ife = ". $ife.", 	";
+		}else{
+			$uIfe = " ";
+
+		}
+
+		if ($curp == 1) {
+			$uCurp = " curp =". $curp;
+		}else{
+			$uCurp = " ";
+		}
+
+		if ($domicilio == 1) {
+			$uDomicilio = ", comprobante_domicilio =".$domicilio;
+			
+		}else{
+			$uDomicilio = " ";
+			
+		}
+
+		if ($terreno == 1) {
+			$uTerreno = ", posesion_terreno = ".$terreno;
+		}else{			
+			$uTerreno = " ";
+		}
+		if ($acta == 1) {
+			$uActa = ", acta_nacimiento = ".$acta;
+		}else{
+			$uActa = " ";
+		}					
+
+if ($ife == 0 && $curp == 0 && $domicilio == 0 && $terreno == 0 && $acta == 0) {
+	$result = 0;
+	// $stmt = "se queda en este if";
+}else{
+		$stmt = Conexion::conectar()->prepare("UPDATE checklist SET".$uIfe.$uCurp.$uDomicilio.$uTerreno.$uActa." WHERE id_layout = $usuario"); 
+
 		$result = ($stmt->execute()) ? 1 : 0;
-
+}
 		if ($result == 1) {
-			 echo '<script>window.location = "../vistas/proyectos.php";</script>';
+			echo '<script>window.location = "../vistas/checklist.php?q='.$usuario.'";</script>';
+		}else{
+			var_dump($stmt);
+			// echo '<script>window.location = "../vistas/checklist.php?q='.$usuario.'";</script>';
 		}
 
 		return $result;

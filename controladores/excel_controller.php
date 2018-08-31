@@ -11,11 +11,21 @@ class ExcelController
     $data = ['id' => $_POST['folio']];
     $result = ExcelModelo::exportar($data);
   }
+
+  function exportarChecklist()
+  {
+  	$data = ['id' => $_POST['check']];
+    $result = ExcelModelo::exportarChecklist($data);
+  }
 }
 
-if(isset($_POST['folio'])){
   $excel = new ExcelController();
+if(isset($_POST['folio'])){
   $excel->exportar();
+}
+
+if (isset($_POST['check'])) {
+	$excel->exportarChecklist();
 }
 
 ?>

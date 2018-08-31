@@ -1,5 +1,5 @@
 <?php include '../libs/header.php';
- 			include '../controladores/main_controller.php'?>
+include '../controladores/main_controller.php'?>
 
 <h3>Llenar formulario</h3>
 <form action="../controladores/layout_controller.php" method="POST">
@@ -11,8 +11,11 @@
 				<select name="proyecto" onchange="alerta()" required="true">
 					<option value="" disabled selected>Selecciona el proyecto</option>
 					<?php
-						$main = new MainController();
-						$main->obtenerProyectos();
+					if (isset($_GET['w'])) {
+						$proyecto = $_GET['w'];
+					}
+					$main = new MainController();
+					$main->obtenerProyectos($proyecto);
 					?>
 				</select>
 				<label>Proyecto</label>
@@ -81,13 +84,13 @@
 			<!-- fecha de nacimiento -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">cake</i>
-				<input name="fecha_nacimiento" type="text" class="validate datepicker">
+				<input name="fecha_nacimiento" type="text" id="datep" class="validate datepicker">
 				<label>Fecha de nacimiento</label>
 			</div>
 			<!-- ingreso -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">attach_money</i>
-				<input name="ingreso" type="text" class="validate" required>
+				<input name="ingreso" type="number" class="validate" required>
 				<label>Ingreso</label>
 			</div>
 			<!-- antiguedad -->
@@ -105,7 +108,7 @@
 			<!-- teléfono -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">phone</i>
-				<input name="telefono" maxlength="10" type="number" class="validate" >
+				<input name="telefono" maxlength="10" type="text" class="validate" >
 				<label>Teléfono</label>
 			</div>
 			<!-- solución -->
@@ -211,10 +214,10 @@
 			<!-- zona -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">domain</i>
-				<select class="" name="tipo_asentamiento" required="true"></a>
+				<select class="" name="zona" required="true"></a>
 					<option value="" disabled selected>Selecciona la zona</option>
-					<option value="U1">Rural</option>
-					<option value="U2">Urbano</option>
+					<option value="Rural">Rural</option>
+					<option value="Urbana">Urbano</option>
 				</select>
 				<label>Zona</label>
 			</div>
@@ -239,7 +242,7 @@
 			<!-- PCU -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">list</i>
-        <select class="" name="pcu" required="true">
+				<select class="" name="pcu" required="true">
 					<option value="" disabled selected>Selecciona el Perimetro de Contención Urbana</option>
 					<option value="U1">U1</option>
 					<option value="U2">U2</option>
@@ -247,18 +250,18 @@
 				</select>
 				<label>PCU</label>
 			</div>
-      <div class="row">
-      	<div class="col m12">
-      		<div class="col m8 offset-m1">
-              <a class="btn-floating btn-large waves-effect waves-light default-primario-color" href="proyectos.php"><i class="material-icons">arrow_back</i></a>
-      		</div>
-      		<div class="col m2 offset-m1">
-            <button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" type="submit" name="action">
-              <i class="material-icons right">done</i>
-      		</div>
-        </button>
-      	</div>
-      </div>
+			<div class="row">
+				<div class="col m12">
+					<div class="col m8 offset-m1">
+						<a class="btn-floating btn-large waves-effect waves-light default-primario-color" href="proyectos.php"><i class="material-icons">arrow_back</i></a>
+					</div>
+					<div class="col m2 offset-m1">
+						<button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" type="submit" name="action">
+							<i class="material-icons right">done</i>
+						</div>
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </form>

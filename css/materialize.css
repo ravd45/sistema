@@ -8706,7 +8706,7 @@ input[type=range]::-ms-thumb {
 }
 
 .datepicker-controls .select-month input {
-  width: 70px;
+  width: 80px;
 }
 
 .month-prev, .month-next {
@@ -8722,7 +8722,7 @@ input[type=range]::-ms-thumb {
   -webkit-flex: 1 auto;
       -ms-flex: 1 auto;
           flex: 1 auto;
-  background-color: #26a69a;
+  background-color: #264FD4;
   color: #fff;
   padding: 20px 22px;
   font-weight: 500;
@@ -8780,11 +8780,11 @@ input[type=range]::-ms-thumb {
 }
 
 .datepicker-table td.is-today {
-  color: #26a69a;
+  color: #264FD4;
 }
 
 .datepicker-table td.is-selected {
-  background-color: #26a69a;
+  background-color: #264FD4;
   color: #fff;
 }
 
@@ -8828,7 +8828,7 @@ input[type=range]::-ms-thumb {
 .datepicker-clear,
 .datepicker-today,
 .datepicker-done {
-  color: #26a69a;
+  color: #264FD4;
   padding: 0 1rem;
 }
 
