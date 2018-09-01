@@ -67,10 +67,10 @@ class ExcelModelo
 
     }else{
 
-       echo '<script language="javascript">
-       alert("No hay datos para exportar");
-       window.location = "../vistas/proyectos.php";
-       </script>'; 
+       echo '
+    <script> 
+    window.location="../vistas/error_alert.php?q=1"
+</script>'; 
 
    }
 
@@ -131,10 +131,9 @@ class ExcelModelo
 
     }else{
 
-     echo '<script language="javascript">
-     alert("No hay datos para exportar");
-     window.location = "../vistas/proyectos.php";
-     </script>'; 
+      echo'<script> 
+    window.location="../vistas/error_alert.php?q='.$id.'"
+</script>'; 
 
  }
 

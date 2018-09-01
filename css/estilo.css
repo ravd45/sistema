@@ -1,6 +1,7 @@
 body{
 	
-
+background-image: url('../img/fondo3.jpg');
+/*background: no-repeat;*/
     /*font-family: 'Indie Flower', cursive;*/
     font-family: 'Varela Round', sans-serif;
     /*font-family: 'Ubuntu Condensed', sans-serif;*/
@@ -14,7 +15,9 @@ body{
 
 
 }
-
+.fdiv{
+	background-color: #fff;
+}
 h3{
 	text-align: center;
 }

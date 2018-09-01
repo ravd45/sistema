@@ -13,9 +13,16 @@ class InicioSesion{
 		$response = LoginModelo::iniciarSesion($data);
 		
 		if (empty($response) || is_null($response)) {
-			echo "<script>window.location='../index.php';</script>";
+			echo "<script>
+				window.location='../vistas/error_alert.php?q=2';</script>";
 		} else{
-			echo "<script>window.location='../vistas/vista_general.php?=1';</script>";
+			echo "<script>
+				window.location='../vistas/vista_general.php';</script>";
+if (1<2) {
+	echo"<script>alert();</script>";
+}
+
+			
 		}
 	}
 }
