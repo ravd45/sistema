@@ -8,6 +8,27 @@ require_once '../modelo/main_model.php';
  */
 class LayoutController{
 
+	public function calculaFechaNac()
+	{
+		$curp = $_POST['curp'];
+
+		$fn = substr($curp, 4, 6);
+		$anio = substr($fn,0,2);
+		$mes = substr($fn, 2, 2);
+		$dia = substr($fn, 4);
+
+		echo $curp;
+		echo $anio."<br>";
+
+		if ($anio >= 00 && $anio <= 18) {
+			$xxi = "20".$anio."-".$mes."-".$dia;
+			return $xxi;
+		}else{
+			$xx = "19".$anio."-".$mes."-".$dia;
+			return $xx;
+		}
+
+	}
 
 	function entidades($localidad, $municipio, $proyecto,$estado,$layout, $motivo)
 	{
@@ -17,6 +38,11 @@ class LayoutController{
 		$coordenada = $_POST['latitud']." ".$_POST['longitud'];
 		$rfc = substr($_POST['curp'], 0, 10);
 		$enganche_especie =  implode ( ', ' , $_POST['enganche_especie']);
+		$fecha_nacimiento = $this->calculaFechaNac();
+		$gen = substr($_POST['curp'], 10, 1);
+
+		$genero = ($gen == 'M') ? 'Femenino' : 'Masculino';
+		
 		// echo $enganche_especie; die();
 
 	#Arreglo traido del formulario
@@ -26,9 +52,9 @@ class LayoutController{
 		'apellido_p' => $_POST['apellido_p'],
 		'apellido_m' => $_POST['apellido_m'],
 		'nombre_completo' => $nom_comp,
-		'genero' => $_POST['genero'],
+		'genero' => $genero,
 		'estado_civil' => $_POST['estado_civil'],
-		'fecha_nacimiento' => $_POST['fecha_nacimiento'],
+		'fecha_nacimiento' => $fecha_nacimiento,
 		'rfc' => $rfc,
 		'ingreso' => $_POST['ingreso'],
 		'antiguedad' => $_POST['antiguedad'],
@@ -58,7 +84,7 @@ class LayoutController{
 		'zona'=>$_POST['zona'],
 		'motivo'=>$motivo,
 		'layout'=>$layout];
-	
+
 		return $data;
 	}
 	function guardaLayout(){
@@ -75,17 +101,17 @@ class LayoutController{
 
 				$x = $data['ingreso'];
 				if(strlen($x)<5){
-				$x1 = substr($x, 0,1);
-				$x2 = substr($x, -3);
-				$arr = array($x1, $x2);
-				$ingreso = implode(",",$arr);
-				$data['ingreso'] = $ingreso;
+					$x1 = substr($x, 0,1);
+					$x2 = substr($x, -3);
+					$arr = array($x1, $x2);
+					$ingreso = implode(",",$arr);
+					$data['ingreso'] = $ingreso;
 				}else{
-				$x1 = substr($x, 0,2);
-				$x2 = substr($x, 2);
-				$arr = array($x1, $x2);
-				$ingreso = implode(",",$arr);
-				$data['ingreso'] = $ingreso;
+					$x1 = substr($x, 0,2);
+					$x2 = substr($x, 2);
+					$arr = array($x1, $x2);
+					$ingreso = implode(",",$arr);
+					$data['ingreso'] = $ingreso;
 
 				}	
 
@@ -108,13 +134,13 @@ class LayoutController{
 		}else{
 			$response = LayoutModelo::insertaLayout($data);
 
-				if ($response==1) {
-					echo "<script>window.location = '../vistas/proyectos.php';</script>";
-				}else{
-					 var_dump($response);
-					echo "<br> Inserta :";
-					var_dump($data);
-				}
+			if ($response==1) {
+				echo "<script>window.location = '../vistas/proyectos.php';</script>";
+			}else{
+				var_dump($response);
+				echo "<br> Inserta :";
+				var_dump($data);
+			}
 		}
 	}
 

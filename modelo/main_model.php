@@ -16,6 +16,17 @@ class MainModelo
     $stmt->close();
   }
 
+    function obtenerTotalCapturados($id)
+  {
+    $stmt = Conexion::conectar()->prepare("SELECT count(*) AS total FROM proyecto p
+                                           INNER JOIN layout l on l.id_proyecto = p.idproyecto
+                                           WHERE p.idproyecto = :id  and l.estado_contrato = 'activo'");
+    $stmt -> bindParam(":id", $id['id'], PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll();
+    $stmt->close();
+  }
+
   public function obtenerProyectos()
   {
     $stmt = Conexion::conectar()->prepare("SELECT * FROM proyecto ORDER BY fecha_alta DESC;");

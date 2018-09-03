@@ -67,6 +67,7 @@ class MainController
     <a class=' btn-small btn waves-effect waves-light btn-large waves-effect waves-light blue accent-3' href='../vistas/form_layout.php?w=$id' type='submit' name='action'>
     <i class='material-icons right'>add</i>Agregar</a>
     </div>
+    <div>
     <div class='col m2 offset-m10'>  
     <form method='POST' action='../controladores/excel_controller.php'>
     <input type='number' value='".$id."' style='display: none;' name='folio'>
@@ -154,11 +155,17 @@ class MainController
   public function listaProyectos()
   {
     $result = MainModelo::obtenerProyectos();
+   
 
     foreach ($result as $row => $item) {
+          $id = ['id'=>$item['idproyecto']];
+       $total = MainModelo::obtenerTotalCapturados($id);
+    foreach ($total as $key => $value) {
+      $total = $value['total'];
+    }
       echo'<ul class="collapsible">
       <li>
-      <div class="collapsible-header"><i class="material-icons">build</i>'.$item["proyecto"].'</div>
+      <div class="collapsible-header"><i class="material-icons">build</i>'.$item["proyecto"].' Capturados: '.$total.'</div>
       <div class="collapsible-body">
       <span>';
       $this->obtenerBeneficiarios($item['idproyecto']);

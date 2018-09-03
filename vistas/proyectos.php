@@ -26,5 +26,15 @@
        // document.getElementById('cancelacion'+id).innerHTML = ("<font color=\"red\">Este texto se verá en rojo</font>");
     }
   </script>
+  <script>
+
+     $(function(){
+      $('#FormBuscador').change(function(){
+        var buscador = document.getElementById('buscador').val;
+        console.log(buscador);
+      })
+     })
+    
+  </script>
 
 <?php include '../libs/footer.php'; ?>

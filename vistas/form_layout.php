@@ -24,7 +24,7 @@ include '../controladores/main_controller.php';
 			<!-- modalidad -->
 			<div class="input-field col m6">
 				<i class="material-icons prefix">list</i>
-				<select class="" name="modalidad" required="true">
+				<select id="modalidad" name="modalidad" onchange="rangoIngreso()" required="true">
 					<option value="" disabled selected>Selecciona la modalidad</option>
 					<option value="Autoproduccion">Autoproducción</option>
 					<option value="Mejoramiento">Mejoramiento</option>
@@ -56,17 +56,6 @@ include '../controladores/main_controller.php';
 				<input id="CURP" name="curp" maxlength="18" minlength="18" type="text" class="curp validate" required>
 				<label>CURP</label>
 			</div>
-			<!-- genero -->
-			<div class="input-field col m4">
-				<i class="material-icons prefix">account_circle</i>
-				<select class="" name="genero">
-					<option value="" disabled selected>Selecciona el genero</option>
-					<option value="Femenino">Femenino</option>
-					<option value="Masculino">Masculino</option>
-
-				</select>
-				<label>Genero</label>
-			</div>
 			<!-- estado civil -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">favorite</i>
@@ -82,17 +71,13 @@ include '../controladores/main_controller.php';
 				</select>
 				<label>Estado civil</label>
 			</div>
-			<!-- fecha de nacimiento -->
-			<div class="input-field col m4">
-				<i class="material-icons prefix">cake</i>
-				<input name="fecha_nacimiento" type="text" id="datep" class="validate datepicker">
-				<label>Fecha de nacimiento</label>
-			</div>
 			<!-- ingreso -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">attach_money</i>
 				<input name="ingreso" type="number" class="validate" required>
 				<label>Ingreso</label>
+				<div class="red-text" id="rango" >
+				</div>
 			</div>
 			<!-- antiguedad -->
 			<div class="input-field col m4">
@@ -269,6 +254,16 @@ include '../controladores/main_controller.php';
 <script>
 	function alerta() {
 		alert("¿Estás seguro que deseas cambiar de proyecto?");
+	}
+</script>
+<script>
+	function rangoIngreso() {
+		var modalidad = document.getElementById('modalidad').value;
+		if (modalidad == 'Autoproduccion') {
+			document.getElementById('rango').innerHTML="El rango en esta modalidad es de $6,900 a $11,000.";
+		}else{
+			document.getElementById('rango').innerHTML = "";
+		}
 	}
 </script>
 <?php include '../libs/footer.php'; ?>

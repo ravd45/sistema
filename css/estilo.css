@@ -1,10 +1,11 @@
 body{
 	
-background-image: url('../img/fondo3.jpg');
+  background-color:#B2EBF2; 	
+/*background-image: url('../img/fondo3.jpg');*/
 /*background: no-repeat;*/
     /*font-family: 'Indie Flower', cursive;*/
     font-family: 'Varela Round', sans-serif;
-    /*font-family: 'Ubuntu Condensed', sans-serif;*/
+    /* font-family: 'Ubuntu Condensed', sans-serif; */
     /*font-family: 'Cairo', sans-serif;*/
     /*font-family: 'Kanit', sans-serif;*/
     /*font-family: 'Satisfy', cursive;*/

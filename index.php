@@ -15,7 +15,7 @@
 	</section>
 	<section>
 		<div>
-			<h3>Bienvenido al Desarrollo11</h3>
+			<h3>Bienvenido a Desarrollo11</h3>
 			<form id="FormInicio" method="POST" action="controladores/login_controller.php">
 				<div class="row div-inicio">
 					<div class="input-field col m6 offset-m3">
