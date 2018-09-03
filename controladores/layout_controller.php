@@ -7,13 +7,17 @@ require_once '../modelo/main_model.php';
  *
  */
 class LayoutController{
+
+
 	function entidades($localidad, $municipio, $proyecto,$estado,$layout, $motivo)
 	{
 	#variables manipuladas
 
 		$nom_comp = $_POST['nombre']." ".$_POST['apellido_p']." ".$_POST['apellido_m'];
-		$coordenada = $_POST['latitud']." -".$_POST['longitud'];
+		$coordenada = $_POST['latitud']." ".$_POST['longitud'];
 		$rfc = substr($_POST['curp'], 0, 10);
+		$enganche_especie =  implode ( ', ' , $_POST['enganche_especie']);
+		// echo $enganche_especie; die();
 
 	#Arreglo traido del formulario
 		$data = ['proyecto' => $proyecto,
@@ -34,7 +38,7 @@ class LayoutController{
 		'subsidio' => $_POST['subsidio'],
 		'credito' => $_POST['credito'],
 		'enganche_efectivo' => $_POST['enganche_efectivo'],
-		'enganche_especie' => $_POST['enganche_especie'],
+		'enganche_especie' => $enganche_especie,
 		'otros_apoyos' => $_POST['otros_apoyos'],
 		'modalidad' => $_POST['modalidad'],
 		'cuv' => $_POST['cuv'],
@@ -51,10 +55,10 @@ class LayoutController{
 		'longitud' => "-".$_POST['longitud'],
 		'domicilio_terreno' => $_POST['domicilio_terreno'],
 		'pcu' => $_POST['pcu'],
-		'layout'=>$layout,
+		'zona'=>$_POST['zona'],
 		'motivo'=>$motivo,
-		'zona'=>$_POST['zona']];
-
+		'layout'=>$layout];
+	
 		return $data;
 	}
 	function guardaLayout(){
@@ -71,19 +75,19 @@ class LayoutController{
 
 				$x = $data['ingreso'];
 				if(strlen($x)<5){
-	$x1 = substr($x, 0,1);
-$x2 = substr($x, -3);
-$arr = array($x1, $x2);
-$ingreso = implode(",",$arr);
-$data['ingreso'] = $ingreso;
-}else{
-$x1 = substr($x, 0,2);
-$x2 = substr($x, 2);
-$arr = array($x1, $x2);
-$ingreso = implode(",",$arr);
-$data['ingreso'] = $ingreso;
+				$x1 = substr($x, 0,1);
+				$x2 = substr($x, -3);
+				$arr = array($x1, $x2);
+				$ingreso = implode(",",$arr);
+				$data['ingreso'] = $ingreso;
+				}else{
+				$x1 = substr($x, 0,2);
+				$x2 = substr($x, 2);
+				$arr = array($x1, $x2);
+				$ingreso = implode(",",$arr);
+				$data['ingreso'] = $ingreso;
 
-}
+				}	
 
 				$response = LayoutModelo::insertaLayout($data);
 
@@ -95,7 +99,10 @@ $data['ingreso'] = $ingreso;
 					var_dump($data);
 				}
 			} else{
-				echo "<script>alert('Ingreso no válido'); window.location = '../vistas/form_layout.php?w=".$data['proyecto']."';</script>";
+				// echo "<script>alert('Ingreso no válido'); window.location = '../vistas/form_layout.php?w=".$data['proyecto']."';</script>";
+				echo "<script>	window.location='../vistas/error_alert.php?w=".$data['proyecto']."';</script>";
+				// echo "<script>alertIngreso(".$data['proyecto']."); ";
+				// $this->alerta($data['proyecto']);
 			}
 			
 		}else{
@@ -104,12 +111,12 @@ $data['ingreso'] = $ingreso;
 				if ($response==1) {
 					echo "<script>window.location = '../vistas/proyectos.php';</script>";
 				}else{
-					var_dump($response);
-					echo "<br>";
+					 var_dump($response);
+					echo "<br> Inserta :";
 					var_dump($data);
+				}
 		}
 	}
-}
 
 	public function actualizaLayout()
 	{
@@ -207,6 +214,7 @@ if (isset($_POST['cancelacion'])) {
 
 
 	if(isset($_POST['curp']) && is_numeric($_POST['municipio']) && is_numeric($_POST['proyecto'])){
+
 		$layout = new LayoutController();
 		$layout->guardaLayout();
 	}else{

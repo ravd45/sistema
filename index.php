@@ -2,18 +2,20 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>Sistema</title>
 	<link rel="stylesheet" href="css/materialize.css">
 	<link rel="stylesheet" href="css/estilo.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Cairo|Cantarell|Hammersmith+One|Handlee|Indie+Flower|Kanit|Marck+Script|Satisfy|Ubuntu+Condensed|Varela+Round" rel="stylesheet"> 
 </head>
 <body>
 	<section>
-		<img src="../sistema/img/logo .png" style="width: 170px; height: 85px; margin-left: 50px; margin-top: 12px;" alt="">
+		<img src="../sistema/img/logo .png" style="width: 220px; height: 170px;" id="logo" alt="Logo DP11">
 	</section>
 	<section>
 		<div>
-			<h3>Bienvenido al desarrollo11</h3>
+			<h3>Bienvenido al Desarrollo11</h3>
 			<form id="FormInicio" method="POST" action="controladores/login_controller.php">
 				<div class="row div-inicio">
 					<div class="input-field col m6 offset-m3">

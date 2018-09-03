@@ -139,12 +139,12 @@ class ActualizarController
           			<!-- enganche en especie -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>list</i>
-          				<select multiple name='enganche_especie' readonly>
-          					<option value='' disabled>Selecciona el tipo de enganche</option>
+          				<select multiple name='enganche_especie[]'readonly>
+          					<option value='".$item['enganche_especie']."' selected>".$item['enganche_especie']."</option>
           					<option value='Mano de obra'>Mano de obra</option>
           					<option value='Material'>Material</option>
           					<option value='Efectivo'>Efectivo</option>
-          					<option value='Pendiente' selected>Pendiente</option>
+          					<option value='Pendiente'>Pendiente</option>
           				</select>
           				<label>Enganche en especie</label>
           			</div>
@@ -157,7 +157,7 @@ class ActualizarController
           			<!-- modalidad -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>list</i>
-          			  <input name='modalidad' value='".$item['modalidad']."' class='validate'readonly >
+          			  <input name='modalidad' type='text' value='".$item['modalidad']."' class='validate' required readonly >
           				<label>Modalidad</label>
           			</div>
           			<!-- CUV -->
@@ -208,6 +208,12 @@ class ActualizarController
           				<input name='tipo_asentamiento' type='text' value='".$item['tipo_asentamiento']."' class='validate' readonly required>
           				<label>Tipo de asentamiento</label>
           			</div>
+                <!-- zona -->
+                <div class='input-field col m4'>
+                  <i class='material-icons prefix'>domain</i>
+                  <input name='zona' type='text' value='".$item['zona']."' class='validate' readonly required>
+                  <label>Zona</label>
+                </div>
           			<!-- latitud -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>map</i>

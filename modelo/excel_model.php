@@ -27,7 +27,7 @@ class ExcelModelo
     INNER JOIN municipio m on m.idmunicipio = l.id_municipio
     INNER JOIN estado e on e.idestado = l.id_estado
     INNER JOIN proyecto p on p.idproyecto = l.id_proyecto
-    WHERE l.id_proyecto = $id  AND l.estado_contrato = 'activo';";
+    WHERE l.id_proyecto = $id  AND l.estado_contrato = 'activo' ORDER BY l.nombre_completo ASC;";
     $result = $conn->query($sql);
 
     while($row = $result->fetch_assoc()){

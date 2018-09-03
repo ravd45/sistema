@@ -26,8 +26,8 @@ class CancelaController
                   <i class='material-icons prefix'>compare_arrows</i>
                    <select id='motivo' name='cancelacion'>
                       <option value='' disabled>Seleccion el motivo</option>
-                      <option value='El beneficiario canceló'>El beneficiario canceló</option>
-                      <option value='El municipio canceló'>El municipio canceló</option>
+                      <option value='El beneficiario cancelo'>El beneficiario canceló</option>
+                      <option value='El municipio cancelo'>El municipio canceló</option>
                    </select>
                   <label>Motivo de sustitución</label>
                 </div>

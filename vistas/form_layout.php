@@ -1,5 +1,6 @@
 <?php include '../libs/header.php';
-include '../controladores/main_controller.php'?>
+include '../controladores/main_controller.php';
+?>
 
 <h3>Llenar formulario</h3>
 <form action="../controladores/layout_controller.php" method="POST">
@@ -73,7 +74,7 @@ include '../controladores/main_controller.php'?>
 					<option value="" disabled selected>Selecciona el estado civil</option>
 					<option value="Soltero">Soltero</option>
 					<option value="Casado">Casado</option>
-					<option value="Unión libre">Unión libre</option>
+					<option value="Union libre">Unión libre</option>
 					<option value="Separado">Separado</option>
 					<option value="Divorciado">Divorciado</option>
 					<option value="Viudo">Viudo</option>
@@ -138,7 +139,7 @@ include '../controladores/main_controller.php'?>
 			<!-- enganche en especie -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">list</i>
-				<select multiple name="enganche_especie">
+				<select multiple name="enganche_especie[]">
 					<option value="" disabled>Selecciona el tipo de enganche</option>
 					<option value="Mano de obra">Mano de obra</option>
 					<option value="Material">Material</option>
@@ -151,7 +152,7 @@ include '../controladores/main_controller.php'?>
 			<div class="input-field col m4">
 				<i class="material-icons prefix">attach_money</i>
 				<input name="otros_apoyos" type="text" class="validate" >
-				<label>Otros apoyos</label>
+				<label>Otros apoyos en efectivo</label>
 			</div>
 			<!-- CUV -->
 			<div class="input-field col m4">
