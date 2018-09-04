@@ -111,8 +111,10 @@ class LayoutModelo{
 	}
 
 	function ejecucionLayout($data){
-		$stmt = Conexion::conectar()->prepare("UPDATE layout SET estatus = 'EN EJECUCION' WHERE id_layout = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE layout SET estatus = 'EN EJECUCION', cuv = :cuv, puntaje = :puntaje WHERE id_layout = :id");
 		$stmt -> bindParam(":id", $data['id'], PDO::PARAM_STR);
+		$stmt -> bindParam(":cuv", $data['cuv'], PDO::PARAM_STR);
+		$stmt -> bindParam(":puntaje", $data['puntaje'], PDO::PARAM_STR);
 		
 		$result = ($stmt->execute()) ? 1 : 0;
 
@@ -133,6 +135,17 @@ class LayoutModelo{
 
 		$stmt->close();
 
+	}
+
+	function obtenerCP($data)
+	{
+		$stmt = Conexion::conectar()->prepare("SELECT puntaje, cuv FROM layout WHERE id_layout = :id");
+		$stmt -> bindParam(":id", $data['id'], PDO::PARAM_STR);
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
 	}
 }
 ?>

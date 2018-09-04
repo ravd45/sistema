@@ -28,6 +28,7 @@ class CancelaController
                       <option value='' disabled>Seleccion el motivo</option>
                       <option value='El beneficiario cancelo'>El beneficiario canceló</option>
                       <option value='El municipio cancelo'>El municipio canceló</option>
+                      <option value='Con subsidio / sin familiar'> Con subsidio / sin familiar</option>
                    </select>
                   <label>Motivo de sustitución</label>
                 </div>
@@ -42,31 +43,31 @@ class CancelaController
           			<!-- nombre -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>account_circle</i>
-          				<input id='nombre' name='nombre' type='text' class='validate' value='".$item['nombre']."' required>
+          				<input id='nombre' name='nombre' type='text' class='validate' value='".$item['nombre']."' required readonly>
           				<label>Nombre</label>
           			</div>
           			<!-- apellido paterno -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>account_circle</i>
-          				<input id='apellido_p' name='apellido_p' type='text' class='validate' value='".$item['apellido_paterno']."' required>
+          				<input id='apellido_p' name='apellido_p' type='text' class='validate' value='".$item['apellido_paterno']."' required readonly>
           				<label>Apellido paterno</label>
           			</div>
           			<!-- apellido materno -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>account_circle</i>
-          				<input id='apellido_m' name='apellido_m' type='text' class='validate'value='".$item['apellido_materno']."' required>
+          				<input id='apellido_m' name='apellido_m' type='text' class='validate'value='".$item['apellido_materno']."' required readonly>
           				<label>Apellido materno</label>
           			</div>
           			<!-- curp -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>recent_actors</i>
-          				<input id='CURP' name='curp' value='". $item['curp']."' maxlength='18' type='text'value='".$item['curp']."' class='validate' required>
+          				<input id='CURP' name='curp' value='". $item['curp']."' maxlength='18' type='text'value='".$item['curp']."' class='validate' required readonly>
           				<label>CURP</label>
           			</div>	
           			<!-- teléfono -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>phone</i>
-          				<input name='telefono' maxlength='10' type='number' value='".$item['telefono']."' class='validate' required>
+          				<input name='telefono' maxlength='10' type='number' value='".$item['telefono']."' class='validate' required readonly>
           				<label>Teléfono</label>
           			</div>
           			

@@ -64,29 +64,11 @@ class ActualizarController
           				<input id='CURP' name='curp' data-length='18' maxlength='18' type='text'value='".$item['curp']."' class='validate' required>
           				<label>CURP</label>
           			</div>
-          			<!-- genero -->
-          			<div class='input-field col m4'>
-          				<i class='material-icons prefix'>account_circle</i>
-          				<select class='' name='genero' required>";
-                  if ($item['genero']=="Femenino"){
-          					echo" <option selected value='Femenino'>Femenino</option>";
-                  }else{
-          					echo" <option selected value='Masculino'>Masculino</option>";
-                  }
-          				echo"</select>
-          				<label>Genero</label>
-          			</div>
           			<!-- estado civil -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>favorite</i>
           				<input name='estado_civil' type='text' value='".$item['estado_civil']."'  required>
           				<label>Estado civil</label>
-          			</div>
-          			<!-- fecha de nacimiento -->
-          			<div class='input-field col m4'>
-          				<i class='material-icons prefix'>cake</i>
-          				<input name='fecha_nacimiento' type='text' value='".$item['fecha_nacimiento']."' class='validate datepicker' required>
-          				<label>Fecha de nacimiento</label>
           			</div>
           			<!-- ingreso -->
           			<div class='input-field col m4'>
@@ -257,6 +239,5 @@ class ActualizarController
   }
 
 }
-
-
 ?>
+

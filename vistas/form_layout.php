@@ -216,7 +216,7 @@ include '../controladores/main_controller.php';
 			<!-- longitud -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">map</i>
-				<input name="longitud" type="text" maxlength="10" minlength="10" class="validate" required>
+				<input name="longitud" type="text" maxlength="11" minlength="11" class="validate" required>
 				<label>Longitud</label>
 			</div>
 			<!-- domicilio del terreno -->
@@ -233,6 +233,7 @@ include '../controladores/main_controller.php';
 					<option value="U1">U1</option>
 					<option value="U2">U2</option>
 					<option value="U3">U3</option>
+					<option value="S/P">Sin perimetro</option>
 				</select>
 				<label>PCU</label>
 			</div>

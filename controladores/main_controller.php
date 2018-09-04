@@ -97,9 +97,10 @@ class MainController
                 </div>
                 <div class='col m2'>";
                 if($item['estatus']=='Solicitante'){
-                 echo" <form method='POST' action='../controladores/layout_controller.php'>
+                 echo" <form method='POST' action='../vistas/ejecucion_form.php'>
                     <input type='number' value='ejecuta' style='display: none;' name='ejecuta'>
                     <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
+                    <input type='text' value='".$item['nombre_completo']."' style='display: none;' name='nombre'>
                     <button class='btn-small btn waves-effect waves-light  waves-effect waves-light teal darken-4' type='submit' name='action'>Ejecución 
                       <i class='material-icons'>done</i>
                     </button>

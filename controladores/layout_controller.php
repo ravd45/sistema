@@ -78,7 +78,7 @@ class LayoutController{
 		'tipo_asentamiento' => $_POST['tipo_asentamiento'],
 		'coordenada' => $coordenada,
 		'latitud' => $_POST['latitud'],
-		'longitud' => "-".$_POST['longitud'],
+		'longitud' => $_POST['longitud'],
 		'domicilio_terreno' => $_POST['domicilio_terreno'],
 		'pcu' => $_POST['pcu'],
 		'zona'=>$_POST['zona'],
@@ -182,7 +182,8 @@ class LayoutController{
 
 	public function ejecucionLayout()
 	{
-		$data = ['id' => $_POST['layout']];
+		$data = ['id' => $_POST['layout'], 'cuv'=>$_POST['cuv'], 'puntaje'=>$_POST['puntaje']];
+		 
 		$result = LayoutModelo::ejecucionLayout($data);
 
 		if ($result==1) {
@@ -231,23 +232,22 @@ if (isset($_POST['cancelacion'])) {
 	if(isset($_POST['ejecuta'])){
 		$layout = new LayoutController();
 		$layout->ejecucionLayout();
-	}
+	}else{
 
 	if(isset($_POST['aparta'])){
 		$layout = new LayoutController();
 		$layout->apartaLayout();
-	}
-
-
-	if(isset($_POST['curp']) && is_numeric($_POST['municipio']) && is_numeric($_POST['proyecto'])){
-
-		$layout = new LayoutController();
-		$layout->guardaLayout();
 	}else{
-		$layout = new LayoutController();
-		$layout->actualizaLayout();
-	}
+		if(isset($_POST['curp']) && is_numeric($_POST['municipio']) && is_numeric($_POST['proyecto'])){
 
+			$layout = new LayoutController();
+			$layout->guardaLayout();
+		}else{
+			$layout = new LayoutController();
+			$layout->actualizaLayout();
+			}	
+		}
+	}
 }
 
 
