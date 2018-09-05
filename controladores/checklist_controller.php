@@ -206,7 +206,7 @@ require_once '../modelo/checklist_model.php';
 						echo '<script>
 								function subir(a){
 									
-									document.getElementById("up").innerHTML = \' <br> <form action="../libs/subir2.php" method="post" enctype="multipart/form-data"><table width="445" height="55" border="0" cellpadding="0" cellspacing="0"><tr><input name="archivo" type="file"  id="archivo" size="35" /><input name="alias" type="text" placeholder="Nombre del documento" value=\'+a+\' style="display: none"><input name="enviar" type="submit" class="btn-small grey"  id="enviar" value="colgar" /><input name="action" style="display:none;" value="upload" /><input name="usuario" style="display:none;" value="'.$id.'" /> </td></tr></table></form> \';
+									document.getElementById("up").innerHTML = \' <br> <form action="../libs/subir2.php" method="post" enctype="multipart/form-data"><table width="445" height="55" border="0" cellpadding="0" cellspacing="0"><tr><input name="archivo" type="file"  id="archivo" size="35" /><input name="alias" type="text" placeholder="Nombre del documento" value=\'+a+\' style="display: none"><input name="enviar" type="submit" class="btn-small grey"  id="enviar" value="subir" /><input name="action" style="display:none;" value="upload" /><input name="usuario" style="display:none;" value="'.$id.'" /> </td></tr></table></form> \';
 								}
 							</script>';
 						

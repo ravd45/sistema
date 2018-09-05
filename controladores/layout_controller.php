@@ -17,9 +17,6 @@ class LayoutController{
 		$mes = substr($fn, 2, 2);
 		$dia = substr($fn, 4);
 
-		echo $curp;
-		echo $anio."<br>";
-
 		if ($anio >= 00 && $anio <= 18) {
 			$xxi = "20".$anio."-".$mes."-".$dia;
 			return $xxi;

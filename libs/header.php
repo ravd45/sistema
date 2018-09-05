@@ -9,6 +9,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Cairo|Cantarell|Hammersmith+One|Handlee|Indie+Flower|Kanit|Marck+Script|Satisfy|Ubuntu+Condensed|Varela+Round" rel="stylesheet"> 
 </head>
 <body>
+	<script src="../js/jquery-3.3.1.js"></script>
+	<script src="../js/materialize.js"></script>
 	<section>
 		<div class="row">
 			<div class="col m12">

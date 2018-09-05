@@ -178,7 +178,7 @@ include '../controladores/main_controller.php';
 			<!-- tipo de asentamiento -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">domain</i>
-				<select class="" name="tipo_asentamiento"></a>>
+				<select class="" name="tipo_asentamiento" required></a>>
 					<option value="" disabled selected>Selecciona el tipo de asentamiento</option>
 					<option value="Pueblo">Pueblo</option>
 					<option value="colonia">Colonia</option>
