@@ -94,7 +94,7 @@ include '../controladores/main_controller.php';
 			<!-- teléfono -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">phone</i>
-				<input name="telefono" maxlength="10" type="text" class="validate" >
+				<input name="telefono" maxlength="10" minlength="7" type="text" class="validate" >
 				<label>Teléfono</label>
 			</div>
 			<!-- solución -->
@@ -142,7 +142,7 @@ include '../controladores/main_controller.php';
 			<!-- CUV -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">assignment_turned_in</i>
-				<input name="cuv" type="number" class="validate" >
+				<input name="cuv" maxlength="16" minlength="16" type="number" class="validate" >
 				<label>CUV</label>
 			</div>
 			<!-- puntaje -->

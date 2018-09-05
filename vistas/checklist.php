@@ -1,6 +1,6 @@
 <?php include '../libs/header.php';
 	  include '../controladores/checklist_controller.php';	?>
-<h3>Lista de documentos</h3>
+<h3>Lista de documentos iniciales</h3>
 
 <?php 
 if (isset($_POST['id'])) {

@@ -147,5 +147,16 @@ class LayoutModelo{
 
 		$stmt->close();
 	}
+
+	function ejecucionList($data)
+	{
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM ejecucion_checklist WHERE id_layout = :id");
+		$stmt -> bindParam(':id', $data['id'], PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+	}
 }
 ?>

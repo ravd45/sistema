@@ -17,6 +17,12 @@ class ExcelController
   	$data = ['id' => $_POST['check']];
     $result = ExcelModelo::exportarChecklist($data);
   }
+
+  function exportarEjeChecklist()
+  {
+    $data = ['id' => $_POST['ejeCheck']];
+    $result = ExcelModelo::exportarejeChecklist($data);
+  }
 }
 
   $excel = new ExcelController();
@@ -26,6 +32,10 @@ if(isset($_POST['folio'])){
 
 if (isset($_POST['check'])) {
 	$excel->exportarChecklist();
+}
+
+if (isset($_POST['ejeCheck'])) {
+  $excel->exportarEjeChecklist();
 }
 
 ?>

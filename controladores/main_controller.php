@@ -88,12 +88,18 @@ class MainController
           <td>
             <div class='row'>
               <div class='col m9 offset-m4'>
-                <div class='col m2'>
-                   <form method='POST' action='../vistas/checklist.php'>
-                      <input name='id' value='".$item['id_layout']."' style='display:none;'>
+                <div class='col m2'>";
+                if ($item['estatus']=='EN EJECUCION') {
+                  
+                  echo" <form method='POST' action='../vistas/ejecucion_check.php?l=".$item['id_layout']."'>";
+                }else{
+                  echo" <form method='POST' action='../vistas/checklist.php'>";
+                   }
+                   echo"<input name='id' value='".$item['id_layout']."' style='display:none;'>
                       <button class='btn-small btn waves-effect waves-light  waves-effect waves-light  cyan darken-4' >checklist <i class='material-icons'>playlist_add_check</i>
                       </button>
                     </form>
+                
                 </div>
                 <div class='col m2'>";
                 if($item['estatus']=='Solicitante'){
@@ -117,7 +123,7 @@ class MainController
                     <div class = 'col m12'>                      
                     <div class=''>
                       <i class='material-icons prefix'>schedule</i>
-                      <input type='date' name='fecha_apartado' max='".$fecha."' placeholder='Fecha de apartado'>
+                      <input type='date' name='fecha_apartado' max='".$fecha."' placeholder='Fecha de apartado' required>
                       
                     </div>
                     </div>

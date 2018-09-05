@@ -123,6 +123,17 @@ class ChecklistModelo{
 
 		$stmt->close();
 	}
+
+	function obtenerarchivos($data)
+	{
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM ejecucion_checklist WHERE id_layout = :id");
+		$stmt -> bindParam(':id', $data['id'], PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+	}
 }
 
 $checklist = new ChecklistModelo();

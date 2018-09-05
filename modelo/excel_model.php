@@ -139,6 +139,68 @@ class ExcelModelo
 
  exit;
     }
+
+     function exportarEjeChecklist($data)
+    {
+           $id = $data['id'];
+    $server = "localhost";
+    $user = "root";
+    $pass = "desarrollo_1";
+    $dbname = "sistema";
+
+    $conn = new mysqli($server, $user, $pass, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT c.ife, c.curp, c.comprobante_domicilio as 'Comprobante de Domicilio', c.posesion_terreno as 'Comprobante de posesión de terreno', c.acta_nacimiento as 'Acta de Nacimiento', l.nombre_completo as 'Beneficiario' FROM checklist c INNER JOIN layout l on l.id_layout = c.id_layout WHERE c.id_layout = $id;";
+    $result = $conn->query($sql);
+
+        while($row = $result->fetch_assoc()){
+            $filas[]= $row;
+        }
+     // if(isset($_POST["export_data"])) {
+
+    if(!empty($filas)) {
+
+        $filename = "checklist.xls";
+
+        header("Content-Type: application/vnd.ms-excel");
+
+        header("Content-Disposition: attachment; filename=".$filename);
+
+
+
+        $mostrar_columnas = false;
+
+
+
+        foreach($filas as $fila) {
+
+            if(!$mostrar_columnas) {
+
+                echo implode("\t", array_keys($fila)) . "\n";
+
+                $mostrar_columnas = true;
+
+            }
+
+            echo implode("\t", array_values($fila)) . "\n";
+
+        }
+
+
+
+    }else{
+
+      echo'<script> 
+    window.location="../vistas/error_alert.php?q='.$id.'"
+</script>'; 
+
+ }
+
+ exit;
+    }
 }
 
 ?>

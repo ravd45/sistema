@@ -38,7 +38,7 @@ class LayoutController{
 		$fecha_nacimiento = $this->calculaFechaNac();
 		$gen = substr($_POST['curp'], 10, 1);
 
-		$genero = ($gen == 'M') ? 'Femenino' : 'Masculino';
+		$genero = ($gen == 'M' || $gen = 'm') ? 'Femenino' : 'Masculino';
 		
 		// echo $enganche_especie; die();
 
