@@ -1,4 +1,5 @@
-<?php include '../libs/header.php'; ?>
+<?php include '../libs/header.php'; 
+include '../controladores/main_controller.php';?>
 
 <h3>Crear nuevo proyecto</h3>
 
@@ -6,17 +7,54 @@
 	<div class="row">
 		<div class="col m10 offset-m1 div-inicio">
 			<div class="input-field col m5 offset-m1">
-				<i class="material-icons prefix">place</i>
-				<select name="municipio" required>
-					<option value="" disabled selected>Selecciona el Municipio</option>
-					<?php include '../libs/municipios.php'; ?>
+				<i class="material-icons prefix">home</i>
+				<input id="proyecto" name="proyecto" type="text" class="validate" required>
+				<label>Proyecto</label>
+			</div>
+			<!-- estado de méxico -->
+			<div class="input-field col m5 offset-m1">
+				<i class="material-icons prefix">location_city</i>
+				<select class="" name="estado">
+					<option value="" disabled selected>Selecciona el estado</option>
+					
 				</select>
-				<label>Localidad</label>
+				<label>Estado</label>
+			</div>
+			<!-- municipio -->
+			<div class="input-field col m5 offset-m1">
+				<i class="material-icons prefix">location_city</i>
+				<select class="" name="municipio">
+					<option value="" disabled selected>Selecciona el Municipio</option>
+					
+				</select>
+				<label>Municipio/Localidad</label>
+			</div>
+			<!-- modalidad -->
+			<div class="input-field col m5 offset-m1">
+				<i class="material-icons prefix">list</i>
+				<select id="modalidad" name="modalidad" onchange="rangoIngreso()" required="true">
+					<option value="" disabled selected>Selecciona la modalidad</option>
+					<option value="AUTOPRODUCCION">Autoproducción</option>
+					<option value="MEJORAMIENTO">Mejoramiento</option>
+					<option value="AMPLIACION">Ampliación</option>
+					<option value="FONDEN">Fonden</option>
+				</select>
+				<label>Modalidad</label>
 			</div>
 			<div class="input-field col m5 offset-m1">
-				<i class="material-icons prefix">directions_walk</i>
-				<input type="number" name="beneficiarios" required>
-				<label> Número de beneficiados</label>
+				<i class="material-icons prefix">schedule</i>
+				<input id="ejercicio" name="fecha" type="text" value="" class="validate" required readonly>
+				<label>Ejercicio fiscal</label>
+			</div>
+			<div class="input-field col m5 offset-m1">
+				<i class="material-icons prefix">schedule</i>
+				<select id="oeo" name="oeo" onchange="rangoIngreso()" required="true">
+					<option value="" disabled selected>Selecciona la OEO</option>
+					<option value="ROCA A.C.">ROCA A.C.</option>
+					<option value="DP11">DP11</option>
+					
+				</select>
+				<label>OEO</label>
 			</div>
 			<div class="input-field col m6 offset-m4">
 				<i class="material-icons prefix">schedule</i>

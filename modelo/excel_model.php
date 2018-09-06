@@ -153,7 +153,28 @@ class ExcelModelo
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT c.ife, c.curp, c.comprobante_domicilio as 'Comprobante de Domicilio', c.posesion_terreno as 'Comprobante de posesión de terreno', c.acta_nacimiento as 'Acta de Nacimiento', l.nombre_completo as 'Beneficiario' FROM checklist c INNER JOIN layout l on l.id_layout = c.id_layout WHERE c.id_layout = $id;";
+    $sql = "SELECT upper(c.ruta_licencia) as 'Ruta de licencia',
+upper(c.licencia_construccion) as 'Licencia de construccion',
+upper(c.ruta_financiera) as 'Ruta de expediente',
+upper(c.expediente_financiera) as 'Expediente de la financiera',
+upper(c.ruta_oeo) as 'Ruta de contrato OEO',
+upper(c.contrato_oeo) as 'Contrato OEO',
+upper(c.ruta_anexo) as 'Ruta de anexo tecnico',
+upper(c.anexo_tecnico) as 'Anexo tecnico',
+upper(c.ruta_poliza) as 'Ruta de poliza de garantia',
+upper(c.poliza_garantia) as 'Poliza de garantia',
+upper(c.ruta_acta) as 'Ruta de acta de entrega',
+upper(c.acta_entrega) as 'Acta de entrega',
+upper(c.ruta_solicitud) as 'Ruta de solicitud de subsidio',
+upper(c.solicitud_subsidio) as 'Solicitud de subsidio',
+upper(c.ruta_certificado) as 'Ruta de certificado de subsidio',
+upper(c.certificado_subsidio) as 'Certificado de subsidio',
+upper(c.ruta_fonden) as 'Ruta de folio fonden',
+upper(c.folio_fonden) as 'Folio fonden',
+upper(c.ruta_foto) as 'Ruta de foto con el beneficiario',
+upper(c.foto_beneficiario) as 'Foto con el beneficiario',
+upper(l.nombre_completo) as 'Beneficiario'
+FROM ejecucion_checklist c INNER JOIN layout l on l.id_layout = c.id_layout WHERE c.id_layout = 2;";
     $result = $conn->query($sql);
 
         while($row = $result->fetch_assoc()){

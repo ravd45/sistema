@@ -172,7 +172,7 @@ class MainController
     }
       echo'<ul class="collapsible">
       <li>
-      <div class="collapsible-header"><i class="material-icons">build</i>'.$item["proyecto"].' Capturados: '.$total.'</div>
+      <div class="collapsible-header"><i class="material-icons">build</i>'.$item["proyecto"].' Capturados: <a class="green-text">'.$total.'</a></div>
       <div class="collapsible-body">
       <span>';
       $this->obtenerBeneficiarios($item['idproyecto']);

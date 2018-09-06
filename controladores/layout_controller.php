@@ -37,7 +37,7 @@ class LayoutController{
 		$enganche_especie =  implode ( ', ' , $_POST['enganche_especie']);
 		$fecha_nacimiento = $this->calculaFechaNac();
 		$gen = substr($_POST['curp'], 10, 1);
-
+		$subsidio = ($_POST['modalidad'] == 'Autoproduccion') ? '$71,056.96' : '$29,402.88';
 		$genero = ($gen == 'M' || $gen = 'm') ? 'Femenino' : 'Masculino';
 		
 		// echo $enganche_especie; die();
@@ -58,7 +58,7 @@ class LayoutController{
 		'ocupacion' => $_POST['ocupacion'],
 		'telefono' => $_POST['telefono'],
 		'solucion' => $_POST['solucion'],
-		'subsidio' => $_POST['subsidio'],
+		'subsidio' => $subsidio,
 		'credito' => $_POST['credito'],
 		'enganche_efectivo' => $_POST['enganche_efectivo'],
 		'enganche_especie' => $enganche_especie,

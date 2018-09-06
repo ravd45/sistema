@@ -13,7 +13,7 @@ if ($_POST['action'] == "upload")
     if ($archivo != "") 
     {
         // guardamos el archivo a la carpeta ficheros
-        $destino =  "archivos/files/".$archivo;
+        $destino =  "http://localhost/sistema/sistema/libs/archivos/files/".$archivo;
         if (copy($_FILES['archivo']['tmp_name'],$destino)) 
         {
           $server = "localhost";
