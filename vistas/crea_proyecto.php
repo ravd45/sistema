@@ -1,5 +1,7 @@
 <?php include '../libs/header.php'; 
-include '../controladores/main_controller.php';?>
+include '../controladores/main_controller.php';
+$main = new MainController();
+?>
 
 <h3>Crear nuevo proyecto</h3>
 
@@ -10,24 +12,6 @@ include '../controladores/main_controller.php';?>
 				<i class="material-icons prefix">home</i>
 				<input id="proyecto" name="proyecto" type="text" class="validate" required>
 				<label>Proyecto</label>
-			</div>
-			<!-- estado de méxico -->
-			<div class="input-field col m5 offset-m1">
-				<i class="material-icons prefix">location_city</i>
-				<select class="" name="estado">
-					<option value="" disabled selected>Selecciona el estado</option>
-					
-				</select>
-				<label>Estado</label>
-			</div>
-			<!-- municipio -->
-			<div class="input-field col m5 offset-m1">
-				<i class="material-icons prefix">location_city</i>
-				<select class="" name="municipio">
-					<option value="" disabled selected>Selecciona el Municipio</option>
-					
-				</select>
-				<label>Municipio/Localidad</label>
 			</div>
 			<!-- modalidad -->
 			<div class="input-field col m5 offset-m1">
@@ -41,9 +25,28 @@ include '../controladores/main_controller.php';?>
 				</select>
 				<label>Modalidad</label>
 			</div>
+			<!-- estado de méxico -->
+			<div class="input-field col m5 offset-m1">
+				<i class="material-icons prefix">location_city</i>
+				<!-- <select class="" name="estado">
+					<option value="" disabled selected>Selecciona el estado</option> -->
+					<?php $main->catalogoEstado(); ?>
+				<!-- </select> -->
+				<label>Estado</label>
+			</div>
+			<!-- municipio -->
+			<div class="input-field col m5 offset-m1">
+				<i class="material-icons prefix">location_city</i>
+				<!-- <select class="" name="estado">
+					<option value="" disabled selected>Selecciona el estado</option> -->
+					<?php $main->catalogoMunicipio(); ?>
+				<!-- </select> -->
+				<label>Municipio</label>
+			</div>
+			
 			<div class="input-field col m5 offset-m1">
 				<i class="material-icons prefix">schedule</i>
-				<input id="ejercicio" name="fecha" type="text" value="" class="validate" required readonly>
+				<input id="ejercicio" name="ejercicio" type="text" value="" class="validate" required>
 				<label>Ejercicio fiscal</label>
 			</div>
 			<div class="input-field col m5 offset-m1">
@@ -55,6 +58,16 @@ include '../controladores/main_controller.php';?>
 					
 				</select>
 				<label>OEO</label>
+			</div>
+			<div class="input-field col m5 offset-m1">
+				<i class="material-icons prefix">schedule</i>
+				<input id="credito" name="credito" type="text" value="" class="validate" required>
+				<label>Credito</label>
+			</div>
+			<div class="input-field col m5 offset-m1">
+				<i class="material-icons prefix">schedule</i>
+				<input id="solucion" name="solucion" type="text" value="" class="validate" required>
+				<label>Solucion</label>
 			</div>
 			<div class="input-field col m6 offset-m4">
 				<i class="material-icons prefix">schedule</i>

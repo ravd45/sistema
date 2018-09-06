@@ -14,16 +14,27 @@ class ProyectoModelo{
   $proyecto = $data['proyecto'];
   $fecha = $data['fecha'];
   $municipio = $data['municipio'];
-  $beneficiarios = $data['beneficiarios'];
+  $modalidad = $data['modalidad'];
+  $estado = $data['estado'];
+  $oeo = $data['oeo'];
+  $ejercicio = $data['ejercicio'];
+  $credito = $data['credito'];
+  $solucion = $data['solucion'];
+
 
 #Consulta para insertar
-  $stmt = Conexion::conectar()->prepare("INSERT INTO proyecto (proyecto, localidad, no_beneficiarios, fecha_alta) VALUES (:proyecto, :localidad, :no_beneficiarios, :fecha_alta)");
+  $stmt = Conexion::conectar()->prepare("INSERT INTO proyecto (proyecto, fecha_alta, estado, modalidad, ejercicio_fiscal, oeo, credito, solucion, localidad) VALUES (:proyecto, :fecha_alta, :estado, :modalidad, :ejercicio_fiscal, :oeo, :credito, :solucion, :localidad)");
 
 #Declaración de parametros
   $stmt -> bindParam(":proyecto", $proyecto, PDO::PARAM_STR);
-  $stmt -> bindParam(":localidad", $municipio, PDO::PARAM_STR);
-  $stmt -> bindParam(":no_beneficiarios", $beneficiarios, PDO::PARAM_STR);
   $stmt -> bindParam(":fecha_alta", $fecha, PDO::PARAM_STR);
+  $stmt -> bindParam(":estado", $estado, PDO::PARAM_STR);
+  $stmt -> bindParam(":modalidad", $modalidad, PDO::PARAM_STR);
+  $stmt -> bindParam(":ejercicio_fiscal", $ejercicio, PDO::PARAM_STR);
+  $stmt -> bindParam(":oeo", $oeo, PDO::PARAM_STR);
+  $stmt -> bindParam(":credito", $credito, PDO::PARAM_STR);
+  $stmt -> bindParam(":solucion", $solucion, PDO::PARAM_STR);
+  $stmt -> bindParam(":localidad", $municipio, PDO::PARAM_STR);
 
 #Ejecución de consulta si es true, entonces se insertó, sino, hubo un error
   $result = ($stmt->execute()) ? 1 : 0; #Esta línea es un if () <- condicion ? <- then : <- else

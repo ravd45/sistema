@@ -26,24 +26,32 @@ class MainController
   {
     $result = MainModelo::catalogoEstado();
 
+      echo'<input type="text" name="estado" id="default" list="estados">
+  
+  <datalist id="estados">';
     foreach ($result as $row => $item) {
       $estado = $item['estado'];
       $id = $item['idestado'];
 
-      echo '<option value="'.$id.'">'.$estado.'</option>';
+    echo'<option value="'.$estado.'">'.$estado.'</option>';
     }
+  echo'</datalist>';
   }
 
   public function catalogoMunicipio()
   {
     $result = MainModelo::catalogoMunicipio();
-
+    
+ echo'<input type="text" id="default" name="municipio" list="municipios">
+  
+  <datalist id="municipios">';
     foreach ($result as $row => $item) {
       $municipio = $item['municipio'];
       $id = $item['idmunicipio'];
 
-      echo '<option value="'.$id.'">'.$municipio.'</option>';
+      echo '<option value="'.$municipio.'">'.$municipio.'</option>';
     }
+     echo'</datalist>';
   }
 
   public function agregarLayout()
@@ -172,7 +180,7 @@ class MainController
     }
       echo'<ul class="collapsible">
       <li>
-      <div class="collapsible-header"><i class="material-icons">build</i>'.$item["proyecto"].' Capturados: <a class="green-text">'.$total.'</a></div>
+      <div class="collapsible-header" style="text-transform: uppercase;"><i class="material-icons">build</i>'.$item["proyecto"].' Capturados: <a class="green-text">'.$total.'</a></div>
       <div class="collapsible-body">
       <span>';
       $this->obtenerBeneficiarios($item['idproyecto']);
