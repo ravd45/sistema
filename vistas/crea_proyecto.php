@@ -21,7 +21,7 @@ $main = new MainController();
 					<option value="AUTOPRODUCCION">Autoproducción</option>
 					<option value="MEJORAMIENTO">Mejoramiento</option>
 					<option value="AMPLIACION">Ampliación</option>
-					<option value="FONDEN">Fonden</option>
+					<option value="RECONSTRUCCION">Reconstrucción</option>
 				</select>
 				<label>Modalidad</label>
 			</div>
@@ -45,12 +45,12 @@ $main = new MainController();
 			</div>
 			
 			<div class="input-field col m5 offset-m1">
-				<i class="material-icons prefix">schedule</i>
+				<i class="material-icons prefix">calendar_today</i>
 				<input id="ejercicio" name="ejercicio" type="text" value="" class="validate" required>
 				<label>Ejercicio fiscal</label>
 			</div>
 			<div class="input-field col m5 offset-m1">
-				<i class="material-icons prefix">schedule</i>
+				<i class="material-icons prefix">build</i>
 				<select id="oeo" name="oeo" onchange="rangoIngreso()" required="true">
 					<option value="" disabled selected>Selecciona la OEO</option>
 					<option value="ROCA A.C.">ROCA A.C.</option>
@@ -60,16 +60,26 @@ $main = new MainController();
 				<label>OEO</label>
 			</div>
 			<div class="input-field col m5 offset-m1">
-				<i class="material-icons prefix">schedule</i>
+				<i class="material-icons prefix">attach_money</i>
 				<input id="credito" name="credito" type="text" value="" class="validate" required>
 				<label>Credito</label>
 			</div>
 			<div class="input-field col m5 offset-m1">
-				<i class="material-icons prefix">schedule</i>
+				<i class="material-icons prefix">attach_money</i>
 				<input id="solucion" name="solucion" type="text" value="" class="validate" required>
 				<label>Solucion</label>
 			</div>
-			<div class="input-field col m6 offset-m4">
+			<div class="input-field col m5 offset-m1">
+				<i class="material-icons prefix">description</i>
+				<select id="modalidad" name="modalidad" required="true">
+					<option value="" disabled selected>Selecciona el programa</option>
+					<option value="CONAVI">CONAVI</option>
+					<option value="FONDEN">FONDEN</option>
+
+				</select>
+				<label>Programa</label>
+			</div>
+			<div class="input-field col m5 offset-m1">
 				<i class="material-icons prefix">schedule</i>
 				<input id="proyecto" name="fecha" type="text" value="<?php include '../libs/fecha.php'; ?>" class="validate" required readonly>
 				<label>Fecha de creación</label>

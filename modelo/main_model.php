@@ -29,7 +29,7 @@ class MainModelo
 
   public function obtenerProyectos()
   {
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM proyecto ORDER BY fecha_alta DESC;");
+    $stmt = Conexion::conectar()->prepare("SELECT * FROM proyecto ORDER BY idproyecto DESC;");
     $stmt->execute();
     return $stmt -> fetchAll();
     $stmt->close();
@@ -72,7 +72,7 @@ class MainModelo
 
   public function catalogoEstado()
   {
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM estado;");
+    $stmt = Conexion::conectar()->prepare("SELECT * FROM estados;");
     $stmt->execute();
     return $stmt -> fetchAll();
     $stmt->close();
@@ -80,7 +80,7 @@ class MainModelo
 
   public function catalogoMunicipio()
   {
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM municipio;");
+    $stmt = Conexion::conectar()->prepare("SELECT * FROM municipios;");
     $stmt->execute();
     return $stmt -> fetchAll();
     $stmt->close();
@@ -94,6 +94,24 @@ class MainModelo
     $stmt -> bindParam(":id", $data['id'], PDO::PARAM_STR);
     $stmt->execute();
     return $stmt -> fetchAll();
+    $stmt->close();
+  }
+
+  function obtenerDatosProyecto($data)
+  {
+    $stmt = Conexion::conectar()->prepare("SELECT * FROM proyecto WHERE idproyecto = :id");
+    $stmt->bindParam(':id', $data['id'], PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll();
+    $stmt->close();
+  }
+
+  function obtenerCP($data)
+  {
+    $stmt = Conexion::conectar()->prepare("call sistema.colonias(:id)");
+    $stmt->bindParam(':id', $data['id'], PDO::PARAM_STR,4000);
+    $stmt->execute();
+    return $stmt->fetchAll();
     $stmt->close();
   }
 

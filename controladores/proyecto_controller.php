@@ -18,11 +18,11 @@ class ProyectoController
 
 		// foreach ($result as $row => $item) {
 		// 	$localidad = $item['municipio'];
-				$proyecto =  $_POST['proyecto'] .", ".$_POST['estado'] .", ".$_POST['municipio'].", ".$_POST['modalidad'].", Ejercicio fiscal ".$_POST['ejercicio'].", OEO: ".$_POST['oeo']
+				$proyecto =  $_POST['proyecto'] .", ".$_POST['estado'] .", ".$_POST['municipio'].", ".$_POST['modalidad'].", Ejercicio fiscal ".$_POST['ejercicio'].", OEO: ".$_POST['oeo'];
 		// }
 
 #Se crea el arreglo con los datos de la vista
-		$data = ['proyecto' => $_POST['proyecto'],
+		$data = ['proyecto' => $proyecto,
 				 		 'fecha' => $_POST['fecha'],
 				 		 'municipio' => $_POST['municipio'],
 				 		 'oeo' => $_POST['oeo'],

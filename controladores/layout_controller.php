@@ -24,7 +24,6 @@ class LayoutController{
 			$xx = "19".$anio."-".$mes."-".$dia;
 			return $xx;
 		}
-
 	}
 
 	function entidades($localidad, $municipio, $proyecto,$estado,$layout, $motivo)
@@ -37,7 +36,7 @@ class LayoutController{
 		$enganche_especie =  implode ( ', ' , $_POST['enganche_especie']);
 		$fecha_nacimiento = $this->calculaFechaNac();
 		$gen = substr($_POST['curp'], 10, 1);
-		$subsidio = ($_POST['modalidad'] == 'Autoproduccion') ? '$71,056.96' : '$29,402.88';
+		$subsidio = ($_POST['modalidad'] == 'Autoproduccion' || $_POST['modalidad'] == 'AUTOPRODUCCION') ? '$71,056.96' : '$29,402.88';
 		$genero = ($gen == 'M' || $gen = 'm') ? 'Femenino' : 'Masculino';
 		
 		// echo $enganche_especie; die();

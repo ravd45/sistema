@@ -1,7 +1,19 @@
 <?php include '../libs/header.php';
 include '../controladores/main_controller.php';
 ?>
-
+<script type="text/javascript">
+	function rangoIngreso() {
+		$(document).ready(function(){
+			$('#rango').append("El rango en esta modalidad es de $6,900 a $11,000.");
+			$('#subsidio').append('<i class="material-icons prefix">attach_money</i><input name="subsidio" id="subsidio" type="text" class="validate" required value="$71,056.96">');
+		});
+	}
+	function subsidio() {
+		$(document).ready(function() {
+		$('#subsidio').append('<i class="material-icons prefix">attach_money</i><input name="subsidio" id="subsidio" type="text" class="validate" required value="$29,402.88"><label>Subsidio</label>');
+		});
+	}	
+</script>
 <h3>Llenar formulario</h3>
 <form action="../controladores/layout_controller.php" method="POST">
 	<div class="row">
@@ -24,12 +36,7 @@ include '../controladores/main_controller.php';
 			<!-- modalidad -->
 			<div class="input-field col m6">
 				<i class="material-icons prefix">list</i>
-				<select id="modalidad" name="modalidad" onchange="rangoIngreso()" required="true">
-					<option value="" disabled selected>Selecciona la modalidad</option>
-					<option value="Autoproduccion">Autoproducción</option>
-					<option value="Mejoramiento">Mejoramiento</option>
-					<option value="Ampliacion">Ampliación</option>
-				</select>
+				<?php $main->modalidadProyecto($_GET['w']); ?>
 				<label>Modalidad</label>
 			</div>
 			<!-- nombre -->
@@ -100,19 +107,18 @@ include '../controladores/main_controller.php';
 			<!-- solución -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">attach_money</i>
-				<input name="solucion" type="text" class="validate" required>
+				<!-- <input name="solucion" type="text" class="validate" required> -->
+				<?php $main->solucionProyecto($_GET['w']); ?>
 				<label>Solución</label>
 			</div>
 			<!-- subsidio -->
-			<div class="input-field col m4">
-				<i class="material-icons prefix">attach_money</i>
-				<input name="subsidio" type="text" class="validate" required>
-				<label>Subsidio</label>
+			<div class="input-field col m4" id="subsidio">
 			</div>
 			<!-- credito -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">attach_money</i>
-				<input name="credito" type="text" class="validate" required>
+				<!-- <input name="credito" type="text" class="validate" required> -->
+				<?php $main->creditoProyecto($_GET['w']); ?>
 				<label>Credito</label>
 			</div>
 			<!-- enganche en efectivo -->
@@ -154,88 +160,79 @@ include '../controladores/main_controller.php';
 			<!-- estado de méxico -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">location_city</i>
-				<select class="" name="estado">
-					<option value="" disabled selected>Selecciona el estado</option>
-					<?php $main->catalogoEstado(); ?>
-				</select>
-				<label>Estado</label>
+				<!-- <select class="" name="estado">
+					<option value="" disabled selected>Selecciona el estado</option>-->
+					<?php $main->estadoProyecto($_GET['w']); ?>
+					<!--</select> -->
+					<label>Estado</label>
 			</div>
 			<!-- municipio -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">location_city</i>
-				<select class="" name="municipio">
-					<option value="" disabled selected>Selecciona el Municipio</option>
-					<?php $main->catalogoMunicipio(); ?>
-				</select>
-				<label>Municipio/Localidad</label>
+					<i class="material-icons prefix">location_city</i>
+					<?php $main->municipioProyecto($_GET['w']); ?>
+					<label>Municipio/Localidad</label>
 			</div>
 			<!-- código postal -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">local_post_office</i>
-				<input name="cp" type="text" maxlength="5" minlength="5" class="validate" required>
+				<input type="text" id="default" name="codigo_postal" list="cp">
+				<datalist id="cp">
+					<?php $main->obtenerCP($_GET['w']); ?>
+					<option value="S/N">Sin Código postal</option>
+				</datalist>
 				<label>Código Postal</label>
-			</div>
-			<!-- tipo de asentamiento -->
-			<div class="input-field col m4">
-				<i class="material-icons prefix">domain</i>
-				<select class="" name="tipo_asentamiento" required></a>>
-					<option value="" disabled selected>Selecciona el tipo de asentamiento</option>
-					<option value="Pueblo">Pueblo</option>
-					<option value="colonia">Colonia</option>
-				</select>
-				<label>Tipo de asentamiento</label>
 			</div>
 			<!-- colonia -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">location_city</i>
-				<input name="colonia" type="text" class="validate" required>
-				<label>Colonia</label>
+					<i class="material-icons prefix">location_city</i>
+					<input name="colonia" type="text" class="validate" required>
+					<label>Colonia</label>
 			</div>
 			<!-- domicilio del beneficiario -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">place</i>
-				<input name="domicilio_beneficiario" type="text" class="validate">
-				<label>Domicilio del beneficiario</label>
+					<i class="material-icons prefix">place</i>
+					<input name="domicilio_beneficiario" type="text" class="validate">
+					<label>Domicilio del beneficiario</label>
 			</div>
 			<!-- zona -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">domain</i>
-				<select class="" name="zona" required="true"></a>
-					<option value="" disabled selected>Selecciona la zona</option>
-					<option value="Rural">Rural</option>
-					<option value="Urbana">Urbano</option>
-				</select>
-				<label>Zona</label>
+					<i class="material-icons prefix">domain</i>
+					<select class="" name="zona" required="true"></a>
+						<option value="" disabled selected>Selecciona la zona</option>
+						<option value="Rural">Rural</option>
+						<option value="Urbana">Urbano</option>
+					</select>
+					<label>Zona</label>
 			</div>
 			<!-- latitud -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">map</i>
-				<input name="latitud" type="text" maxlength="10" minlength="10" class="validate" required>
-				<label>Latitud</label>
+					<i class="material-icons prefix">map</i>
+					<input name="latitud" type="text" maxlength="10" minlength="10" class="validate" required>
+					<label>Latitud</label>
 			</div>
 			<!-- longitud -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">map</i>
-				<input name="longitud" type="text" maxlength="11" minlength="11" class="validate" required>
-				<label>Longitud</label>
+					<i class="material-icons prefix">map</i>
+					<input name="longitud" type="text" maxlength="11" minlength="11" class="validate" required>
+					<label>Longitud</label>
 			</div>
 			<!-- domicilio del terreno -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">place</i>
-				<input name="domicilio_terreno" type="text" class="validate" required>
-				<label>Domicilio del terreno</label>
+					<i class="material-icons prefix">place</i>
+					<input name="domicilio_terreno" type="text" class="validate" required>
+					<label>Domicilio del terreno</label>
 			</div>
 			<!-- PCU -->
 			<div class="input-field col m4">
-				<i class="material-icons prefix">list</i>
-				<select class="" name="pcu" required="true">
-					<option value="" disabled selected>Selecciona el Perimetro de Contención Urbana</option>
-					<option value="U1">U1</option>
-					<option value="U2">U2</option>
-					<option value="U3">U3</option>
-					<option value="S/P">Sin perimetro</option>
-				</select>
-				<label>PCU</label>
+					<i class="material-icons prefix">list</i>
+					<select class="" name="pcu" required="true">
+						<option value="" disabled selected>Selecciona el Perimetro de Contención Urbana</option>
+						<option value="U1">U1</option>
+						<option value="U2">U2</option>
+						<option value="U3">U3</option>
+						<option value="S/P">Sin perimetro</option>
+					</select>
+					<label>PCU</label>
 			</div>
 			<div class="row">
 				<div class="col m12">
@@ -247,24 +244,15 @@ include '../controladores/main_controller.php';
 							<i class="material-icons right">done</i>
 						</div>
 					</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</form>
-<script>
-	function alerta() {
-		alert("¿Estás seguro que deseas cambiar de proyecto?");
-	}
-</script>
-<script>
-	function rangoIngreso() {
-		var modalidad = document.getElementById('modalidad').value;
-		if (modalidad == 'Autoproduccion') {
-			document.getElementById('rango').innerHTML="El rango en esta modalidad es de $6,900 a $11,000.";
-		}else{
-			document.getElementById('rango').innerHTML = "";
+	</form>
+	<script>
+		function alerta() {
+			alert("¿Estás seguro que deseas cambiar de proyecto?");
+
 		}
-	}
-</script>
-<?php include '../libs/footer.php'; ?>
+	</script>
+	<?php include '../libs/footer.php'; ?>
