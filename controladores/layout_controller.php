@@ -26,7 +26,7 @@ class LayoutController{
 		}
 	}
 
-	function entidades($localidad, $municipio, $proyecto,$estado,$layout, $motivo)
+	function entidades( $proyecto,$layout, $motivo)
 	{
 	#variables manipuladas
 
@@ -65,13 +65,13 @@ class LayoutController{
 		'modalidad' => $_POST['modalidad'],
 		'cuv' => $_POST['cuv'],
 		'puntaje' => $_POST['puntaje'],
-		'estado' => $estado,
-		'municipio' => $municipio,
-		'cp' => $_POST['cp'],
-		'localidad'=>$localidad,
+		'estado' => $_POST['estado'],
+		'municipio' => $_POST['municipio'],
+		'cp' => $_POST['codigo_postal'],
+		'localidad'=> $_POST['municipio'],
 		'colonia' => $_POST['colonia'],
 		'domicilio_beneficiario' => $_POST['domicilio_beneficiario'],
-		'tipo_asentamiento' => $_POST['tipo_asentamiento'],
+		'tipo_asentamiento' => "Ciudad",
 		'coordenada' => $coordenada,
 		'latitud' => $_POST['latitud'],
 		'longitud' => $_POST['longitud'],
@@ -84,14 +84,8 @@ class LayoutController{
 		return $data;
 	}
 	function guardaLayout(){
-		$data = ['id' => $_POST['municipio']];
-		$result = MainModelo::obtenerMunicipio($data);
-
-		foreach ($result as $row => $item) {
-			$localidad = $item['municipio'];
-			$data = $this->entidades($localidad, $_POST['municipio'], $_POST['proyecto'], $_POST['estado'],"0", "0");
-		}
-
+			$data = $this->entidades($_POST['proyecto'],"0", "0");
+		
 		if ($data['modalidad']=='Autoproduccion') {
 			if ($data['ingreso']>=6900 && $data['ingreso']<=11000){
 
@@ -128,6 +122,7 @@ class LayoutController{
 			}
 			
 		}else{
+
 			$response = LayoutModelo::insertaLayout($data);
 
 			if ($response==1) {
@@ -234,7 +229,7 @@ if (isset($_POST['cancelacion'])) {
 		$layout = new LayoutController();
 		$layout->apartaLayout();
 	}else{
-		if(isset($_POST['curp']) && is_numeric($_POST['municipio']) && is_numeric($_POST['proyecto'])){
+		if(isset($_POST['curp']) && isset($_POST['municipio']) && is_numeric($_POST['proyecto'])){
 
 			$layout = new LayoutController();
 			$layout->guardaLayout();
