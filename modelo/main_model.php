@@ -1,5 +1,6 @@
 <?php
 require_once '../libs/conectardb.php';
+require_once '../libs/dbinegi.php';
 /**
  *
  */
@@ -72,15 +73,21 @@ class MainModelo
 
   public function catalogoEstado()
   {
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM estados;");
+    $stmt = ConexionInegi::conectar()->prepare("SELECT * FROM estados;");
     $stmt->execute();
     return $stmt -> fetchAll();
     $stmt->close();
   }
 
-  public function catalogoMunicipio()
+  public function catalogoMunicipio($data)
   {
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM municipios;");
+    $stmt = ConexionInegi::conectar()->prepare("SELECT em.*, e.estado, m.municipio from estados_municipios em
+inner join estados e on e.id = em.estados_id
+inner join municipios m on m.id = em.municipios_id
+where e.estado = :estado
+ order by m.municipio asc;
+");
+    $stmt->bindParam(':estado', $data['estado'],PDO::PARAM_STR);
     $stmt->execute();
     return $stmt -> fetchAll();
     $stmt->close();
@@ -108,8 +115,26 @@ class MainModelo
 
   function obtenerCP($data)
   {
-    $stmt = Conexion::conectar()->prepare("call sistema.colonias(:id)");
-    $stmt->bindParam(':id', $data['id'], PDO::PARAM_STR,4000);
+    $stmt = ConexionInegi::conectar()->prepare("call estados.codigosPostales(:municipio)");
+    $stmt->bindParam(':municipio', $data['municipio'], PDO::PARAM_STR,4000);
+    $stmt->execute();
+    return $stmt->fetchAll();
+    $stmt->close();
+  }
+
+  function obtenMunicipio($data)
+  {
+    $stmt = Conexion::conectar()->prepare("SELECT localidad FROM proyecto WHERE idproyecto = :id");
+    $stmt->bindParam(':id',$data['id'],PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll();
+    $stmt->close();
+  }
+
+  function obtenerColonias($data)
+  {
+    $stmt = ConexionInegi::conectar()->prepare("SELECT colonia FROM colonia WHERE codigo_postal = :cp");
+    $stmt->bindParam(':cp', $data['cp'], PDO::PARAM_STR);
     $stmt->execute();
     return $stmt->fetchAll();
     $stmt->close();

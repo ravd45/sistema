@@ -20,10 +20,11 @@ class ProyectoModelo{
   $ejercicio = $data['ejercicio'];
   $credito = $data['credito'];
   $solucion = $data['solucion'];
+  $programa = $data['programa'];
 
 
 #Consulta para insertar
-  $stmt = Conexion::conectar()->prepare("INSERT INTO proyecto (proyecto, fecha_alta, estado, modalidad, ejercicio_fiscal, oeo, credito, solucion, localidad) VALUES (:proyecto, :fecha_alta, :estado, :modalidad, :ejercicio_fiscal, :oeo, :credito, :solucion, :localidad)");
+  $stmt = Conexion::conectar()->prepare("INSERT INTO proyecto (proyecto, fecha_alta, estado, modalidad, ejercicio_fiscal, oeo, credito, solucion, localidad, programa) VALUES (:proyecto, :fecha_alta, :estado, :modalidad, :ejercicio_fiscal, :oeo, :credito, :solucion, :localidad, :programa)");
 
 #Declaración de parametros
   $stmt -> bindParam(":proyecto", $proyecto, PDO::PARAM_STR);
@@ -35,6 +36,7 @@ class ProyectoModelo{
   $stmt -> bindParam(":credito", $credito, PDO::PARAM_STR);
   $stmt -> bindParam(":solucion", $solucion, PDO::PARAM_STR);
   $stmt -> bindParam(":localidad", $municipio, PDO::PARAM_STR);
+  $stmt -> bindParam(":programa", $programa, PDO::PARAM_STR);
 
 #Ejecución de consulta si es true, entonces se insertó, sino, hubo un error
   $result = ($stmt->execute()) ? 1 : 0; #Esta línea es un if () <- condicion ? <- then : <- else
@@ -50,10 +52,9 @@ class ProyectoModelo{
 
   public function obtenerDatos($id)
   {
+
     $stmt = Conexion::conectar()->prepare("
-    SELECT l.id_layout, p.proyecto, l.curp, l.nombre, l.apellido_paterno, l.apellido_materno, l.genero, l.estado_civil, l.fecha_nacimiento, l.ingreso, l.antiguedad, l.ocupacion, l.telefono, l.solucion, l.subsidio, l.credito, l.enganche_efectivo, l.enganche_especie, l.otros_apoyos, l.modalidad, l.cuv, l.puntaje, e.estado, m.municipio, l.codigo_postal, l.localidad, l.colonia, l.domicilio_beneficiario, l.tipo_asentamiento, l.latitud, l.longitud, l.domicilio_terreno, l.pcu, l.zona FROM layout l
-    INNER JOIN municipio m on m.idmunicipio = l.id_municipio
-    INNER JOIN estado e on e.idestado = l.id_estado
+    SELECT l.id_layout, p.proyecto, l.curp, l.nombre, l.apellido_paterno, l.apellido_materno, l.genero, l.estado_civil, l.fecha_nacimiento, l.ingreso, l.antiguedad, l.ocupacion, l.telefono, l.solucion, l.subsidio, l.credito, l.enganche_efectivo, l.enganche_especie, l.otros_apoyos, l.modalidad, l.cuv, l.puntaje, l.estado, l.municipio, l.codigo_postal, l.localidad, l.colonia, l.domicilio_beneficiario, l.tipo_asentamiento, l.latitud, l.longitud, l.domicilio_terreno, l.pcu, l.zona FROM layout l
     INNER JOIN proyecto p on p.idproyecto = l.id_proyecto
     WHERE l.id_layout = :id;");
 

@@ -59,32 +59,38 @@ class MainController
   {
     $result = MainModelo::catalogoEstado();
 
-    echo'<input type="text" name="estado" id="default" list="estados">
+    echo'
+    <form id="formEstado">
+    <input type="text" name="estado" id="estado" list="estados">
 
     <datalist id="estados">';
     foreach ($result as $row => $item) {
       $estado = $item['estado'];
-      $id = $item['idestado'];
+      $id = $item['id'];
 
       echo'<option value="'.$estado.'">'.$estado.'</option>';
     }
-    echo'</datalist>';
+    echo'</datalist>
+    </form>';
   }
 
   public function catalogoMunicipio()
   {
-    $result = MainModelo::catalogoMunicipio();
+    $data = ['estado'=>$_POST['estado']];
+
+    $result = MainModelo::catalogoMunicipio($data);
     
-    echo'<input type="text" id="default" name="municipio" list="municipios">
+    echo'
+    <i class="material-icons prefix">location_city</i><input type="text" id="default" name="municipio" list="municipios">
 
     <datalist id="municipios">';
     foreach ($result as $row => $item) {
       $municipio = $item['municipio'];
-      $id = $item['idmunicipio'];
+      $id = $item['id'];
 
       echo '<option value="'.$municipio.'">'.$municipio.'</option>';
     }
-    echo'</datalist>';
+    echo'</datalist><label>Municipio</label>';
   }
 
   public function obtenerBeneficiarios($id)
@@ -253,17 +259,44 @@ class MainController
 
   public function obtenerCP($proyectoGet)
   {
+
     $data = ['id'=>$proyectoGet];
 
-    $result = MainModelo::obtenerCP($data);
+    $municipio = MainModelo::obtenMunicipio($data);
+ 
+    foreach ($municipio as $key => $value) {
+       $mun = ['municipio'=>$value['localidad']];
+    }
 
+    $result = MainModelo::obtenerCP($mun);
     if ($result[0]==NULL) {
        echo '<option value="">No se han cargado los Codigos postales del municipio</option>';
     }else{
       foreach ($result as $key => $value) {
-        echo '<option value="'.$value['cp'].'">'.$value['cp'].'</option>';
+        echo '<option value="'.$value['codigo_postal'].'">'.$value['codigo_postal'].'</option>';
       }
     }
+  }
+
+  public function colonias()
+  {
+    $data = ['cp' => $_POST['cp']];
+    $result = MainModelo::obtenerColonias($data);
+    // var_dump($result);
+       echo '  <i class="material-icons prefix">location_city</i>
+           <input name="colonia" type="text" list="colonias" class="validate" required>
+           <datalist id="colonias">';
+      foreach ($result as $key => $value) {
+        $colonia = $value['colonia'];
+
+        
+      echo '<option value="'.$colonia.'">'.$colonia.'</option>';
+            
+      }
+        echo'   </datalist>
+           <label>Colonia</label>';
+    
+    
   }
 }
 
@@ -275,5 +308,16 @@ if(isset($_POST['motivo'])){
   }
   </script>";
 }
+
+if (isset($_POST['estado'])) {
+  
+  $cat = new MainController();
+  $cat->catalogoMunicipio();
+}
+
+ if (isset($_POST['cp'])) {
+  $cp = new MainController();
+  $cp->colonias();
+ }
 
 ?>

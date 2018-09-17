@@ -35,13 +35,10 @@ $main = new MainController();
 				<label>Estado</label>
 			</div>
 			<!-- municipio -->
-			<div class="input-field col m5 offset-m1">
-				<i class="material-icons prefix">location_city</i>
-				<!-- <select class="" name="estado">
-					<option value="" disabled selected>Selecciona el estado</option> -->
-					<?php $main->catalogoMunicipio(); ?>
-				<!-- </select> -->
-				<label>Municipio</label>
+			<div class="input-field col m5 offset-m1" id="mun">
+				
+				
+				
 			</div>
 			
 			<div class="input-field col m5 offset-m1">
@@ -71,7 +68,7 @@ $main = new MainController();
 			</div>
 			<div class="input-field col m5 offset-m1">
 				<i class="material-icons prefix">description</i>
-				<select id="modalidad" name="modalidad" required="true">
+				<select id="modalidad" name="programa" required="true">
 					<option value="" disabled selected>Selecciona el programa</option>
 					<option value="CONAVI">CONAVI</option>
 					<option value="FONDEN">FONDEN</option>
@@ -99,4 +96,20 @@ $main = new MainController();
 		</div>
 	</div>
 </form>
+<script>
+	$(function () {
+		$('#estado').change(function() {
+			estado = $('#estado').val();
+			$.ajax({
+				url: "../controladores/main_controller.php",
+				type: "POST",
+				data: {estado:estado},
+				success: function(response) {
+					$('#mun').html(response);
+				}
+			});
+			return false;
+		});
+	});
+</script>
 <?php include '../libs/footer.php' ?>

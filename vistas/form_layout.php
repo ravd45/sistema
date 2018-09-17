@@ -10,7 +10,7 @@ include '../controladores/main_controller.php';
 	}
 	function subsidio() {
 		$(document).ready(function() {
-		$('#subsidio').append('<i class="material-icons prefix">attach_money</i><input name="subsidio" id="subsidio" type="text" class="validate" required value="$29,402.88"><label>Subsidio</label>');
+			$('#subsidio').append('<i class="material-icons prefix">attach_money</i><input name="subsidio" id="subsidio" type="text" class="validate" required value="$29,402.88"><label>Subsidio</label>');
 		});
 	}	
 </script>
@@ -165,37 +165,35 @@ include '../controladores/main_controller.php';
 					<?php $main->estadoProyecto($_GET['w']); ?>
 					<!--</select> -->
 					<label>Estado</label>
-			</div>
-			<!-- municipio -->
-			<div class="input-field col m4">
+				</div>
+				<!-- municipio -->
+				<div class="input-field col m4">
 					<i class="material-icons prefix">location_city</i>
 					<?php $main->municipioProyecto($_GET['w']); ?>
 					<label>Municipio/Localidad</label>
-			</div>
-			<!-- código postal -->
-			<div class="input-field col m4">
-				<i class="material-icons prefix">local_post_office</i>
-				<input type="text" id="default" name="codigo_postal" list="cp">
-				<datalist id="cp">
-					<?php $main->obtenerCP($_GET['w']); ?>
-					<option value="S/N">Sin Código postal</option>
-				</datalist>
-				<label>Código Postal</label>
-			</div>
-			<!-- colonia -->
-			<div class="input-field col m4">
-					<i class="material-icons prefix">location_city</i>
-					<input name="colonia" type="text" class="validate" required>
-					<label>Colonia</label>
-			</div>
-			<!-- domicilio del beneficiario -->
-			<div class="input-field col m4">
+				</div>
+				<!-- código postal -->
+				<div class="input-field col m4">
+					<i class="material-icons prefix">local_post_office</i>
+						<input type="text" id="codPost" name="codigo_postal" list="cp">
+						<datalist id="cp">
+							<?php $main->obtenerCP($proyecto); ?>
+							<option value="S/N">Sin Código postal</option>
+						</datalist>
+					<label>Código Postal</label>
+				</div>
+				<!-- colonia -->
+				<div class="input-field col m4" id="coloniaF">
+					
+				</div>
+				<!-- domicilio del beneficiario -->
+				<div class="input-field col m4">
 					<i class="material-icons prefix">place</i>
 					<input name="domicilio_beneficiario" type="text" class="validate">
 					<label>Domicilio del beneficiario</label>
-			</div>
-			<!-- zona -->
-			<div class="input-field col m4">
+				</div>
+				<!-- zona -->
+				<div class="input-field col m4">
 					<i class="material-icons prefix">domain</i>
 					<select class="" name="zona" required="true"></a>
 						<option value="" disabled selected>Selecciona la zona</option>
@@ -203,27 +201,27 @@ include '../controladores/main_controller.php';
 						<option value="Urbana">Urbano</option>
 					</select>
 					<label>Zona</label>
-			</div>
-			<!-- latitud -->
-			<div class="input-field col m4">
+				</div>
+				<!-- latitud -->
+				<div class="input-field col m4">
 					<i class="material-icons prefix">map</i>
 					<input name="latitud" type="text" maxlength="10" minlength="10" class="validate" required>
 					<label>Latitud</label>
-			</div>
-			<!-- longitud -->
-			<div class="input-field col m4">
+				</div>
+				<!-- longitud -->
+				<div class="input-field col m4">
 					<i class="material-icons prefix">map</i>
 					<input name="longitud" type="text" maxlength="11" minlength="11" class="validate" required>
 					<label>Longitud</label>
-			</div>
-			<!-- domicilio del terreno -->
-			<div class="input-field col m4">
+				</div>
+				<!-- domicilio del terreno -->
+				<div class="input-field col m4">
 					<i class="material-icons prefix">place</i>
 					<input name="domicilio_terreno" type="text" class="validate" required>
 					<label>Domicilio del terreno</label>
-			</div>
-			<!-- PCU -->
-			<div class="input-field col m4">
+				</div>
+				<!-- PCU -->
+				<div class="input-field col m4">
 					<i class="material-icons prefix">list</i>
 					<select class="" name="pcu" required="true">
 						<option value="" disabled selected>Selecciona el Perimetro de Contención Urbana</option>
@@ -233,22 +231,38 @@ include '../controladores/main_controller.php';
 						<option value="S/P">Sin perimetro</option>
 					</select>
 					<label>PCU</label>
-			</div>
-			<div class="row">
-				<div class="col m12">
-					<div class="col m8 offset-m1">
-						<a class="btn-floating btn-large waves-effect waves-light default-primario-color" href="proyectos.php"><i class="material-icons">arrow_back</i></a>
-					</div>
-					<div class="col m2 offset-m1">
-						<button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" type="submit" name="action">
-							<i class="material-icons right">done</i>
+				</div>
+				<div class="row">
+					<div class="col m12">
+						<div class="col m8 offset-m1">
+							<a class="btn-floating btn-large waves-effect waves-light default-primario-color" href="proyectos.php"><i class="material-icons">arrow_back</i></a>
 						</div>
-					</button>
+						<div class="col m2 offset-m1">
+							<button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" type="submit" name="action">
+								<i class="material-icons right">done</i>
+							</div>
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
+	<script>
+		$(function() {
+			$('#codPost').change(function() {
+				var cp = $('#codPost').val();
+				$.ajax({
+					url: "../controladores/main_controller.php",
+					type: "POST",
+					data: {cp: cp},
+					success: function(response) {
+						$('#coloniaF').html(response);
+										}
+				});
+				return false;
+			});
+		});
+	</script>
 	<script>
 		function alerta() {
 			alert("¿Estás seguro que deseas cambiar de proyecto?");

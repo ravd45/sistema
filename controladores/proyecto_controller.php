@@ -22,21 +22,25 @@ class ProyectoController
 		// }
 
 #Se crea el arreglo con los datos de la vista
-		$data = ['proyecto' => $proyecto,
+				$data = ['proyecto' => $proyecto,
 				 		 'fecha' => $_POST['fecha'],
-				 		 'municipio' => $_POST['municipio'],
-				 		 'oeo' => $_POST['oeo'],
 				 		 'estado'=> $_POST['estado'],
-				 		 'ejercicio'=>$_POST['ejercicio'],
 				 		 'modalidad'=>$_POST['modalidad'],
+				 		 'ejercicio'=>$_POST['ejercicio'],
+				 		 'oeo' => $_POST['oeo'],
 				 		 'credito'=>$_POST['credito'],
-				 		 'solucion'=>$_POST['solucion']
+				 		 'solucion'=>$_POST['solucion'],
+				 		 'municipio' => $_POST['municipio'],
+				 		 'programa'=>$_POST['programa']
 						];
 
 #Se invoca el modelo y se mandan los datos
 
 		$response = ProyectoModelo::creaProyecto($data);
-		if (!is_null($response)) {
+		var_dump($response);
+		var_dump($data);
+		 // die();
+		if (!is_null($response) && $response > 0) {
 			foreach ($response as $key => $value) {
 				$id = $value['idproyecto'];
 			}
