@@ -1,3 +1,9 @@
+<?php 
+
+session_start();
+session_destroy();
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +25,7 @@
 			<form id="FormInicio" method="POST" action="controladores/login_controller.php">
 				<div class="row div-inicio">
 					<div class="input-field col m6 offset-m3">
-						<input id="usuario" type="text" class="validate" name="usuario" required>
+						<input id="usuario" type="email" class="validate" name="usuario" required>
 						<label for="usuario">Usuario</label>
 					</div>
 					<div class="input-field col m6 offset-m3">

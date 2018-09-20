@@ -17,7 +17,12 @@
 				<div class="col m4 offset-m1">
 					<img src="../img/logo .png" id="logo" style="width: 220px; height: 170px;" alt="Logo DP11">
 				</div>
-				<div class="col m2 offset-m5">
+				<div class="col m2 ">
+					<?php
+					session_start();?>
+					<h5><?php echo $_SESSION['usuario']; ?></h5>
+				</div>
+				<div class="col m2 offset-m3">
 					<a href="../index.php">Salir <i style="margin-top: 35px;" class="material-icons">logout</i></a>
 				</div>
 			</div>

@@ -3,6 +3,7 @@
 require_once '../modelo/layout_model.php';
 require_once '../modelo/beneficiario_model.php';
 require_once '../modelo/main_model.php';
+require_once '../controladores/main_controller.php';
 /**
  *
  */
@@ -26,22 +27,34 @@ class LayoutController{
 		}
 	}
 
-	function entidades( $proyecto,$layout, $motivo)
+	function entidades($proyecto,$layout, $motivo)
 	{
-	#variables manipuladas
-
+		#variables manipuladas
+		session_start();
 		$nom_comp = $_POST['nombre']." ".$_POST['apellido_p']." ".$_POST['apellido_m'];
 		$coordenada = $_POST['latitud']." ".$_POST['longitud'];
 		$rfc = substr($_POST['curp'], 0, 10);
 		$enganche_especie =  implode ( ', ' , $_POST['enganche_especie']);
 		$fecha_nacimiento = $this->calculaFechaNac();
 		$gen = substr($_POST['curp'], 10, 1);
-		$subsidio = ($_POST['modalidad'] == 'Autoproduccion' || $_POST['modalidad'] == 'AUTOPRODUCCION') ? '$71,056.96' : '$29,402.88';
+		$subsidio = ($_POST['modalidad'] == 'Autoproduccion' || $_POST['modalidad'] == 'AUTOPRODUCCION') ? '71056.96' : '29402.88';
 		$genero = ($gen == 'M' || $gen = 'm') ? 'Femenino' : 'Masculino';
+		$enganche_efect = (isset($_POST['enganche_efectivo'])) ? $_POST['enganche_efectivo'] : 0;
+		$otro_apoyo = 		(isset($_POST['otros_apoyos'])) ? $_POST['otros_apoyos'] : 0;
+		$sumatoria = intval($_POST['credito']) + intval($subsidio) + intval($enganche_efect) + intval($otro_apoyo);
+		
+		$datos = ['colonia'=>$_POST['colonia'], 'cp'=>$_POST['codigo_postal']];
+		$asentamiento = MainModelo::obtenerAsentamiento($datos);
+		foreach ($asentamiento as $key => $value) {
+			$tipo_asentamiento = $value['tipo_asentamiento'];
+		}
+		$solucion = $_POST['solucion'];
+				if ($sumatoria == $solucion) {
+			# code...
 		
 		// echo $enganche_especie; die();
 
-	#Arreglo traido del formulario
+		#Arreglo traido del formulario
 		$data = ['proyecto' => $proyecto,
 		'curp' => $_POST['curp'],
 		'nombre' => $_POST['nombre'],
@@ -71,68 +84,83 @@ class LayoutController{
 		'localidad'=> $_POST['municipio'],
 		'colonia' => $_POST['colonia'],
 		'domicilio_beneficiario' => $_POST['domicilio_beneficiario'],
-		'tipo_asentamiento' => "Ciudad",
+		'tipo_asentamiento' => $tipo_asentamiento,
 		'coordenada' => $coordenada,
 		'latitud' => $_POST['latitud'],
 		'longitud' => $_POST['longitud'],
 		'domicilio_terreno' => $_POST['domicilio_terreno'],
 		'pcu' => $_POST['pcu'],
 		'zona'=>$_POST['zona'],
+		'usuario'=>$_SESSION['usuario'],
 		'motivo'=>$motivo,
 		'layout'=>$layout];
 
+		}else{
+			$data = ['error' => 1,
+					 'suma' => $sumatoria,
+					 'solucion' => $solucion
+					];
+		}
+
 		return $data;
 	}
-	function guardaLayout(){
-			$data = $this->entidades($_POST['proyecto'],"0", "0");
-		
-		if ($data['modalidad']=='Autoproduccion') {
-			if ($data['ingreso']>=6900 && $data['ingreso']<=11000){
+	
+	function guardaLayout()
+	{
+		$data = $this->entidades($_POST['proyecto'],"0", "0");
+			if (!isset($data['error'])) {
+				
+				if ($data['modalidad']=='Autoproduccion') {
+					if ($data['ingreso']>=6900 && $data['ingreso']<=11000){
 
-				$x = $data['ingreso'];
-				if(strlen($x)<5){
-					$x1 = substr($x, 0,1);
-					$x2 = substr($x, -3);
-					$arr = array($x1, $x2);
-					$ingreso = implode(",",$arr);
-					$data['ingreso'] = $ingreso;
+						$x = $data['ingreso'];
+						if(strlen($x)<5){
+							$x1 = substr($x, 0,1);
+							$x2 = substr($x, -3);
+							$arr = array($x1, $x2);
+							$ingreso = implode(",",$arr);
+							$data['ingreso'] = $ingreso;
+						}else{
+							$x1 = substr($x, 0,2);
+							$x2 = substr($x, 2);
+							$arr = array($x1, $x2);
+							$ingreso = implode(",",$arr);
+							$data['ingreso'] = $ingreso;
+
+						}	
+
+						$response = LayoutModelo::insertaLayout($data);
+
+						if ($response==1) {
+							echo "<script>window.location = '../vistas/proyectos.php';</script>";
+						}else{
+							var_dump($response);
+							echo "<br>";
+							var_dump($data);
+						}
+					} else{
+								// echo "<script>alert('Ingreso no válido'); window.location = '../vistas/form_layout.php?w=".$data['proyecto']."';</script>";
+						echo "<script>	window.location='../vistas/error_alert.php?w=".$data['proyecto']."';</script>";
+								// echo "<script>alertIngreso(".$data['proyecto']."); ";
+								// $this->alerta($data['proyecto']);
+					}
+
 				}else{
-					$x1 = substr($x, 0,2);
-					$x2 = substr($x, 2);
-					$arr = array($x1, $x2);
-					$ingreso = implode(",",$arr);
-					$data['ingreso'] = $ingreso;
 
-				}	
+					$response = LayoutModelo::insertaLayout($data);
 
-				$response = LayoutModelo::insertaLayout($data);
-
-				if ($response==1) {
-					echo "<script>window.location = '../vistas/proyectos.php';</script>";
-				}else{
-					var_dump($response);
-					echo "<br>";
-					var_dump($data);
+					if ($response==1) {
+						echo "<script>window.location = '../vistas/proyectos.php';</script>";
+					}else{
+						var_dump($response);
+						echo "<br> Inserta :";
+						var_dump($data);
+					}
 				}
-			} else{
-				// echo "<script>alert('Ingreso no válido'); window.location = '../vistas/form_layout.php?w=".$data['proyecto']."';</script>";
-				echo "<script>	window.location='../vistas/error_alert.php?w=".$data['proyecto']."';</script>";
-				// echo "<script>alertIngreso(".$data['proyecto']."); ";
-				// $this->alerta($data['proyecto']);
-			}
-			
-		}else{
-
-			$response = LayoutModelo::insertaLayout($data);
-
-			if ($response==1) {
-				echo "<script>window.location = '../vistas/proyectos.php';</script>";
 			}else{
-				var_dump($response);
-				echo "<br> Inserta :";
+				echo "la solución y los montos no encajan";
 				var_dump($data);
 			}
-		}
 	}
 
 	public function actualizaLayout()
@@ -213,6 +241,7 @@ class LayoutController{
 
 		echo $response;
 	}
+	
 }
 // $layout = new LayoutController();
 if (isset($_POST['cancelacion'])) {

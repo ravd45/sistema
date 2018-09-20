@@ -21,10 +21,11 @@ class ProyectoModelo{
   $credito = $data['credito'];
   $solucion = $data['solucion'];
   $programa = $data['programa'];
+  $ee = $data['ee'];
 
 
 #Consulta para insertar
-  $stmt = Conexion::conectar()->prepare("INSERT INTO proyecto (proyecto, fecha_alta, estado, modalidad, ejercicio_fiscal, oeo, credito, solucion, localidad, programa) VALUES (:proyecto, :fecha_alta, :estado, :modalidad, :ejercicio_fiscal, :oeo, :credito, :solucion, :localidad, :programa)");
+  $stmt = Conexion::conectar()->prepare("INSERT INTO proyecto (proyecto, fecha_alta, estado, modalidad, ejercicio_fiscal, oeo, credito, solucion, localidad, programa, entidad_ejecutora) VALUES (:proyecto, :fecha_alta, :estado, :modalidad, :ejercicio_fiscal, :oeo, :credito, :solucion, :localidad, :programa, :ee)");
 
 #Declaración de parametros
   $stmt -> bindParam(":proyecto", $proyecto, PDO::PARAM_STR);
@@ -37,6 +38,7 @@ class ProyectoModelo{
   $stmt -> bindParam(":solucion", $solucion, PDO::PARAM_STR);
   $stmt -> bindParam(":localidad", $municipio, PDO::PARAM_STR);
   $stmt -> bindParam(":programa", $programa, PDO::PARAM_STR);
+  $stmt -> bindParam(":ee", $ee, PDO::PARAM_STR);
 
 #Ejecución de consulta si es true, entonces se insertó, sino, hubo un error
   $result = ($stmt->execute()) ? 1 : 0; #Esta línea es un if () <- condicion ? <- then : <- else

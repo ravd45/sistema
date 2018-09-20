@@ -5,12 +5,12 @@ include '../controladores/main_controller.php';
 	function rangoIngreso() {
 		$(document).ready(function(){
 			$('#rango').append("El rango en esta modalidad es de $6,900 a $11,000.");
-			$('#subsidio').append('<i class="material-icons prefix">attach_money</i><input name="subsidio" id="subsidio" type="text" class="validate" required value="$71,056.96">');
+			$('#subsidio').append('<i class="material-icons prefix">attach_money</i><input name="subsidio" id="subsidio" type="number" step=".01" class="validate" required value="71056.96" readonly><label class="active">Subsidio*</label>');
 		});
 	}
 	function subsidio() {
 		$(document).ready(function() {
-			$('#subsidio').append('<i class="material-icons prefix">attach_money</i><input name="subsidio" id="subsidio" type="text" class="validate" required value="$29,402.88"><label>Subsidio</label>');
+			$('#subsidio').append('<i class="material-icons prefix">attach_money</i><input name="subsidio" id="subsidio" type="number" step=".01" class="validate" required value="29402.88" readonly><label class="active">Subsidio*</label>');
 		});
 	}	
 </script>
@@ -105,9 +105,9 @@ include '../controladores/main_controller.php';
 				<label>Teléfono</label>
 			</div>
 			<!-- solución -->
-			<div class="input-field col m4">
+			<div class="input-field col m4" style="display:none">
 				<i class="material-icons prefix">attach_money</i>
-				<!-- <input name="solucion" type="text" class="validate" required> -->
+				<input name="solucion" type="text" class="validate">
 				<?php $main->solucionProyecto($_GET['w']); ?>
 				<label>Solución</label>
 			</div>
@@ -124,7 +124,7 @@ include '../controladores/main_controller.php';
 			<!-- enganche en efectivo -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">attach_money</i>
-				<input name="enganche_efectivo" type="text" class="validate" >
+				<input name="enganche_efectivo" type="number" step=".01" class="validate" >
 				<label>Enganche en efectivo</label>
 			</div>
 			<!-- enganche en especie -->
@@ -142,13 +142,13 @@ include '../controladores/main_controller.php';
 			<!-- otros apoyos -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">attach_money</i>
-				<input name="otros_apoyos" type="text" class="validate" >
+				<input name="otros_apoyos" type="number" step=".01" class="validate" >
 				<label>Otros apoyos en efectivo</label>
 			</div>
 			<!-- CUV -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">assignment_turned_in</i>
-				<input name="cuv" maxlength="16" minlength="16" type="number" class="validate" >
+				<input name="cuv" maxlength="16" minlength="16" type="text" class="validate" >
 				<label>CUV</label>
 			</div>
 			<!-- puntaje -->
@@ -170,7 +170,16 @@ include '../controladores/main_controller.php';
 				<div class="input-field col m4">
 					<i class="material-icons prefix">location_city</i>
 					<?php $main->municipioProyecto($_GET['w']); ?>
-					<label>Municipio/Localidad</label>
+					<label>Municipio</label>
+				</div>
+				<!-- localidad -->
+				<div class="input-field col m4">
+					<i class="material-icons prefix">location_city</i>
+					<input type="text" id="localidad" name="localidad" list="loc">
+						<datalist id="loc">
+					<?php $main->obtenerLocalidad($_GET['w']); ?>
+					</datalist>
+					<label>Localidad</label>
 				</div>
 				<!-- código postal -->
 				<div class="input-field col m4">
@@ -183,8 +192,10 @@ include '../controladores/main_controller.php';
 					<label>Código Postal</label>
 				</div>
 				<!-- colonia -->
-				<div class="input-field col m4" id="coloniaF">
-					
+				<div class="input-field col m4" id="coloniaF">		
+				</div>
+				<!-- tipo asentamiento -->
+				<div class="input-field col m4" id="asentamiento">		
 				</div>
 				<!-- domicilio del beneficiario -->
 				<div class="input-field col m4">
@@ -261,6 +272,22 @@ include '../controladores/main_controller.php';
 				});
 				return false;
 			});
+
+			// $('#colonia').change(function() {
+			// 	var colonia = $('#colonia').val();
+			// 	console.log(colonia);
+			// 	var cp = $('#codPost').val();
+			// 	$.ajax({
+			// 		url: "../controladores/main_controller.php",
+			// 		type: "POST",
+			// 		data: {colonia: colonia, cp: cp},
+			// 		success: function(response) {
+			// 			console.log(response);
+			// 			// $('#asentamiento').html(response);
+			// 							}
+			// 	});
+			// 	return false;
+			// });
 		});
 	</script>
 	<script>

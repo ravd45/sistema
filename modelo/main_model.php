@@ -17,11 +17,11 @@ class MainModelo
     $stmt->close();
   }
 
-    function obtenerTotalCapturados($id)
+  function obtenerTotalCapturados($id)
   {
     $stmt = Conexion::conectar()->prepare("SELECT count(*) AS total FROM proyecto p
-                                           INNER JOIN layout l on l.id_proyecto = p.idproyecto
-                                           WHERE p.idproyecto = :id  and l.estado_contrato = 'activo'");
+     INNER JOIN layout l on l.id_proyecto = p.idproyecto
+     WHERE p.idproyecto = :id  and l.estado_contrato = 'activo'");
     $stmt -> bindParam(":id", $id['id'], PDO::PARAM_STR);
     $stmt->execute();
     return $stmt->fetchAll();
@@ -82,11 +82,11 @@ class MainModelo
   public function catalogoMunicipio($data)
   {
     $stmt = ConexionInegi::conectar()->prepare("SELECT em.*, e.estado, m.municipio from estados_municipios em
-inner join estados e on e.id = em.estados_id
-inner join municipios m on m.id = em.municipios_id
-where e.estado = :estado
- order by m.municipio asc;
-");
+      inner join estados e on e.id = em.estados_id
+      inner join municipios m on m.id = em.municipios_id
+      where e.estado = :estado
+      order by m.municipio asc;
+      ");
     $stmt->bindParam(':estado', $data['estado'],PDO::PARAM_STR);
     $stmt->execute();
     return $stmt -> fetchAll();
@@ -96,8 +96,8 @@ where e.estado = :estado
   public function listaProyectos($data)
   {
     $stmt = Conexion::conectar()->prepare("SELECT p.proyecto, l.estatus, l.fecha_apartado, l.nombre_completo, l.id_layout FROM proyecto p
-                                           INNER JOIN layout l on l.id_proyecto = p.idproyecto
-                                           WHERE p.idproyecto = :id  and l.estado_contrato = 'activo' ORDER BY l.nombre_completo ASC;");
+     INNER JOIN layout l on l.id_proyecto = p.idproyecto
+     WHERE p.idproyecto = :id  and l.estado_contrato = 'activo' ORDER BY l.nombre_completo ASC;");
     $stmt -> bindParam(":id", $data['id'], PDO::PARAM_STR);
     $stmt->execute();
     return $stmt -> fetchAll();
@@ -115,7 +115,7 @@ where e.estado = :estado
 
   function obtenerCP($data)
   {
-    $stmt = ConexionInegi::conectar()->prepare("call estados.codigosPostales(:municipio)");
+    $stmt = ConexionInegi::conectar()->prepare("call codigosPostales(:municipio)");
     $stmt->bindParam(':municipio', $data['municipio'], PDO::PARAM_STR,4000);
     $stmt->execute();
     return $stmt->fetchAll();
@@ -139,6 +139,28 @@ where e.estado = :estado
     return $stmt->fetchAll();
     $stmt->close();
   }
+
+  function obtenerLocalidad($data)
+  {
+   $stmt = ConexionInegi::conectar()->prepare("SELECT l.localidad FROM municipios_localidad ml 
+    inner join localidad l on ml.localidad_id = l.id
+    inner join municipios m on ml. municipios_id = m.id
+    where m.municipio = :mun;");
+    $stmt->bindParam(':mun', $data['municipio'], PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll();
+    $stmt->close();
+ }
+
+ function obtenerAsentamiento($data)
+ {
+    $stmt = ConexionInegi::conectar()->prepare("SELECT tipo_asentamiento FROM colonia WHERE colonia = :colonia and codigo_postal = :cp");
+    $stmt->bindParam(':colonia', $data['colonia'], PDO::PARAM_STR);
+    $stmt->bindParam(':cp', $data['cp'], PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll();
+    $stmt->close();
+ }
 
 }
 

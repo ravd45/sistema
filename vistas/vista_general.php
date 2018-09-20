@@ -1,5 +1,4 @@
 <?php include '../libs/header.php' ?>
-
 <h3>Vista General</h3>
 <div class="row">
 	<div class="col m12">

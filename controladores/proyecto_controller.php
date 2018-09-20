@@ -18,7 +18,7 @@ class ProyectoController
 
 		// foreach ($result as $row => $item) {
 		// 	$localidad = $item['municipio'];
-				$proyecto =  $_POST['proyecto'] .", ".$_POST['estado'] .", ".$_POST['municipio'].", ".$_POST['modalidad'].", Ejercicio fiscal ".$_POST['ejercicio'].", OEO: ".$_POST['oeo'];
+				$proyecto =  $_POST['proyecto'] .", ".$_POST['estado'] .", ".$_POST['municipio'].", ".$_POST['modalidad'].", Ejercicio fiscal ".$_POST['ejercicio'].", OEO: ".$_POST['oeo'].", EE: ".$_POST['financiera'];
 		// }
 
 #Se crea el arreglo con los datos de la vista
@@ -31,14 +31,15 @@ class ProyectoController
 				 		 'credito'=>$_POST['credito'],
 				 		 'solucion'=>$_POST['solucion'],
 				 		 'municipio' => $_POST['municipio'],
-				 		 'programa'=>$_POST['programa']
+				 		 'programa'=>$_POST['programa'],
+				 		 'ee'=>$_POST['financiera']
 						];
 
 #Se invoca el modelo y se mandan los datos
 
 		$response = ProyectoModelo::creaProyecto($data);
-		var_dump($response);
-		var_dump($data);
+		// var_dump($response);
+		// var_dump($data);
 		 // die();
 		if (!is_null($response) && $response > 0) {
 			foreach ($response as $key => $value) {
