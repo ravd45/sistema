@@ -54,7 +54,7 @@ class LayoutModelo{
 	}
 
 	function actualizaLayout($data){
-		$stmt = Conexion::conectar()->prepare("INSERT INTO layout (id_proyecto, curp, nombre, apellido_paterno, apellido_materno, nombre_completo, genero, estado_civil, fecha_nacimiento, rfc, ingreso, antiguedad, ocupacion, telefono, solucion, subsidio, credito, enganche_efectivo, enganche_especie, otros_apoyos, modalidad, cuv, puntaje, id_estado, id_municipio, codigo_postal, localidad, colonia, domicilio_beneficiario, tipo_asentamiento, coordenadas, latitud, longitud, domicilio_terreno, pcu, zona) VALUES (:proyecto, :curp, :nombre, :apellido_p, :apellido_m, :nombre_completo, :genero, :estado_civil, :fecha_nacimiento, :rfc, :ingreso, :antiguedad, :ocupacion, :telefono, :solucion, :subsidio, :credito, :enganche_efectivo, :enganche_especie, :otros_apoyos, :modalidad, :cuv, :puntaje, :estado, :municipio, :cp, :localidad, :colonia, :domicilio_beneficiario, :tipo_asentamiento, :coordenada, :latitud, :longitud, :domicilio_terreno, :pcu, :zona);");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO layout (id_proyecto, curp, nombre, apellido_paterno, apellido_materno, nombre_completo, genero, estado_civil, fecha_nacimiento, rfc, ingreso, antiguedad, ocupacion, telefono, solucion, subsidio, credito, enganche_efectivo, enganche_especie, otros_apoyos, modalidad, cuv, puntaje, estado, municipio, codigo_postal, localidad, colonia, domicilio_beneficiario, tipo_asentamiento, coordenadas, latitud, longitud, domicilio_terreno, pcu, zona, usuario) VALUES (:proyecto, :curp, :nombre, :apellido_p, :apellido_m, :nombre_completo, :genero, :estado_civil, :fecha_nacimiento, :rfc, :ingreso, :antiguedad, :ocupacion, :telefono, :solucion, :subsidio, :credito, :enganche_efectivo, :enganche_especie, :otros_apoyos, :modalidad, :cuv, :puntaje, :estado, :municipio, :cp, :localidad, :colonia, :domicilio_beneficiario, :tipo_asentamiento, :coordenada, :latitud, :longitud, :domicilio_terreno, :pcu, :zona, :usuario);");
 
 		$stmt -> bindParam(":proyecto", $data['proyecto'], PDO::PARAM_STR);
 		$stmt -> bindParam(":curp", $data['curp'], PDO::PARAM_STR);
@@ -92,6 +92,7 @@ class LayoutModelo{
 		$stmt -> bindParam(":domicilio_terreno", $data['domicilio_terreno'], PDO::PARAM_STR);
 		$stmt -> bindParam(":pcu", $data['pcu'], PDO::PARAM_STR);
 		$stmt -> bindParam(":zona", $data['zona'], PDO::PARAM_STR);
+		$stmt -> bindParam(":usuario", $data['usuario'],PDO::PARAM_STR);
 
 		$result = ($stmt->execute()) ? 1 : 0; #Esta línea es un if () <- condicion ? <- then : <- else
 

@@ -27,9 +27,10 @@ class LayoutController{
 		}
 	}
 
-	function entidades($proyecto,$layout, $motivo)
+	function entidades($proyecto,$layout, $motivo, $asentamiento)
 	{
 		#variables manipuladas
+
 		session_start();
 		$nom_comp = $_POST['nombre']." ".$_POST['apellido_p']." ".$_POST['apellido_m'];
 		$coordenada = $_POST['latitud']." ".$_POST['longitud'];
@@ -43,11 +44,16 @@ class LayoutController{
 		$otro_apoyo = 		(isset($_POST['otros_apoyos'])) ? $_POST['otros_apoyos'] : 0;
 		$sumatoria = intval($_POST['credito']) + intval($subsidio) + intval($enganche_efect) + intval($otro_apoyo);
 		
-		$datos = ['colonia'=>$_POST['colonia'], 'cp'=>$_POST['codigo_postal']];
+		if ($asentamiento === 0) {
+			$datos = ['colonia'=>$_POST['colonia'], 'cp'=>$_POST['codigo_postal']];
 		$asentamiento = MainModelo::obtenerAsentamiento($datos);
 		foreach ($asentamiento as $key => $value) {
 			$tipo_asentamiento = $value['tipo_asentamiento'];
+			}
+		}else{
+			$tipo_asentamiento = $asentamiento;
 		}
+		
 		$solucion = $_POST['solucion'];
 				if ($sumatoria == $solucion) {
 			# code...
@@ -107,7 +113,7 @@ class LayoutController{
 	
 	function guardaLayout()
 	{
-		$data = $this->entidades($_POST['proyecto'],"0", "0");
+		$data = $this->entidades($_POST['proyecto'],"0", "0", "0");
 			if (!isset($data['error'])) {
 				
 				if ($data['modalidad']=='Autoproduccion') {
@@ -165,26 +171,28 @@ class LayoutController{
 
 	public function actualizaLayout()
 	{
-		$data = ['municipio' => $_POST['municipio'], 'proyecto'=>$_POST['proyecto'], 'estado'=>$_POST['estado']];
-		$result = MainModelo::obtenerIdMunicipio($data);
-		$response = MainModelo::obtenerIdProyecto($data);
-		$resultadoestado = MainModelo::obtenerIdEstado($data);
 
-		foreach ($resultadoestado as $row => $item) {
-			$idestado = $item['idestado'];
-		}
+
+		$data = ['municipio' => $_POST['municipio'], 'proyecto'=>$_POST['proyecto'], 'estado'=>$_POST['estado']];
+		// $result = MainModelo::obtenerIdMunicipio($data);
+		$response = MainModelo::obtenerIdProyecto($data);
+		// $resultadoestado = MainModelo::obtenerIdEstado($data);
+
+		// foreach ($resultadoestado as $row => $item) {
+			// $idestado = $item['idestado'];
+		// }
 
 		foreach ($response as $row => $item) {
 			$idproyecto = $item['idproyecto'];
 		}
-		foreach ($result as $row => $item) {
-			$idmunicipio = $item['idmunicipio'];
+		// foreach ($result as $row => $item) {
+			// $idmunicipio = $item['idmunicipio'];
 			if (isset($_POST['observacion'])) {
-				$data = $this->entidades($_POST['municipio'],$idmunicipio,$idproyecto, $idestado, $_POST['layout'], $_POST['observacion']);
+				$data = $this->entidades($idproyecto, $_POST['layout'], $_POST['observacion'], $_POST['tipo_asentamiento']);
 			}else{
-				$data = $this->entidades($_POST['municipio'],$idmunicipio,$idproyecto, $idestado, $_POST['layout'], $_POST['motivo']);	
+				$data = $this->entidades($idproyecto, $_POST['layout'], $_POST['motivo'], $_POST['tipo_asentamiento']);	
 			}
-		}
+		// }
 
 
 		$response = LayoutModelo::actualizaLayout($data);
@@ -241,6 +249,11 @@ class LayoutController{
 
 		echo $response;
 	}
+
+	public function  actualizaBeneficiario()
+	{
+		// $data = $this->entidades($_POST['proyecto'], $_POST[''])
+	}
 	
 }
 // $layout = new LayoutController();
@@ -258,14 +271,19 @@ if (isset($_POST['cancelacion'])) {
 		$layout = new LayoutController();
 		$layout->apartaLayout();
 	}else{
-		if(isset($_POST['curp']) && isset($_POST['municipio']) && is_numeric($_POST['proyecto'])){
-
+		if (isset($_POST['beneficiario'])) {
 			$layout = new LayoutController();
-			$layout->guardaLayout();
+			$layout = actualizaBeneficiario();
 		}else{
-			$layout = new LayoutController();
-			$layout->actualizaLayout();
-			}	
+			if(isset($_POST['curp']) && isset($_POST['municipio']) && is_numeric($_POST['proyecto'])){
+
+				$layout = new LayoutController();
+				$layout->guardaLayout();
+			}else{
+				$layout = new LayoutController();
+				$layout->actualizaLayout();
+				}	
+			}
 		}
 	}
 }

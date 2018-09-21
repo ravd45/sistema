@@ -96,116 +96,138 @@ public function catalogoMunicipio()
 public function obtenerBeneficiarios($id)
 {
     // session_start();
-     date_default_timezone_set('America/Mexico_city');
-     $fecha = date('Y-m-d');
+ date_default_timezone_set('America/Mexico_city');
+ $fecha = date('Y-m-d');
 
         // $fecha = include '../libs/fecha.php';
-     $data = ['id'=>$id];
-     $result = MainModelo::listaProyectos($data);
+ $data = ['id'=>$id];
+ $result = MainModelo::listaProyectos($data);
 
-     echo"
-     <div class='row'>
-     <div class='col m12'>";
-    if ($_SESSION['rol'] != 'invitado') {
-      
-    echo" <div class='col m2'>
-     <a class=' btn-small btn waves-effect waves-light btn-large waves-effect waves-light blue accent-3' href='../vistas/form_layout.php?w=$id' type='submit' name='action'>
-     <i class='material-icons right'>add</i>Agregar</a>
-     </div>";
+ echo"
+ <div class='row'>
+ <div class='col m12'>";
+ if ($_SESSION['rol'] != 'invitado') {
+
+  echo" <div class='col m2'>
+  <a class=' btn-small btn waves-effect waves-light btn-large waves-effect waves-light blue accent-3' href='../vistas/form_layout.php?w=$id' type='submit' name='action'>
+  <i class='material-icons right'>add</i>Agregar</a>
+  </div>";
+}
+echo "
+<div class=row>
+<div class='col m12'>
+<div class='col m2 offset-m8'>  
+<form method='POST' action='../controladores/excel_controller.php'>
+<input type='number' value='".$id."' style='display: none;' name='folio'>
+<button class='btn-small btn waves-effect waves-light waves-effect waves-light green accent-4' type='submit' name='action'>
+<i class='material-icons right'>print</i>Exportar
+</button>
+</form>
+</div>";
+if ($_SESSION['rol'] == 'administrador') {  
+echo "<div class='col m2'>  
+<form method='POST' action='../controladores/eliminar_controller.php'>
+<input type='number' value='".$id."' style='display: none;' name='proyecto'>
+<button class='btn-small btn waves-effect waves-light waves-effect waves-light red accent-4' type='submit' name='action'>
+<i class='material-icons right'>delete</i>Eliminar
+</button>
+</form>
+</div>";
+}
+echo"</div>
+</div>";
+
+foreach ($result as $row => $item) {
+  echo "
+  <table class=''>
+  <tbody>
+  <tr>
+  <td style='width:250px;'>".$item['nombre_completo']."</td>";
+  if ($_SESSION['rol'] != 'invitado') {
+    echo "  <td>
+
+    <div class='row'>
+    <div class='col m9 offset-m4'>
+    <div class='col m2'>
+       <form method='POST' action='../vistas/actualiza_beneficiario.php'>
+           <input type='text' value='actualiza' style='display: none;' name='actualiza'>
+           <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
+           <input type='text' value='".$item['nombre_completo']."' style='display: none;' name='nombre'>
+           <button class='btn-small btn waves-effect waves-light  waves-effect waves-light cyan darken-3' type='submit' name='action'>Actualizar 
+              <i class='material-icons'>rate_review</i>
+           </button>
+       </form>
+    </div>
+    <div class='col m2'>";
+    if ($item['estatus']=='EN EJECUCION') {
+
+      echo" <form method='POST' action='../vistas/ejecucion_check.php?l=".$item['id_layout']."'>";
+    }else{
+      echo" <form method='POST' action='../vistas/checklist.php'>";
     }
-     echo "<div>
-     <div class='col m2 offset-m10'>  
-     <form method='POST' action='../controladores/excel_controller.php'>
-     <input type='number' value='".$id."' style='display: none;' name='folio'>
-     <button class='btn-small btn waves-effect waves-light waves-effect waves-light green accent-4' type='submit' name='action'>
-     <i class='material-icons right'>print</i>Exportar
+    echo"<input name='id' value='".$item['id_layout']."' style='display:none;'>
+    <button class='btn-small btn waves-effect waves-light  waves-effect waves-light  cyan darken-4' >checklist <i class='material-icons'>playlist_add_check</i>
+    </button>
+    </form>
+
+    </div>
+    <div class='col m2'>";
+    if($item['estatus']=='Solicitante'){
+     echo" <form method='POST' action='../vistas/ejecucion_form.php'>
+     <input type='number' value='ejecuta' style='display: none;' name='ejecuta'>
+     <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
+     <input type='text' value='".$item['nombre_completo']."' style='display: none;' name='nombre'>
+     <button class='btn-small btn waves-effect waves-light  waves-effect waves-light teal darken-4' type='submit' name='action'>Ejecución 
+     <i class='material-icons'>done</i>
      </button>
-     </form>
-     </div>
-     </div>
-     </div>";
-
-     foreach ($result as $row => $item) {
-      echo "
-      <table class=''>
-      <tbody>
-      <tr>
-      <td style='width:250px;'>".$item['nombre_completo']."</td>";
-      if ($_SESSION['rol'] != 'invitado') {
-        echo "  <td>
-
-        <div class='row'>
-        <div class='col m9 offset-m4'>
-        <div class='col m2'>";
-        if ($item['estatus']=='EN EJECUCION') {
-
-          echo" <form method='POST' action='../vistas/ejecucion_check.php?l=".$item['id_layout']."'>";
-        }else{
-          echo" <form method='POST' action='../vistas/checklist.php'>";
-        }
-        echo"<input name='id' value='".$item['id_layout']."' style='display:none;'>
-        <button class='btn-small btn waves-effect waves-light  waves-effect waves-light  cyan darken-4' >checklist <i class='material-icons'>playlist_add_check</i>
-        </button>
-        </form>
-
-        </div>
-        <div class='col m2'>";
-        if($item['estatus']=='Solicitante'){
-         echo" <form method='POST' action='../vistas/ejecucion_form.php'>
-         <input type='number' value='ejecuta' style='display: none;' name='ejecuta'>
-         <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
-         <input type='text' value='".$item['nombre_completo']."' style='display: none;' name='nombre'>
-         <button class='btn-small btn waves-effect waves-light  waves-effect waves-light teal darken-4' type='submit' name='action'>Ejecución 
-         <i class='material-icons'>done</i>
-         </button>
-         </form>";
-       } else {
-        if ($item['estatus']=='EN EJECUCION') {
-          echo " <form method='POST' action='../controladores/layout_controller.php'>
-          <input type='text' value='aparta' style='display: none;' name='aparta'>
-          <!-- fecha de apartado -->
-          <button class='btn-small btn waves-effect waves-light  waves-effect waves-light teal darken-2' type='submit' name='action'>Apartado 
-          <i class='material-icons'>done</i>
-          </button>
-          <div class = 'row'>                    
-          <div class = 'col m12'>                      
-          <div class=''>
-          <i class='material-icons prefix'>schedule</i>
-          <input type='date' name='fecha_apartado' max='".$fecha."' placeholder='Fecha de apartado' required>
-
-          </div>
-          </div>
-          </div>
-          <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
-          </form>";
-        }else{
-          echo "APARTADO: ".$item['fecha_apartado'];
-        }
-      }
-      echo "</div>
-      <div class='col m2'>
-      <form method='POST' action='../vistas/cancela_beneficiario.php'>
-      <input name='id' value='".$item['id_layout']."' style='display:none;'>
-      <button class='btn-small btn waves-effect waves-light waves-effect waves-light green darken-4 ' onclick='cancelacion()' type='submit' name='action'>Cancelar <i class='material-icons'>cancel</i></button>
-      </form>
-      </div>
-      <div class='col m2'>
-      <form method='POST' action='../vistas/actualiza_datos.php'>
-      <input value='actualizacion' name='actualizacion' style='display:none;'>
-      <input name='id' value='".$item['id_layout']."' style='display:none;'>
-      <button class='btn-small btn waves-effect waves-light  waves-effect waves-light light-green darken-4' >Sustituir <i class='material-icons'>update</i>
+     </form>";
+   } else {
+    if ($item['estatus']=='EN EJECUCION') {
+      echo " <form method='POST' action='../controladores/layout_controller.php'>
+      <input type='text' value='aparta' style='display: none;' name='aparta'>
+      <!-- fecha de apartado -->
+      <button class='btn-small btn waves-effect waves-light  waves-effect waves-light teal darken-2' type='submit' name='action'>Apartado 
+      <i class='material-icons'>done</i>
       </button>
-      </form>
+      <div class = 'row'>                    
+      <div class = 'col m12'>                      
+      <div class=''>
+      <i class='material-icons prefix'>schedule</i>
+      <input type='date' name='fecha_apartado' max='".$fecha."' placeholder='Fecha de apartado' required>
+
       </div>
       </div>
       </div>
-      </td>";
+      <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
+      </form>";
+    }else{
+      echo "APARTADO: ".$item['fecha_apartado'];
     }
-    echo "  </tr>
-    </tbody>
-    </table>
-    ";
-    }
+  }
+  echo "</div>
+  <div class='col m2'>
+  <form method='POST' action='../vistas/cancela_beneficiario.php'>
+  <input name='id' value='".$item['id_layout']."' style='display:none;'>
+  <button class='btn-small btn waves-effect waves-light waves-effect waves-light green darken-4 ' onclick='cancelacion()' type='submit' name='action'>Cancelar <i class='material-icons'>cancel</i></button>
+  </form>
+  </div>
+  <div class='col m2'>
+  <form method='POST' action='../vistas/actualiza_datos.php'>
+  <input value='actualizacion' name='actualizacion' style='display:none;'>
+  <input name='id' value='".$item['id_layout']."' style='display:none;'>
+  <button class='btn-small btn waves-effect waves-light  waves-effect waves-light light-green darken-4' >Sustituir <i class='material-icons'>update</i>
+  </button>
+  </form>
+  </div>
+  </div>
+  </div>
+  </td>";
+}
+echo "  </tr>
+</tbody>
+</table>
+";
+}
 }
 
 public function listaProyectos()
@@ -267,64 +289,64 @@ public function solucionProyecto($proyectoGet)
 public function obtenerCP($proyectoGet)
 {
 
-    $data = ['id'=>$proyectoGet];
+  $data = ['id'=>$proyectoGet];
 
-    $municipio = MainModelo::obtenMunicipio($data);
+  $municipio = MainModelo::obtenMunicipio($data);
 
-    foreach ($municipio as $key => $value) {
-     $mun = ['municipio'=>$value['localidad']];
-   }
+  foreach ($municipio as $key => $value) {
+   $mun = ['municipio'=>$value['localidad']];
+ }
 
-   $result = MainModelo::obtenerCP($mun);
-   if ($result[0]==NULL) {
-     echo '<option value="">No se han cargado los Codigos postales del municipio</option>';
-   }else{
-    foreach ($result as $key => $value) {
-      echo '<option value="'.$value['codigo_postal'].'">'.$value['codigo_postal'].'</option>';
-    }
-    }
+ $result = MainModelo::obtenerCP($mun);
+ if ($result[0]==NULL) {
+   echo '<option value="">No se han cargado los Codigos postales del municipio</option>';
+ }else{
+  foreach ($result as $key => $value) {
+    echo '<option value="'.$value['codigo_postal'].'">'.$value['codigo_postal'].'</option>';
+  }
+}
 }
 
 public function obtenerLocalidad($proyecto)
 {
-    $data = ['id'=> $proyecto];
-    $municipio = MainModelo::obtenMunicipio($data);
+  $data = ['id'=> $proyecto];
+  $municipio = MainModelo::obtenMunicipio($data);
 
-     foreach ($municipio as $key => $value) {
-     $mun = ['municipio'=>$value['localidad']];
-   }
-   
-   $result = MainModelo::obtenerLocalidad($mun);
+  foreach ($municipio as $key => $value) {
+   $mun = ['municipio'=>$value['localidad']];
+ }
 
-    if ($result[0]==NULL) {
-     echo '<option value="">No se han cargado las localidades de este municipio </option>';
-   }else{
-    foreach ($result as $key => $value) {
-      echo '<option value="'.$value['localidad'].'">'.$value['localidad'].'</option>';
-    }
-    }
+ $result = MainModelo::obtenerLocalidad($mun);
+
+ if ($result[0]==NULL) {
+   echo '<option value="">No se han cargado las localidades de este municipio </option>';
+ }else{
+  foreach ($result as $key => $value) {
+    echo '<option value="'.$value['localidad'].'">'.$value['localidad'].'</option>';
+  }
+}
 
 
 }
 
-  public function colonias()
-  {
-    $data = ['cp' => $_POST['cp']];
-    $result = MainModelo::obtenerColonias($data);
+public function colonias()
+{
+  $data = ['cp' => $_POST['cp']];
+  $result = MainModelo::obtenerColonias($data);
       // var_dump($result);
-    echo ' <i class="material-icons prefix">location_city</i>
-    <input name="colonia" id="colonia" type="text" list="colonias" class="validate" required>
-    <datalist id="colonias">';
-    foreach ($result as $key => $value) {
-      $colonia = $value['colonia'];
+  echo ' <i class="material-icons prefix">location_city</i>
+  <input name="colonia" id="colonia" type="text" list="colonias" class="validate" required>
+  <datalist id="colonias">';
+  foreach ($result as $key => $value) {
+    $colonia = $value['colonia'];
 
 
-      echo '<option value="'.$colonia.'">'.$colonia.'</option>';
+    echo '<option value="'.$colonia.'">'.$colonia.'</option>';
 
-    }
-    echo'   </datalist>
-    <label>Colonia</label>';    
   }
+  echo'   </datalist>
+  <label>Colonia</label>';    
+}
 
 }
 

@@ -66,5 +66,17 @@ class ProyectoModelo{
     return $stmt->fetchAll();
     $stmt->close();
   }
+
+  public function eliminarProyecto($data)
+  {
+
+    $stmt =  Conexion::conectar()->prepare("UPDATE proyecto SET estatus = 'eliminado' WHERE idproyecto = :id ");
+    $stmt -> bindParam(":id", $data['id'], PDO::PARAM_STR);
+    $result = ($stmt->execute()) ? 1 : 0;
+
+    return $result;
+
+    $stmt->close();
+  }
 }
 ?>

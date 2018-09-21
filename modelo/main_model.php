@@ -30,7 +30,7 @@ class MainModelo
 
   public function obtenerProyectos()
   {
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM proyecto ORDER BY idproyecto DESC;");
+    $stmt = Conexion::conectar()->prepare("SELECT * FROM proyecto WHERE estatus = 'activo' ORDER BY idproyecto DESC;");
     $stmt->execute();
     return $stmt -> fetchAll();
     $stmt->close();
