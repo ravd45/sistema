@@ -3,19 +3,19 @@
 session_start();
 session_destroy();
 
- ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>Sistema</title>
 	<link rel="stylesheet" href="css/materialize.css">
 	<link rel="stylesheet" href="css/estilo.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Cairo|Cantarell|Hammersmith+One|Handlee|Indie+Flower|Kanit|Marck+Script|Satisfy|Ubuntu+Condensed|Varela+Round" rel="stylesheet"> 
 </head>
-<body>
+<!-- <body>
 	<section>
 		<img src="../sistema/img/logo .png" style="width: 220px; height: 170px;" id="logo" alt="Logo DP11">
 	</section>
@@ -26,11 +26,11 @@ session_destroy();
 				<div class="row div-inicio">
 					<div class="input-field col m6 offset-m3">
 						<input id="usuario" type="email" class="validate" name="usuario" required>
-						<label for="usuario">Usuario</label>
+						<label class='active' for="usuario">Usuario</label>
 					</div>
 					<div class="input-field col m6 offset-m3">
 						<input id="contrasenia" type="password" class="validate" name="contrasenia" required>
-						<label for="contrasenia">Contraseña</label>
+						<label class='active' for="contrasenia">Contraseña</label>
 					</div>
 					<div class="col m2 offset-m8">
 						<button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" type="submit" name="action">
@@ -40,12 +40,9 @@ session_destroy();
 				</div>
 			</form>
 		</div>
-		<div id="error">
-			
-		</div>
+		
 	</section>
 	<script src="js/jquery-3.3.1.js"></script>
-	<script src="js/script.js"></script>
 	<script src="js/materialize.js"></script>
 	<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
 
@@ -56,6 +53,95 @@ session_destroy();
 
 	</script>
 
+	<script type="text/javascript">
+		window.onload=function(){
+			
+		}
+	</script>
+	
+</body> -->
+
+<body>
+	<script src="js/jquery-3.3.1.js"></script>
+	<section>
+		<img src="../sistema/img/logo .png" style="width: 220px; height: 170px;" id="logo" alt="Logo DP11">
+	</section>
+	<section>
+		<div>
+			<h3>Bienvenido a Desarrollo11</h3>
+			<!-- <form id="FormInicio" method="POST" action="controladores/login_controller.php"> -->
+				<div class="row div-inicio">
+					<div class="input-field col m6 offset-m3">
+						<input id="usuario" type="email" class="validate" name="usuario" required>
+						<label class='active' for="usuario">Usuario</label>
+					</div>
+					<div class="input-field col m6 offset-m3">
+						<input id="contrasenia" type="password" class="validate" name="contrasenia" required>
+						<label class='active' for="contrasenia">Contraseña</label>
+					</div>
+					<div class="col m2 offset-m8">
+						<button class="btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2" id="login" type="submit" name="action">
+							<i class="material-icons right">done</i>
+						</button>
+					</div>
+				</div>
+				<!-- </form> -->
+			</div>
+		<!-- <div id="error">
+			
+		</div> -->
+	</section>
+	
+	<!-- <script src="js/script.js"></script> -->
+	<script src="js/materialize.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	<script>
+		$(document).ready(function(){
+			$('.fixed-action-btn').floatingActionButton();
+		});
+
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('#login').click(function() {
+				var usuario = $('#usuario').val();
+				var pass = $('#contrasenia').val();
+
+				$.ajax({
+					url: 'controladores/login_controller.php',
+					type:'POST',
+					data: {usuario: usuario, pass: pass},
+					success: function(response) {
+						console.log(response)
+						switch (response){
+							case "0":
+							swal({
+							title: "Datos Erroneos",
+							text: "Los datos no coinsiden con la base de datos",
+							icon: "warning",
+							button: true,
+							})
+							break;
+							case "1":
+							window.location = 'vistas/vista_general.php';
+							break;
+							case "2":
+							swal({
+							title: "Acceso denegado",
+							text: "Ya no cuenta con acceso al sistema, contacte al administrador",
+							icon: "error",
+							button: true,
+							})
+							break;
+						}
+					}
+				})
+
+				return false;
+			})
+		})
+	</script>
 	<script type="text/javascript">
 		window.onload=function(){
 			<?php
@@ -74,7 +160,5 @@ session_destroy();
 		}
 	</script>
 	
-
-
-	</body>
-	</html>
+</body>
+</html>

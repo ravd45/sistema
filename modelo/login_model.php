@@ -12,7 +12,7 @@ class LoginModelo{
 
 		#Declarando variables traidas desde la vista por el controlador
 		$usuario = $data['usuario'];
-		$contrasenia = $data['contrasenia'];
+		$contrasenia = $data['pass'];
 
 		#Consulta
 		$stmt = Conexion::conectar()->prepare("SELECT * FROM usuario WHERE correo = :usuario AND pass = :contrasenia");
