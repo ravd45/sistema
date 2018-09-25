@@ -1,8 +1,6 @@
 <?php
 require_once '../modelo/main_model.php';
-/**
- *
- */
+
 class MainController
 {
 
@@ -125,14 +123,14 @@ echo "
 </form>
 </div>";
 if ($_SESSION['rol'] == 'administrador') {  
-echo "<div class='col m2'>  
-<form method='POST' action='../controladores/eliminar_controller.php'>
-<input type='number' value='".$id."' style='display: none;' name='proyecto'>
-<button class='btn-small btn waves-effect waves-light waves-effect waves-light red accent-4' type='submit' name='action'>
-<i class='material-icons right'>delete</i>Eliminar
-</button>
-</form>
-</div>";
+  echo "<div class='col m2'>  
+  <form method='POST' action='../controladores/eliminar_controller.php'>
+  <input type='number' value='".$id."' style='display: none;' name='proyecto'>
+  <button class='btn-small btn waves-effect waves-light waves-effect waves-light red accent-4' type='submit' name='action'>
+  <i class='material-icons right'>delete</i>Eliminar
+  </button>
+  </form>
+  </div>";
 }
 echo"</div>
 </div>";
@@ -143,35 +141,39 @@ foreach ($result as $row => $item) {
   <tbody>
   <tr>
   <td style='width:250px;'>".$item['nombre_completo']."</td>";
-  if ($_SESSION['rol'] != 'invitado') {
+  
     echo "  <td>
 
-    <div class='row'>
-    <div class='col m9 offset-m4'>
+    <div class='row'>";
+if ($_SESSION['rol'] != 'invitado') {
+   echo " <div class='col m9 offset-m4'>
     <div class='col m2'>
-       <form method='POST' action='../vistas/actualiza_beneficiario.php'>
-           <input type='text' value='actualiza' style='display: none;' name='actualiza'>
-           <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
-           <input type='text' value='".$item['nombre_completo']."' style='display: none;' name='nombre'>
-           <button class='btn-small btn waves-effect waves-light  waves-effect waves-light cyan darken-3' type='submit' name='action'>Actualizar 
-              <i class='material-icons'>rate_review</i>
-           </button>
-       </form>
-    </div>
-    <div class='col m2'>";
+    <form method='POST' action='../vistas/actualiza_beneficiario.php'>
+    <input type='text' value='actualiza' style='display: none;' name='actualiza'>
+    <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
+    <input type='text' value='".$item['nombre_completo']."' style='display: none;' name='nombre'>
+    <button class='btn-small btn waves-effect waves-light  waves-effect waves-light cyan darken-3' type='submit' name='action'>Actualizar 
+    <i class='material-icons'>rate_review</i>
+    </button>
+    </form>
+    </div>";
+  }
+    echo "<div class='col m2'>";
     if ($item['estatus']=='EN EJECUCION') {
 
       echo" <form method='POST' action='../vistas/ejecucion_check.php?l=".$item['id_layout']."'>";
     }else{
       echo" <form method='POST' action='../vistas/checklist.php'>";
     }
+    
     echo"<input name='id' value='".$item['id_layout']."' style='display:none;'>
     <button class='btn-small btn waves-effect waves-light  waves-effect waves-light  cyan darken-4' >checklist <i class='material-icons'>playlist_add_check</i>
     </button>
     </form>
 
-    </div>
-    <div class='col m2'>";
+    </div>";
+    if ($_SESSION['rol'] != 'invitado') {
+    echo "<div class='col m2'>";
     if($item['estatus']=='Solicitante'){
      echo" <form method='POST' action='../vistas/ejecucion_form.php'>
      <input type='number' value='ejecuta' style='display: none;' name='ejecuta'>
@@ -232,8 +234,12 @@ echo "  </tr>
 
 public function listaProyectos()
 {
-  $result = MainModelo::obtenerProyectos();
-
+  if ($_SESSION['ee'] != 'N/F') {
+    $data = ['ee' => $_SESSION['ee']];
+    $result = MainModelo::proyectosFinanciera($data);
+  }else{
+    $result = MainModelo::obtenerProyectos();
+  }
 
   foreach ($result as $row => $item) {
     $id = ['id'=>$item['idproyecto']];

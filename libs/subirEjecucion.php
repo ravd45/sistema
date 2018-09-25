@@ -39,7 +39,7 @@ if ($_POST['action'] == "upload")
             $sql = "INSERT INTO ejecucion_checklist (licencia_construccion, ruta_licencia, id_layout) VALUES (1, '$destino', '$usuario')";
             break;
             case 2:
-            $sql = "INSERT INTO ejecucion_checklist (expediente_financiera, ruta_financiera, id_layout) VALUES (1, '$destino', '$usuario')";
+            $sql = "INSERT INTO ejecucion_checklist (contrato_financiera, ruta_financiera, id_layout) VALUES (1, '$destino', '$usuario')";
             break;
             case 3:
             $sql = "INSERT INTO ejecucion_checklist (contrato_oeo, ruta_oeo, id_layout) VALUES (1, '$destino', '$usuario')";
@@ -65,6 +65,18 @@ if ($_POST['action'] == "upload")
             case 10:
             $sql = "INSERT INTO ejecucion_checklist (acta_entrega, ruta_acta, id_layout) VALUES (1, '$destino', '$usuario')";
             break;
+            case 11:
+            $sql = "INSERT INTO ejecucion_checklist (certificado_municipal, ruta_cmunicipal, id_layout) VALUES (1, '$destino', '$usuario')";
+            break;
+            case 12:
+            $sql = "INSERT INTO ejecucion_checklist (subsidio_municipal, ruta_smunicipal, id_layout) VALUES (1, '$destino', '$usuario')";
+            break;
+            case 13:
+            $sql = "INSERT INTO ejecucion_checklist (anexo_4, ruta_4, id_layout) VALUES (1, '$destino', '$usuario')";
+            break;
+            case 14:
+            $sql = "INSERT INTO ejecucion_checklist (mandato_irrevocable, ruta_mandato, id_layout) VALUES (1, '$destino', '$usuario')";
+            break;
             default:
             $nombre = "Otro documento";
             break;
@@ -76,7 +88,7 @@ if ($_POST['action'] == "upload")
             $sql = "UPDATE ejecucion_checklist SET ruta_licencia = '$destino', licencia_construccion = 1 WHERE id_layout = '$usuario'";
             break;
             case 2:
-            $sql = "UPDATE ejecucion_checklist SET ruta_financiera = '$destino', expediente_financiera = 1 WHERE id_layout = '$usuario'";
+            $sql = "UPDATE ejecucion_checklist SET ruta_financiera = '$destino', contrato_financiera = 1 WHERE id_layout = '$usuario'";
             break;
             case 3:
             $sql = "UPDATE ejecucion_checklist SET ruta_oeo = '$destino', contrato_oeo = 1 WHERE id_layout = '$usuario'";
@@ -101,6 +113,18 @@ if ($_POST['action'] == "upload")
             break;
             case 10:
             $sql = "UPDATE ejecucion_checklist SET ruta_acta = '$destino', acta_entrega = 1 WHERE id_layout = '$usuario'";
+            break;
+            case 11:
+            $sql = "UPDATE ejecucion_checklist SET ruta_cmunicipal = '$destino', certificado_municipal = 1 WHERE id_layout = '$usuario'";
+            break;
+            case 12:
+            $sql = "UPDATE ejecucion_checklist SET ruta_smunicipal = '$destino', subsidio_municipal = 1 WHERE id_layout = '$usuario'";
+            break;
+            case 13:
+            $sql = "UPDATE ejecucion_checklist SET ruta_4 = '$destino', anexo_4 = 1 WHERE id_layout = '$usuario'";
+            break;
+            case 14:
+            $sql = "UPDATE ejecucion_checklist SET ruta_mandato = '$destino', mandato_irrevocable = 1 WHERE id_layout = '$usuario'";
             break;
             default:
             $nombre = "Otro documento";

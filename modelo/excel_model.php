@@ -153,8 +153,16 @@ class ExcelModelo
     }
     $sql = "SELECT upper(c.ruta_licencia) as 'Ruta de licencia',
 upper(c.licencia_construccion) as 'Licencia de construccion',
-upper(c.ruta_financiera) as 'Ruta de expediente',
-upper(c.expediente_financiera) as 'Expediente de la financiera',
+upper(c.ruta_financiera) as 'Ruta de Contrato de la financiera',
+upper(c.contrato_financiera) as 'Contrato de la financiera',
+upper(c.ruta_smunicipal) as 'Ruta de solicitud de subsidio municipal',
+upper(c.subsidio_municipal) as 'Solicitud de subsidio municipal',
+upper(c.ruta_cmunicipal) as 'Ruta de certificado de subsidio municipal',
+upper(c.certificado_municipal) as 'Certificado de subsidio municipal',
+upper(c.ruta_4) as 'Ruta de Anexo 4',
+upper(c.anexo_4) as 'Anexo 4',
+upper(c.ruta_mandato) as 'Ruta de carta de mandato irrevocable',
+upper(c.mandato_irrevocable) as 'Carta de mandato irrevocable',
 upper(c.ruta_oeo) as 'Ruta de contrato OEO',
 upper(c.contrato_oeo) as 'Contrato OEO',
 upper(c.ruta_anexo) as 'Ruta de anexo tecnico',
@@ -172,7 +180,7 @@ upper(c.folio_fonden) as 'Folio fonden',
 upper(c.ruta_foto) as 'Ruta de foto con el beneficiario',
 upper(c.foto_beneficiario) as 'Foto con el beneficiario',
 upper(l.nombre_completo) as 'Beneficiario'
-FROM ejecucion_checklist c INNER JOIN layout l on l.id_layout = c.id_layout WHERE c.id_layout = 2;";
+FROM ejecucion_checklist c INNER JOIN layout l on l.id_layout = c.id_layout WHERE c.id_layout =$id;";
     $result = $conn->query($sql);
 
         while($row = $result->fetch_assoc()){

@@ -8,7 +8,8 @@
   $main->listaProyectos();?>
 </div>
 </div>
-
+<?php if ($_SESSION['rol'] != 'invitado') {
+ ?>
   <div class="row">
     <div class="col m12">
       <div class="col m8 offset-m1">
@@ -16,6 +17,7 @@
       </div>
     </div>
   </div>
+<?php } ?>
   <div>
    
   </div>

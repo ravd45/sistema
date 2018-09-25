@@ -36,6 +36,16 @@ class MainModelo
     $stmt->close();
   }
 
+  public function proyectosFinanciera($data)
+  {
+    $stmt = Conexion::conectar()->prepare("SELECT * FROM proyecto WHERE estatus = 'activo' AND entidad_ejecutora = :ee ORDER BY idproyecto DESC;");
+    $stmt->bindParam(':ee', $data['ee'], PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt -> fetchAll();
+    $stmt->close();
+  }
+
+
   public function obtenerMunicipio($data)
   {
     $stmt = Conexion::conectar()->prepare("SELECT municipio FROM municipio WHERE idmunicipio = :id;");

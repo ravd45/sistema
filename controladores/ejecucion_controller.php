@@ -53,6 +53,9 @@ include '../modelo/checklist_model.php';
 
 		function ejecucionList($id)
 		{
+			if ($_SESSION['rol'] != 'invitado') {
+				
+
 			$data= ['id'=>$id];
 			$nombre = ChecklistModelo::nombre($data);
 			
@@ -71,16 +74,15 @@ include '../modelo/checklist_model.php';
 					<a class='btn-floating blue' onclick='subir(1)'><i class='material-icons'>attach_file</i></a>
 					</p>";
 					echo "
-					<!-- Expediente financiera -->
+					<!-- contrato financiera -->
 					<p>
 					<label>
 					<input type='checkbox'/>
-					<span>Expediente de la financiera</span>
+					<span>Contrato de la financiera</span>
 					</label>
 					<a class='btn-floating blue' onclick='subir(2)'><i class='material-icons'>attach_file</i></a>
 					</p>";
 					echo "
-
 					<!-- Contrato OEO -->
 					<p>
 					<label>
@@ -136,6 +138,38 @@ include '../modelo/checklist_model.php';
 					</label>
 					<a class='btn-floating blue' onclick='subir(10)'><i class='material-icons'>attach_file</i></a>
 					</p>";
+					echo"<!-- certificado de subsidio municipal -->
+					<p>
+					<label>
+					<input type='checkbox'/>
+					<span>Certificdo de subsidio municipal</span>
+					</label>
+					<a class='btn-floating blue' onclick='subir(10)'><i class='material-icons'>attach_file</i></a>
+					</p>";
+					echo"<!-- solicitud de subsidio municipal -->
+					<p>
+					<label>
+					<input type='checkbox'/>
+					<span>Solicitud de subsidio municipal</span>
+					</label>
+					<a class='btn-floating blue' onclick='subir(10)'><i class='material-icons'>attach_file</i></a>
+					</p>";
+					echo"<!-- anexo 4 -->
+					<p>
+					<label>
+					<input type='checkbox'/>
+					<span>Anexo 4</span>
+					</label>
+					<a class='btn-floating blue' onclick='subir(10)'><i class='material-icons'>attach_file</i></a>
+					</p>";
+					echo"<!-- mandato irrevocable -->
+					<p>
+					<label>
+					<input type='checkbox'/>
+					<span>Carta de Mandato irrevocable</span>
+					</label>
+					<a class='btn-floating blue' onclick='subir(10)'><i class='material-icons'>attach_file</i></a>
+					</p>";
 			}
 
 			foreach ($response as $key => $value) { 
@@ -158,24 +192,24 @@ include '../modelo/checklist_model.php';
 					<a class='btn-floating blue' onclick='subir(1)'><i class='material-icons'>attach_file</i></a>
 					</p>";
 				}
-				if ($value['expediente_financiera']==1) {
+				if ($value['contrato_financiera']==1) {
 					echo "
 					<!-- Expediente financiera -->
 					<p>
 					<label>
 					<input type='checkbox' checked/>
-					<span>Expediente de la financiera</span>
+					<span>Contrato de la financiera</span>
 					</label>
 					
 					</p>
 					";
 				}else{
 					echo "
-					<!-- Expediente financiera -->
+					<!-- Contrato financiera -->
 					<p>
 					<label>
 					<input type='checkbox'/>
-					<span>Expediente de la financiera</span>
+					<span>Contrato de la financiera</span>
 					</label>
 					<a class='btn-floating blue' onclick='subir(2)'><i class='material-icons'>attach_file</i></a>
 					</p>
@@ -341,6 +375,84 @@ include '../modelo/checklist_model.php';
 					<a class='btn-floating blue' onclick='subir(10)'><i class='material-icons'>attach_file</i></a>
 					</p>";
 				}
+				if ($value['certificado_municipal']) {
+					echo"<!--Certificado de subsidio municipal -->
+					<p>
+					<label>
+					<input type='checkbox' checked/>
+					<span>Certificado de subsidio municipal</span>
+					</label>
+					
+					</p>";
+				}else{
+					echo"<!-- Certificado de subsidio municipal -->
+					<p>
+					<label>
+					<input type='checkbox'/>
+					<span>Certificado de subsidio municipal</span>
+					</label>
+					<a class='btn-floating blue' onclick='subir(11)'><i class='material-icons'>attach_file</i></a>
+					</p>";
+				}
+				if ($value['subsidio_municipal']) {
+					echo"<!--Solicitud de subsidio municipal -->
+					<p>
+					<label>
+					<input type='checkbox' checked/>
+					<span>Solicitud de subsidio municipal</span>
+					</label>
+					
+					</p>";
+				}else{
+					echo"<!-- Solicitud de subsidio municipal -->
+					<p>
+					<label>
+					<input type='checkbox'/>
+					<span>Solicitud de subsidio municipal</span>
+					</label>
+					<a class='btn-floating blue' onclick='subir(12)'><i class='material-icons'>attach_file</i></a>
+					</p>";
+				}
+				if ($value['anexo_4']) {
+					echo"<!--Anexo 4 -->
+					<p>
+					<label>
+					<input type='checkbox' checked/>
+					<span>Anexo 4</span>
+					</label>
+					
+					</p>";
+				}else{
+					echo"<!-- Anexo 4 -->
+					<p>
+					<label>
+					<input type='checkbox'/>
+					<span>Anexo 4</span>
+					</label>
+					<a class='btn-floating blue' onclick='subir(13)'><i class='material-icons'>attach_file</i></a>
+					</p>";
+				}
+				
+				if ($value['mandato_irrevocable']) {
+					echo"<!--Carta de mandato irrevocable -->
+					<p>
+					<label>
+					<input type='checkbox' checked/>
+					<span>Carta de mandato irrevocable</span>
+					</label>
+					
+					</p>";
+				}else{
+					echo"<!-- Carta de mandato irrevocable -->
+					<p>
+					<label>
+					<input type='checkbox'/>
+					<span>Carta de mandato irrevocable</span>
+					</label>
+					<a class='btn-floating blue' onclick='subir(14)'><i class='material-icons'>attach_file</i></a>
+					</p>";
+				}			
+			}
 			}
 		}
 
@@ -354,7 +466,7 @@ include '../modelo/checklist_model.php';
 				if ($value['licencia_construccion']==1) {
 					echo'<li><a href="../libs/'.$value['ruta_licencia'].'" target="_blank">Licencia de construcción</a></li>';
 				}
-				if ($value['expediente_financiera']==1) {
+				if ($value['contrato_financiera']==1) {
 					echo'<li><a href="../libs/'.$value['ruta_financiera'].'" target="_blank">Expediente de la financiera</a></li>';
 				}
 				if ($value['contrato_oeo']==1) {
@@ -380,6 +492,18 @@ include '../modelo/checklist_model.php';
 				}
 				if ($value['acta_entrega']==1) {
 					echo'<li><a href="../libs/'.$value['ruta_acta'].'" target="_blank">Acta de entrega</a></li>';
+				}
+				if ($value['certificado_municipal']==1) {
+					echo'<li><a href="../libs/'.$value['ruta_cmunicipal'].'" target="_blank">Certificado de subsidio municipal</a></li>';
+				}
+				if ($value['subsidio_municipal']==1) {
+					echo'<li><a href="../libs/'.$value['ruta_smunicipal'].'" target="_blank">Solicitud de subsidio municipal</a></li>';
+				}
+				if ($value['anexo_4']==1) {
+					echo'<li><a href="../libs/'.$value['ruta_4'].'" target="_blank">Anexo 4</a></li>';
+				}
+				if ($value['mandato_irrevocable']==1) {
+					echo'<li><a href="../libs/'.$value['ruta_mandato'].'" target="_blank">Carta de mandato irrevocable</a></li>';
 				}
 				echo '</ul>';
 

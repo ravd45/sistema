@@ -134,6 +134,9 @@ session_destroy();
 							button: true,
 							})
 							break;
+							case "3":
+							window.location = 'vistas/proyectos.php';
+							break;
 						}
 					}
 				})
