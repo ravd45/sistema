@@ -8,6 +8,8 @@ require_once '../modelo/checklist_model.php';
 		
 		function obtenerLista($id)
 		{
+			
+				
 			$data = ['id'=>$id];
 
 			$result = ChecklistModelo::obtenerLista($data);
@@ -16,7 +18,8 @@ require_once '../modelo/checklist_model.php';
 			foreach ($nombre as $key => $value) {
 				$usuario = $value['nombre_completo'];
 			}
-
+			
+			if ($_SESSION['rol'] != 'invitado') {	
 			if (!isset($result[0])) {
 			echo "
 			<div class='row z-depth-4'>
@@ -177,19 +180,30 @@ require_once '../modelo/checklist_model.php';
 					}
 				}
 			}
+		}
 			$archivos = ChecklistModelo::obtenerDocumentos($data);
 
 			foreach ($archivos as $key => $value) {
-				echo '<ul>
-						<li><a href="../libs/'.$value['documento'].'" target="_blank">'.$value['alias'].'</a></li>
-					  </ul>';
+				
+				if ($value['ife']==1) {
+					echo'<li><a href="../libs/'.$value['ruta_ife'].'" target="_blank">IFE / INE</a></li>';
+				}
+				if ($value['curp']==1) {
+					echo'<li><a href="../libs/'.$value['ruta_curp'].'" target="_blank">CURP</a></li>';
+				}
+				if ($value['comprobante_domicilio']==1) {
+					echo'<li><a href="../libs/'.$value['ruta_comprobante'].'" target="_blank">Comprobante de domicilio</a></li>';
+				}
+				if ($value['posesion_terreno']==1) {
+					echo'<li><a href="../libs/'.$value['ruta_posesion'].'" target="_blank">Comprobante de posesión de terreno</a></li>';
+				}
+				if ($value['acta_nacimiento']==1) {
+					echo'<li><a href="../libs/'.$value['ruta_nacimiento'].'" target="_blank">Acta de nacimiento</a></li>';
+				}
 			}
 			echo "		<div class='row'>
 							<div class='col m2'>
 								<a class='btn-floating btn-large waves-effect waves-light default-primario-color' href='../vistas/proyectos.php'><i class='material-icons'>arrow_back</i></a>
-							</div>
-							<div class='col m2 offset-m8'>	
-								<button type='submit' name='action' class='btn-small waves-green waves-effect waves-light green darken-4'>Guardar <i class='material-icons'>save</i></button>
 							</div>	
 						</div>
 					</form>
@@ -215,4 +229,5 @@ require_once '../modelo/checklist_model.php';
 					</div>";
 		}
 	}
-	?>
+
+?>

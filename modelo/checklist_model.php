@@ -115,7 +115,7 @@ class ChecklistModelo{
 
 	function obtenerDocumentos($data)
 	{
-		$stmt = Conexion::conectar()->prepare("SELECT * from documento where id_layout = :id;");
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM checklist WHERE id_layout = :id;");
 		$stmt->bindParam(":id", $data['id'], PDO::PARAM_STR);
 		$stmt->execute();
 

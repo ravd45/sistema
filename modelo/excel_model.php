@@ -89,7 +89,18 @@ class ExcelModelo
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT c.ife, c.curp, c.comprobante_domicilio as 'Comprobante de Domicilio', c.posesion_terreno as 'Comprobante de posesión de terreno', c.acta_nacimiento as 'Acta de Nacimiento', l.nombre_completo as 'Beneficiario' FROM checklist c INNER JOIN layout l on l.id_layout = c.id_layout WHERE c.id_layout = $id;";
+    $sql = "SELECT upper(c.ruta_ife) as 'Ruta de IFE/INE',
+upper(c.ife) as 'IFE / INE',
+upper(c.ruta_curp) as 'Ruta de la CURP',
+upper(c.curp) as 'CURP',
+upper(c.ruta_comprobante) as 'Ruta de comprobante de domicilio',
+upper(c.comprobante_domicilio) as 'Comprobante de domicilio',
+upper(c.ruta_posesion) as 'Ruta de comprobante de posesion de terreno',
+upper(c.posesion_terreno) as 'Comprobante de posesion de terreno',
+upper(c.ruta_nacimiento) as 'Ruta de Acta de nacimiento',
+upper(c.acta_nacimiento) as 'Acta de nacimiento',
+upper(l.nombre_completo) as 'Beneficiario'
+FROM checklist c INNER JOIN layout l on l.id_layout = c.id_layout WHERE c.id_layout = $id;";
     $result = $conn->query($sql);
 
         while($row = $result->fetch_assoc()){
