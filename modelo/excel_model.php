@@ -10,10 +10,18 @@ class ExcelModelo
   public function exportar($data)
   {
     $id = $data['id'];
-    $server = "localhost";
-    $user = "root";
-    $pass = "desarrollo_1";
-    $dbname = "sistema";
+    /*Produccion*/
+        $server = "localhost";
+        $user = "id7019453_root";
+        $pass = "desarrollo_1";
+        $dbname = "id7019453_sistema"; 
+
+        /*Desarrollo
+        $server = "localhost";
+        $user = "root";
+        $pass = "desarrollo_1";
+        $dbname = "sistema";*/
+
 
     $conn = new mysqli($server, $user, $pass, $dbname);
     // Check connection
@@ -79,10 +87,18 @@ class ExcelModelo
     function exportarChecklist($data)
     {
            $id = $data['id'];
-    $server = "localhost";
-    $user = "root";
-    $pass = "desarrollo_1";
-    $dbname = "sistema";
+    /*Produccion*/
+        $server = "localhost";
+        $user = "id7019453_root";
+        $pass = "desarrollo_1";
+        $dbname = "id7019453_sistema"; 
+
+        /*Desarrollo
+        $server = "localhost";
+        $user = "root";
+        $pass = "desarrollo_1";
+        $dbname = "sistema";*/
+
 
     $conn = new mysqli($server, $user, $pass, $dbname);
     // Check connection
@@ -152,10 +168,18 @@ FROM checklist c INNER JOIN layout l on l.id_layout = c.id_layout WHERE c.id_lay
      function exportarEjeChecklist($data)
     {
            $id = $data['id'];
-    $server = "localhost";
-    $user = "root";
-    $pass = "desarrollo_1";
-    $dbname = "sistema";
+    /*Produccion*/
+        $server = "localhost";
+        $user = "id7019453_root";
+        $pass = "desarrollo_1";
+        $dbname = "id7019453_sistema"; 
+
+        /*Desarrollo
+        $server = "localhost";
+        $user = "root";
+        $pass = "desarrollo_1";
+        $dbname = "sistema";*/
+
 
     $conn = new mysqli($server, $user, $pass, $dbname);
     // Check connection
