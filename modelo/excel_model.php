@@ -10,17 +10,17 @@ class ExcelModelo
   public function exportar($data)
   {
     $id = $data['id'];
-    /*Produccion*/
+    /*Produccion
         $server = "localhost";
         $user = "id7019453_root";
         $pass = "desarrollo_1";
-        $dbname = "id7019453_sistema"; 
+        $dbname = "id7019453_sistema"; */
 
-        /*Desarrollo
+        /*Desarrollo*/
         $server = "localhost";
         $user = "root";
         $pass = "desarrollo_1";
-        $dbname = "sistema";*/
+        $dbname = "sistema";
 
 
     $conn = new mysqli($server, $user, $pass, $dbname);
@@ -87,17 +87,17 @@ class ExcelModelo
     function exportarChecklist($data)
     {
            $id = $data['id'];
-    /*Produccion*/
+    /*Produccion
         $server = "localhost";
         $user = "id7019453_root";
         $pass = "desarrollo_1";
-        $dbname = "id7019453_sistema"; 
+        $dbname = "id7019453_sistema"; */
 
-        /*Desarrollo
+        /*Desarrollo*/
         $server = "localhost";
         $user = "root";
         $pass = "desarrollo_1";
-        $dbname = "sistema";*/
+        $dbname = "sistema";
 
 
     $conn = new mysqli($server, $user, $pass, $dbname);
@@ -168,17 +168,17 @@ FROM checklist c INNER JOIN layout l on l.id_layout = c.id_layout WHERE c.id_lay
      function exportarEjeChecklist($data)
     {
            $id = $data['id'];
-    /*Produccion*/
+    /*Produccion
         $server = "localhost";
         $user = "id7019453_root";
         $pass = "desarrollo_1";
-        $dbname = "id7019453_sistema"; 
+        $dbname = "id7019453_sistema"; */
 
-        /*Desarrollo
+        /*Desarrollo*/
         $server = "localhost";
         $user = "root";
         $pass = "desarrollo_1";
-        $dbname = "sistema";*/
+        $dbname = "sistema";
 
 
     $conn = new mysqli($server, $user, $pass, $dbname);

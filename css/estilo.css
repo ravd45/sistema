@@ -1,5 +1,6 @@
 body{
-	
+	/*background-color: #f6f6f6;*/
+	color: #003366 !important;
   background-color:#B2EBF2; 	
 /*background-image: url('../img/fondo3.jpg');*/
 /*background: no-repeat;*/
@@ -20,9 +21,16 @@ body{
 	background-color: #fff;
 }
 h3{
+	
 	text-align: center;
 }
-
+.primerMenu{
+	position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
 h5{
 	text-align: center;
 }
@@ -33,8 +41,8 @@ h6{
 }
 
 img:hover{
-	transform: scale(2);
-	transition: all .2s ease-in-out;
+	/*transform: scale(1);*/
+	/*transition: all .2s ease-in-out;*/
 	:not(#logo);
 }
 
@@ -48,17 +56,18 @@ img:hover{
 }
 
 .img-menu{
-	width: 35%;
-	padding-top: 7%;
+	position: absolute;
+
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+	text-align: center;
+	width: 20%;
 	padding-left: 12%;
 }
 
-.dark-primario-color    { background: #0097A7; }
-.default-primario-color { background: #00BCD4; }
-.light-primario-color   { background: #B2EBF2; }
-.text-primario-color    { color: #FFFFFF; }
-.accent-color          { background: #8BC34A; }
-.primario-text-color    { color: #212121; }
-.secondario-text-color  { color: #757575; }
-.divider-color         { border-color: #BDBDBD; }
 
+.azul { background: #003366; }
+.verde{ background: #669900; }
+.celeste { background: #0099cc; }
+.blanco { background: #f6f6f6; }

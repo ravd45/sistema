@@ -5,17 +5,17 @@
 class Conexion{
 	
 	function conectar(){
-		/*Produccion*/
+		/*Produccion
 	    $server = "localhost";
 	    $user = "id7019453_root";
 	    $pass = "desarrollo_1";
-	    $dbname = "id7019453_sistema";
+	    $dbname = "id7019453_sistema";*/
 
-	    /*Desarrollo
+	    /*Desarrollo*/
 		$server = "localhost";
 		$user = "root";
 		$pass = "desarrollo_1";
-		$dbname = "sistema";*/
+		$dbname = "sistema";
 		
 		$conn = new PDO("mysql:host=$server;dbname=$dbname", $user, $pass);
 		return $conn;

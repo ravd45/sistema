@@ -16,17 +16,17 @@ if ($_POST["action"] == "upload")
     $destino =  "archivos/files/".$archivo;
     if (copy($_FILES['archivo']['tmp_name'],$destino)) 
     {
-     /*Produccion*/
+     /*Produccion
        $server = "localhost";
        $user = "id7019453_root";
        $pass = "desarrollo_1";
-       $dbname = "id7019453_sistema";
+       $dbname = "id7019453_sistema";*/
 
-     /*Desarrollo
+     /*Desarrollo*/
      $server = "localhost";
      $user = "root";
      $pass = "desarrollo_1";
-     $dbname = "sistema";*/
+     $dbname = "sistema";
 
      $conn = new mysqli($server, $user, $pass, $dbname);
      if ($conn->connect_error) {
