@@ -194,9 +194,6 @@ include '../controladores/main_controller.php';
 				<!-- colonia -->
 				<div class="input-field col m4" id="coloniaF">		
 				</div>
-				<!-- tipo asentamiento -->
-				<div class="input-field col m4" id="asentamiento">		
-				</div>
 				<!-- domicilio del beneficiario -->
 				<div class="input-field col m4">
 					<i class="material-icons prefix">place</i>

@@ -63,8 +63,17 @@ session_destroy();
 
 <body>
 	<script src="js/jquery-3.3.1.js"></script>
-	<section>
+	<!-- <section>
 		<img src="../sistema/img/logo .png" style="width: 220px; height: 170px;" id="logo" alt="Logo DP11">
+	</section> -->
+	<section>
+		<nav>
+    <div class="nav-wrapper verde">
+      <img src="img/logo .png" id="logo" style="width: 105px; height: 75px; margin-left: 10%;" alt="Logo DP11">
+
+    </div>
+  </nav>
+        
 	</section>
 	<section>
 		<div>

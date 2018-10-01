@@ -63,7 +63,7 @@ $main = new MainController();
 			<!-- credito -->
 			<div class="input-field col m5 offset-m1">
 				<i class="material-icons prefix">attach_money</i>
-				<input id="credito" name="credito" type="number" step=".01" class="validate" required>
+				<input id="credito" name="credito" type="text" step=".01" class="validate" required>
 				<label>Credito</label>
 			</div>
 			<!-- solucion -->

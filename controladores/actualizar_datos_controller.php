@@ -453,9 +453,7 @@ class ActualizarController
             </div>
           </form>";
       }
-
   }
-
 }
 
 

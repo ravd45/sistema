@@ -1,9 +1,13 @@
+
+.azul { background: #003366; }
+.verde{ background: #669900; }
+.celeste { background: #0099cc; }
+.blanco { background: #f6f6f6; }
+
 body{
-	/*background-color: #f6f6f6;*/
 	color: #003366 !important;
-  background-color:#B2EBF2; 	
-/*background-image: url('../img/fondo3.jpg');*/
-/*background: no-repeat;*/
+ 	/*background-color:#daf5ef !important;*/
+    background-color:#efffefb3 !important; 
     /*font-family: 'Indie Flower', cursive;*/
     font-family: 'Varela Round', sans-serif;
     /* font-family: 'Ubuntu Condensed', sans-serif; */
@@ -14,16 +18,17 @@ body{
     /*font-family: 'Cantarell', sans-serif;*/
     /*font-family: 'Hammersmith One', sans-serif;*/
     /*font-family: 'Marck Script', cursive;*/
-
-
 }
+
 .fdiv{
 	background-color: #fff;
 }
+
 h3{
 	
 	text-align: center;
 }
+
 .primerMenu{
 	position: absolute;
     left: 50%;
@@ -31,21 +36,15 @@ h3{
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
 }
+
 h5{
 	text-align: center;
 }
 
 h6{
-	padding-left: 12%;
-	padding-top: 25%;
+	padding-left: 8.5%;
+	padding-top: 87%;
 }
-
-img:hover{
-	/*transform: scale(1);*/
-	/*transition: all .2s ease-in-out;*/
-	:not(#logo);
-}
-
 
 .div-inicio{
 	margin-top: 7%;
@@ -66,8 +65,3 @@ img:hover{
 	padding-left: 12%;
 }
 
-
-.azul { background: #003366; }
-.verde{ background: #669900; }
-.celeste { background: #0099cc; }
-.blanco { background: #f6f6f6; }

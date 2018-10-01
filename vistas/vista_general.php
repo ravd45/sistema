@@ -7,23 +7,17 @@
 	
 		<div class="col m3 offset-m2">
 			<h6 class="dark-pimario-color">Crear nuevo Proyecto</h6>
-			<br>
-			<a href="crea_proyecto.php"><img class="img-menu" src="../img/nuevo_proyecto.png" title="Crear proyecto" alt="crear proyecto"></a>
+			<a href="crea_proyecto.php"><img class="img-menu" src="../img/nuevo_proyecto.png" title="Crear proyecto" alt="Crear proyecto"></a>
 		</div>
-		<?php  
-		
-			if ($_SESSION['rol']=='administrador') { ?>
+		<?php if ($_SESSION['rol']=='administrador') { ?>
 			<div class="col m3">
 			<h6 class="dark-pimario-color">Panel de administración</h6>
-			<br>
 			<a href="panel_administrador.php"><img class="img-menu" width="290px" height="130px" src="../img/panel.png" title="Panel de administración" alt="Panel de administración"></a>
 		</div>
-		<?php	}
-		 ?>
+		<?php } ?>
 		<div class="col m3">
 			<h6 class="dark-pimario-color"> Lista de Proyectos</h6>
-			<br>
-			<a href="proyectos.php"><img class="img-menu" src="../img/lista_proyecto.png" title="Lista de proyectos" alt="lista de proyectos"></a>
+			<a href="proyectos.php"><img class="img-menu" src="../img/lista_proyecto.png" title="Lista de proyectos" alt="Lista de proyectos"></a>
 		</div>
 	</div>
 </div>
