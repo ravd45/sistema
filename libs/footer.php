@@ -17,7 +17,7 @@
 	$(document).ready(function(){
 		// $('.datepicker').datepicker();
 		$('#datep').datepicker();
-			
+		
 	});
 </script>
 
@@ -32,6 +32,13 @@
 		$('.tooltipped').tooltip();
 	});
 </script>
-
+<footer class="page-footer verde">
+	<div class="footer-copyright">
+		<div class="container">
+			© 2018 Copyright 
+			<a class="grey-text text-lighten-4 right" href="../vistas/documentacion.php">Documentación</a>
+		</div>
+	</div>
+</footer>
 </body>
 </html>

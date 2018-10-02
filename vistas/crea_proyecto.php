@@ -143,4 +143,5 @@ $main = new MainController();
 		});
 	});
 </script>
+
 <?php include '../libs/footer.php' ?>

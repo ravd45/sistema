@@ -33,6 +33,11 @@ class InicioSesion{
 				if ($value['rol'] == 'invitado') {
 					$response = 3;
 				}
+
+				if ($value['rol'] == 'invitado' && $value['estado'] == 'inactivo') {
+					$response = 2;
+				}
+
 		 	}
 		 }
 

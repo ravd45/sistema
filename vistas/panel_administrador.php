@@ -246,6 +246,10 @@
 			return false;
 		});
 
+		$('#contra').click(function() {
+			console.log('auch');
+		});
+
 		$('#pass').change(function() {
 			$('#confirmContra').removeClass('hide');
 			$('#confirmContra').addClass('show');

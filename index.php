@@ -122,7 +122,7 @@ session_destroy();
 					type:'POST',
 					data: {usuario: usuario, pass: pass},
 					success: function(response) {
-						console.log(response)
+						console.log(response);
 						switch (response){
 							case "0":
 							swal({
@@ -171,6 +171,13 @@ session_destroy();
 			?>
 		}
 	</script>
-	
+
+	<footer class="page-footer verde">
+		<div class="footer-copyright">
+			<div class="container">
+				© 2018 Copyright 
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

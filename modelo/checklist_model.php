@@ -1,9 +1,6 @@
 <?php 
 require_once '../libs/conectardb.php';
 
-/**
- * 
- */
 class ChecklistModelo{
 	
 	function obtenerLista($data)

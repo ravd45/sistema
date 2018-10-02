@@ -42,8 +42,8 @@ h5{
 }
 
 h6{
-	padding-left: 8.5%;
-	padding-top: 87%;
+	padding-left: 11%;
+	padding-top: 95%;
 }
 
 .div-inicio{
@@ -65,3 +65,8 @@ h6{
 	padding-left: 12%;
 }
 
+footer{
+    width: 100%;
+    position: absolute !important;
+    bottom: 0px !important;
+}
