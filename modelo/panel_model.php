@@ -56,6 +56,35 @@ class PanelModelo
 
 		$stmt->close();
 	}
+
+	function listaCancelados()
+	{
+		$stmt = Conexion::conectar()->prepare("SELECT c.*, l.nombre_completo FROM sistema.cancelacion c inner join layout l on l.id_layout = c.idlayout where datediff(now(),c.fecha_cancelacion) < 60 AND reactivado = 0;");
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+	}
+
+	function reactivarBeneficiario($data)
+	{
+		$stmt = Conexion::conectar()->prepare("UPDATE layout SET estado_contrato = 'activo' WHERE id_layout = :id");
+		$stmt->bindParam(":id",$data['id'], PDO::PARAM_STR);
+
+		$result = ($stmt->execute()) ? 1 : 0;
+
+		if ($result == 1) {
+			$stmt = Conexion::conectar()->prepare("UPDATE cancelacion SET reactivado = 1 WHERE idlayout = :id");
+			$stmt->bindParam(":id",$data['id'], PDO::PARAM_STR);
+
+			$response = ($stmt->execute()) ? 1 : 0;
+		}
+
+		return $response;
+
+		$stmt->close();
+	}
 }
 
 ?>

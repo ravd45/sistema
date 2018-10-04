@@ -37,7 +37,9 @@ class ExcelModelo
     $result = $conn->query($sql);
 
     while($row = $result->fetch_assoc()){
-        $filas[]= $row;
+        $celdas[]= $row;
+
+        $filas = utf8_encode($celdas[]);
     }
      // if(isset($_POST["export_data"])) {
 

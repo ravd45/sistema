@@ -1,9 +1,11 @@
-<?php include '../libs/header.php'; ?>
+<?php include '../libs/header.php';
+	  include '../controladores/panel_controller.php'; ?>
 <h3>Panel de administrador</h3>
 <ol>
 	<li><a id="opcion1" >Lista de usuarios</a></li>
 	<li><a id="opcion2" >Crear usuarios</a></li>
 	<li><a id="opcion3" >Eliminar</a></li>
+	<li><a id="opcion4" >Beneficiarios Cancelados</a></li>
 </ol>
 
 <section id="usuario" class='hide'>
@@ -132,6 +134,38 @@
 	</div>
 </section>	
 
+<section id="cancelados" class='hide'>
+	<div class="row">
+		<div class="col m8 offset-m2">
+			<div class="card white darken-1">
+				<div class="card-content black-text">
+					<span class="card-title center" id="tituloCancel">Lista de beneficiarios cancelados</span>
+					<div class="row">
+						<div class="col m12">
+							<div class="col m10 offset-m1">	
+								<table class="striped centered">
+									<thead>
+										<tr>
+											<th>Nombre</th>
+											<th>Motivo</th>
+											<th>Fecha</th>
+										</tr>
+									</thead>
+
+									<tbody id="tablaCancel">
+										<?php $panel = new PanelController();
+											  $panel->listaCancelados(); ?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>	
+
 <div id="panel"></div>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
@@ -141,6 +175,8 @@
 			$('#usuario').addClass('hide');
 			$('#eliminar').removeClass('show');
 			$('#eliminar').addClass('hide');
+			$('#cancelados').removeClass('show');
+			$('#cancelados').addClass('hide');
 			$('#permisos').removeClass('hide');
 			$('#permisos').addClass('show');
 		});
@@ -149,7 +185,9 @@
 			$('#permisos').removeClass('show');
 			$('#permisos').addClass('hide');	
 			$('#eliminar').removeClass('show');
-			$('#eliminar').addClass('hide');	
+			$('#eliminar').addClass('hide');
+			$('#cancelados').removeClass('show');
+			$('#cancelados').addClass('hide');
 			$('#usuario').removeClass('hide');
 			$('#usuario').addClass('show');
 		});
@@ -159,8 +197,21 @@
 			$('#usuario').addClass('hide');	
 			$('#permisos').removeClass('show');
 			$('#permisos').addClass('hide');	
+			$('#cancelados').removeClass('show');
+			$('#cancelados').addClass('hide');
 			$('#eliminar').removeClass('hide');
 			$('#eliminar').addClass('show');
+		});
+
+		$('#opcion4').click(function() {
+			$('#usuario').removeClass('show');
+			$('#usuario').addClass('hide');	
+			$('#permisos').removeClass('show');
+			$('#permisos').addClass('hide');	
+			$('#eliminar').removeClass('show');
+			$('#eliminar').addClass('hide');
+			$('#cancelados').removeClass('hide');
+			$('#cancelados').addClass('show');
 		});
 
 		$('#eliminarBtn').click(function() {
@@ -353,6 +404,25 @@
 					} ,1500);
 				}
 			})
+			return false;
+		});
+
+		$('.activar').click(function() {
+			var id = $(this).val();
+			console.log(id);
+
+			$.ajax({
+				url: '../controladores/panel_controller.php',
+				type: 'POST',
+				data: {id:id, reactivar : 0},
+				success: function(response) {
+					if (response == 1) {
+						window.setTimeout(function(){ 
+						location.reload();
+					} ,1500);
+					}
+				}
+			});
 			return false;
 		});
 	});

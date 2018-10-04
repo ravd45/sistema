@@ -77,6 +77,25 @@ class PanelController
 		}
 		print_r($response);
 	}
+
+	function listaCancelados()
+	{
+		$listaCancel = PanelModelo::listaCancelados();
+
+		foreach ($listaCancel as $key => $value) {
+			$response = '<tr><td>'.$value['nombre_completo'].'</td><td>'.$value['motivo'].'</td><td>'.$value['fecha_cancelacion'].'</td><td><button class="activar btn-small" value="'.$value['idlayout'].'">Re-Activar</button></td></tr>';
+		print_r($response);
+		}
+	}
+
+	function reactivarBeneficiario()
+	{
+		$data = ['id' => $_POST['id']];
+
+		$response = PanelModelo::reactivarBeneficiario($data);
+
+		print_r($response);
+	}
 }
 
 if (isset($_POST['correo']) && isset($_POST['contrasenia']) && isset($_POST['consulta'])) {
@@ -101,5 +120,10 @@ if (isset($_POST['crear'])) {
 if (isset($_POST['ccorreo'])) {
 	$panel = new PanelController();
 	$panel -> buscaCorreo();
+}
+
+if (isset($_POST['reactivar'])) {
+	$panel = new PanelController();
+	$panel -> reactivarBeneficiario();
 }
 ?>

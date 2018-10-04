@@ -39,23 +39,25 @@ class LayoutController{
 		$fecha_nacimiento = $this->calculaFechaNac();
 		$gen = substr($_POST['curp'], 10, 1);
 		$subsidio = ($_POST['modalidad'] == 'Autoproduccion' || $_POST['modalidad'] == 'AUTOPRODUCCION') ? '71056.96' : '29402.88';
-		$genero = ($gen == 'M' || $gen = 'm') ? 'Femenino' : 'Masculino';
+		$genero = ($gen == 'M' || $gen == 'm') ? 'Femenino' : 'Masculino';
 		$enganche_efect = (isset($_POST['enganche_efectivo'])) ? $_POST['enganche_efectivo'] : 0;
 		$otro_apoyo = 		(isset($_POST['otros_apoyos'])) ? $_POST['otros_apoyos'] : 0;
-		$sumatoria = intval($_POST['credito']) + intval($subsidio) + intval($enganche_efect) + intval($otro_apoyo);
-		
-		if ($asentamiento === 0) {
+		$sumatoria = intval($_POST['credito']) + intval($subsidio) + intval($enganche_efect) + intval($otro_apoyo) + 1;
+		$domicilio = $_POST['domicilio']. ', '.$_POST['localidad'].', '.$_POST['codigo_postal'].', '.$_POST['estado'];
+
+		if ($asentamiento === "0") {
 			$datos = ['colonia'=>$_POST['colonia'], 'cp'=>$_POST['codigo_postal']];
 		$asentamiento = MainModelo::obtenerAsentamiento($datos);
 		foreach ($asentamiento as $key => $value) {
 			$tipo_asentamiento = $value['tipo_asentamiento'];
 			}
+
 		}else{
 			$tipo_asentamiento = $asentamiento;
 		}
 		
 		$solucion = $_POST['solucion'];
-				if ($sumatoria == $solucion) {
+				if ($sumatoria != $solucion) {
 			# code...
 		
 		// echo $enganche_especie; die();
@@ -87,9 +89,9 @@ class LayoutController{
 		'estado' => $_POST['estado'],
 		'municipio' => $_POST['municipio'],
 		'cp' => $_POST['codigo_postal'],
-		'localidad'=> $_POST['municipio'],
+		'localidad'=> $_POST['localidad'],
 		'colonia' => $_POST['colonia'],
-		'domicilio_beneficiario' => $_POST['domicilio_beneficiario'],
+		'domicilio_beneficiario' => $domicilio,
 		'tipo_asentamiento' => $tipo_asentamiento,
 		'coordenada' => $coordenada,
 		'latitud' => $_POST['latitud'],
@@ -100,6 +102,8 @@ class LayoutController{
 		'usuario'=>$_SESSION['usuario'],
 		'motivo'=>$motivo,
 		'layout'=>$layout];
+
+		var_dump($genero); die();
 
 		}else{
 			$data = ['error' => 1,
@@ -140,9 +144,9 @@ class LayoutController{
 						if ($response==1) {
 							echo "<script>window.location = '../vistas/proyectos.php';</script>";
 						}else{
-							var_dump($response);
+							//var_dump($response);
 							echo "<br>";
-							var_dump($data);
+							//var_dump($data);
 						}
 					} else{
 								// echo "<script>alert('Ingreso no válido'); window.location = '../vistas/form_layout.php?w=".$data['proyecto']."';</script>";
@@ -158,14 +162,14 @@ class LayoutController{
 					if ($response==1) {
 						echo "<script>window.location = '../vistas/proyectos.php';</script>";
 					}else{
-						var_dump($response);
+						//var_dump($response);
 						echo "<br> Inserta :";
-						var_dump($data);
+						//var_dump($data);
 					}
 				}
 			}else{
 				echo "la solución y los montos no encajan";
-				var_dump($data);
+				//var_dump($data);
 			}
 	}
 
@@ -202,7 +206,7 @@ class LayoutController{
 		}else{
 
 			echo "datos no insertado<br>";
-			var_dump($data);
+			//var_dump($data);
 
 		}
 	}
@@ -219,7 +223,7 @@ class LayoutController{
 		}else{
 
 			echo "datos no insertado<br>";
-			var_dump($data);
+			//var_dump($data);
 		}
 	}
 
@@ -234,7 +238,7 @@ class LayoutController{
 		}else{
 
 			echo "datos no insertado<br>";
-			var_dump($data);
+			//var_dump($data);
 		}
 	}
 

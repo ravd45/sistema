@@ -159,12 +159,21 @@ if ($_SESSION['rol'] != 'invitado') {
     </div>";
   }
     echo "<div class='col m2'>";
-    if ($item['estatus']=='EN EJECUCION') {
+     // if ($item['estatus']=='EN EJECUCION') {
 
       echo" <form method='POST' action='../vistas/ejecucion_check.php?l=".$item['id_layout']."'>";
-    }else{
+
+      /**cuando ya se hayan subido todas las licencias volver a eliminar esta parte*/
+      echo"<input name='id' value='".$item['id_layout']."' style='display:none;'>
+    <button class='btn-small btn waves-effect waves-light  waves-effect waves-light  cyan darken-4' >Licencia <i class='material-icons'>playlist_add_check</i>
+    </button>
+    </form></div>";
+    /**hasta acá*/
+     // }else{
+    /**y acá*/  
+     echo "<div class='col m2'>";
       echo" <form method='POST' action='../vistas/checklist.php'>";
-    }
+     // }
     
     echo"<input name='id' value='".$item['id_layout']."' style='display:none;'>
     <button class='btn-small btn waves-effect waves-light  waves-effect waves-light  cyan darken-4' >checklist <i class='material-icons'>playlist_add_check</i>

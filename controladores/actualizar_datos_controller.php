@@ -362,13 +362,13 @@ class ActualizarController
                 <!-- CUV -->
                 <div class='input-field col m4'>
                   <i class='material-icons prefix'>assignment_turned_in</i>
-                  <input name='cuv' type='text' value='".$item['cuv']."' class='validate' required >
+                  <input name='cuv' type='text' value='".$item['cuv']."' class='validate'  >
                   <label>CUV</label>
                 </div>
                 <!-- puntaje -->
                 <div class='input-field col m4'>
                   <i class='material-icons prefix'>exposure_plus</i>
-                  <input name='puntaje' type='number' value='".$item['puntaje']."' class='validate' required>
+                  <input name='puntaje' type='number' value='".$item['puntaje']."' class='validate' >
                   <label>Puntaje</label>
                 </div>
                 <!-- estado de méxico -->
