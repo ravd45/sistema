@@ -105,7 +105,7 @@ class MainModelo
 
   public function listaProyectos($data)
   {
-    $stmt = Conexion::conectar()->prepare("SELECT p.proyecto, l.estatus, l.fecha_apartado, l.nombre_completo, l.id_layout FROM proyecto p
+    $stmt = Conexion::conectar()->prepare("SELECT p.idproyecto, p.proyecto, l.estatus, l.fecha_apartado, l.nombre_completo, l.id_layout FROM proyecto p
      INNER JOIN layout l on l.id_proyecto = p.idproyecto
      WHERE p.idproyecto = :id  and l.estado_contrato = 'activo' ORDER BY l.nombre_completo ASC;");
     $stmt -> bindParam(":id", $data['id'], PDO::PARAM_STR);

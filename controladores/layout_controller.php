@@ -43,7 +43,7 @@ class LayoutController{
 		$enganche_efect = (isset($_POST['enganche_efectivo'])) ? $_POST['enganche_efectivo'] : 0;
 		$otro_apoyo = 		(isset($_POST['otros_apoyos'])) ? $_POST['otros_apoyos'] : 0;
 		$sumatoria = intval($_POST['credito']) + intval($subsidio) + intval($enganche_efect) + intval($otro_apoyo) + 1;
-		$domicilio = $_POST['domicilio']. ', '.$_POST['localidad'].', '.$_POST['codigo_postal'].', '.$_POST['estado'];
+		$domicilio = $_POST['domicilio_beneficiario']. ', '.$_POST['localidad'].', '.$_POST['codigo_postal'].', '.$_POST['estado'];
 
 		if ($asentamiento === "0") {
 			$datos = ['colonia'=>$_POST['colonia'], 'cp'=>$_POST['codigo_postal']];
@@ -103,7 +103,6 @@ class LayoutController{
 		'motivo'=>$motivo,
 		'layout'=>$layout];
 
-		var_dump($genero); die();
 
 		}else{
 			$data = ['error' => 1,
@@ -254,13 +253,12 @@ class LayoutController{
 		echo $response;
 	}
 
-	public function  actualizaBeneficiario()
-	{
-		// $data = $this->entidades($_POST['proyecto'], $_POST[''])
-	}
+	
 	
 }
-// $layout = new LayoutController();
+
+
+
 if (isset($_POST['cancelacion'])) {
 	$layout = new LayoutController();
 	$layout->cancelacionLayout();

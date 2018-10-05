@@ -243,8 +243,8 @@ class ActualizarController
     $data = ['id' => $_POST['layout']];
      $result = ProyectoModelo::obtenerDatos($data);
        foreach ($result as $row => $item) {
-        echo"  <form action='../controladores/layout_controller.php' method='POST'>
-          <input value='beneficiario name='beneficiario' style='display:none;'>
+        echo"  <form action='../controladores/actualiza_controller.php' method='POST'>
+          <input value='beneficiario' name='datos' style='display:inline;'>
             <div class='row'>
               <div class='col m12'>
               <!-- layout -->
@@ -383,10 +383,16 @@ class ActualizarController
                   <input name='municipio' type='text' value='".$item['municipio']."' class='validate' readonly required>
                   <label>Municipio/Localidad</label>
                 </div>
+                <!-- localidad -->
+                <div class='input-field col m4'>
+                  <i class='material-icons prefix'>location_city</i>
+                  <input name='localidad' type='text' value='".$item['localidad']."' class='validate' readonly required>
+                  <label>Localidad</label>
+                </div>
                 <!-- código postal -->
                 <div class='input-field col m4'>
                   <i class='material-icons prefix'>local_post_office</i>
-                  <input name='codigo_postal' type='number' value='".$item['codigo_postal']."' maxlength='5' class='validate'  required>
+                  <input name='codigo_postal' type='text' value='".$item['codigo_postal']."' maxlength='5' class='validate'  required>
                   <label>Código Postal</label>
                 </div>
                 <!-- colonia -->
@@ -445,8 +451,8 @@ class ActualizarController
                     <div class='col m2 offset-m1'>
                       <button class='btn waves-effect waves-light btn-floating btn-large waves-effect waves-light green accent-2' type='submit' name='action'>
                         <i class='material-icons right'>update</i>
-                    </div>
                   </button>
+                    </div>
                   </div>
                 </div>
               </div>
