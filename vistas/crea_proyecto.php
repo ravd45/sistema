@@ -28,10 +28,7 @@ $main = new MainController();
 			<!-- estado de méxico -->
 			<div class="input-field col m5 offset-m1">
 				<i class="material-icons prefix">location_city</i>
-				<!-- <select class="" name="estado">
-					<option value="" disabled selected>Selecciona el estado</option> -->
 					<?php $main->catalogoEstado(); ?>
-				<!-- </select> -->
 				<label>Estado</label>
 			</div>
 			<!-- municipio -->

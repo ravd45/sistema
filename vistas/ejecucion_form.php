@@ -16,7 +16,6 @@
 				$campos = new EjecucionController();
 				$campos->obtenerCP($_POST['layout']);
 			 ?>
-		 <!-- </div> -->
 		<div class="row">
 			<div class="col m12">
 			<div class='col m2'>

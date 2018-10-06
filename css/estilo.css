@@ -56,7 +56,6 @@ h6{
 
 .img-menu{
 	position: absolute;
-
     top: 50%;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
@@ -66,7 +65,9 @@ h6{
 }
 
 footer{
-    width: 100%;
-    position: absolute !important;
-    bottom: 0px !important;
+  position: fixed !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  color: white !important;
+  align-self: flex-end !important;
 }

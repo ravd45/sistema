@@ -7,8 +7,6 @@
 
 </head>
 <body>
-
-
 	
 	<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 	<div id="modal1" class="modal">

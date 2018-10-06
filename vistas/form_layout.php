@@ -117,7 +117,6 @@ include '../controladores/main_controller.php';
 			<!-- credito -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">attach_money</i>
-				<!-- <input name="credito" type="text" class="validate" required> -->
 				<?php $main->creditoProyecto($_GET['w']); ?>
 				<label>Credito</label>
 			</div>
@@ -160,10 +159,7 @@ include '../controladores/main_controller.php';
 			<!-- estado de méxico -->
 			<div class="input-field col m4">
 				<i class="material-icons prefix">location_city</i>
-				<!-- <select class="" name="estado">
-					<option value="" disabled selected>Selecciona el estado</option>-->
 					<?php $main->estadoProyecto($_GET['w']); ?>
-					<!--</select> -->
 					<label>Estado</label>
 				</div>
 				<!-- municipio -->
@@ -269,22 +265,6 @@ include '../controladores/main_controller.php';
 				});
 				return false;
 			});
-
-			// $('#colonia').change(function() {
-			// 	var colonia = $('#colonia').val();
-			// 	console.log(colonia);
-			// 	var cp = $('#codPost').val();
-			// 	$.ajax({
-			// 		url: "../controladores/main_controller.php",
-			// 		type: "POST",
-			// 		data: {colonia: colonia, cp: cp},
-			// 		success: function(response) {
-			// 			console.log(response);
-			// 			// $('#asentamiento').html(response);
-			// 							}
-			// 	});
-			// 	return false;
-			// });
 		});
 	</script>
 	<script>

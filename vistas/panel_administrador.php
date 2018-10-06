@@ -1,12 +1,17 @@
 <?php include '../libs/header.php';
-	  include '../controladores/panel_controller.php'; ?>
+include '../controladores/panel_controller.php'; ?>
 <h3>Panel de administrador</h3>
-<ol>
-	<li><a id="opcion1" >Lista de usuarios</a></li>
-	<li><a id="opcion2" >Crear usuarios</a></li>
-	<li><a id="opcion3" >Eliminar</a></li>
-	<li><a id="opcion4" >Beneficiarios Cancelados</a></li>
-</ol>
+
+<section id="opciones" class="show">
+	<div class="row">
+		<div class="col m8 offset-m4">
+			<a class='btn-small light-green darken-3' id="opcion1" >Lista de usuarios</a>
+			<a class='btn-small light-green darken-3' id="opcion2" >Crear usuarios</a>
+			<a class='btn-small light-green darken-3' id="opcion3" >Eliminar</a>
+			<a class='btn-small light-green darken-3' id="opcion4" >Beneficiarios Cancelados</a>
+		</div>
+	</div>
+</section>
 
 <section id="usuario" class='hide'>
 	<div class="row">
@@ -154,7 +159,7 @@
 
 									<tbody id="tablaCancel">
 										<?php $panel = new PanelController();
-											  $panel->listaCancelados(); ?>
+										$panel->listaCancelados(); ?>
 									</tbody>
 								</table>
 							</div>
@@ -166,8 +171,19 @@
 	</div>
 </section>	
 
+<section id="regresar" class="show">
+	<div class="row">
+		<div class="col m12">
+			<div class="col m8 offset-m1">
+				<a class="btn-floating btn-large waves-effect waves-light default-primario-color" href="vista_general.php"><i class="material-icons">arrow_back</i></a>
+			</div>
+		</div>
+	</div>
+</section>
+
 <div id="panel"></div>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+<script src="../js/sweetalert.min.js"></script>
 <script>
 	$(document).ready(function() {
 		$('#opcion1').click(function() {
@@ -179,6 +195,14 @@
 			$('#cancelados').addClass('hide');
 			$('#permisos').removeClass('hide');
 			$('#permisos').addClass('show');
+			$('#opcion1').removeClass('light-green darken-3');
+			$('#opcion1').addClass('orange darken-4');
+			$('#opcion2').removeClass('orange darken-4');
+			$('#opcion2').addClass('light-green darken-3');
+			$('#opcion3').removeClass('orange darken-4');
+			$('#opcion3').addClass('light-green darken-3');
+			$('#opcion4').removeClass('orange darken-4');
+			$('#opcion4').addClass('light-green darken-3');
 		});
 
 		$('#opcion2').click(function() {
@@ -190,6 +214,15 @@
 			$('#cancelados').addClass('hide');
 			$('#usuario').removeClass('hide');
 			$('#usuario').addClass('show');
+			$('#opcion1').removeClass('orange darken-4');
+			$('#opcion1').addClass('light-green darken-3');
+			$('#opcion2').removeClass('light-green darken-3');
+			$('#opcion2').addClass('orange darken-4');
+			$('#opcion3').removeClass('orange darken-4');
+			$('#opcion3').addClass('light-green darken-3');
+			$('#opcion4').removeClass('orange darken-4');
+			$('#opcion4').addClass('light-green darken-3');
+
 		});
 
 		$('#opcion3').click(function() {
@@ -201,6 +234,16 @@
 			$('#cancelados').addClass('hide');
 			$('#eliminar').removeClass('hide');
 			$('#eliminar').addClass('show');
+			$('#opcion1').removeClass('orange darken-4');
+			$('#opcion1').addClass('light-green darken-3');
+			$('#opcion2').removeClass('orange darken-4');
+			$('#opcion2').addClass('light-green darken-3');
+			$('#opcion3').removeClass('light-green darken-3');
+			$('#opcion3').addClass('orange darken-4');
+			$('#opcion4').removeClass('orange darken-4');
+			$('#opcion4').addClass('light-green darken-3');
+
+
 		});
 
 		$('#opcion4').click(function() {
@@ -212,6 +255,15 @@
 			$('#eliminar').addClass('hide');
 			$('#cancelados').removeClass('hide');
 			$('#cancelados').addClass('show');
+			$('#opcion1').removeClass('orange darken-4');
+			$('#opcion1').addClass('light-green darken-3');
+			$('#opcion2').removeClass('orange darken-4');
+			$('#opcion2').addClass('light-green darken-3');
+			$('#opcion3').removeClass('orange darken-4');
+			$('#opcion3').addClass('light-green darken-3');
+			$('#opcion4').removeClass('light-green darken-3');
+			$('#opcion4').addClass('orange darken-4');
+
 		});
 
 		$('#eliminarBtn').click(function() {
@@ -230,7 +282,7 @@
 							title: "Eliminando Usuario",
 							text: "¿Seguro que desea eliminar al usuario?",
 							icon: "error",
-							buttons: true,
+							buttons: ['No', 'Aceptar'],
 							dangerMode: true,
 						})
 						.then((willDelete) => {
@@ -297,10 +349,6 @@
 			return false;
 		});
 
-		$('#contra').click(function() {
-			console.log('auch');
-		});
-
 		$('#pass').change(function() {
 			$('#confirmContra').removeClass('hide');
 			$('#confirmContra').addClass('show');
@@ -313,9 +361,9 @@
 				$('#confirmpass').removeClass('validate');
 				$('#pass').addClass('invalid');
 				$('#confirmpass').addClass('invalid');
-					swal("Las contraseñas no coinciden", {
-						icon: "error",
-					});				
+				swal("Las contraseñas no coinciden", {
+					icon: "error",
+				});				
 
 			} else {
 				$('#pass').removeClass('invalid');
@@ -334,9 +382,9 @@
 				$('#confirmpass').removeClass('validate');
 				$('#pass').addClass('invalid');
 				$('#confirmpass').addClass('invalid');
-					swal("Las contraseñas no coinciden", {
-						icon: "error",
-					});
+				swal("Las contraseñas no coinciden", {
+					icon: "error",
+				});
 
 			}
 			else {
@@ -356,14 +404,14 @@
 				data: {correo : correo, ccorreo : 1},
 				success: function(response) {
 					if (response == 1) {
-					swal("El correo ya está en uso", {
-						icon: "error",
-					});
-					$('#correo').removeClass('validate');
-					$('#correo').addClass('invalid');
+						swal("El correo ya está en uso", {
+							icon: "error",
+						});
+						$('#correo').removeClass('validate');
+						$('#correo').addClass('invalid');
 					}else{
-					$('#correo').removeClass('invalid');
-					$('#correo').addClass('validate');
+						$('#correo').removeClass('invalid');
+						$('#correo').addClass('validate');
 					}
 
 				}
@@ -418,8 +466,8 @@
 				success: function(response) {
 					if (response == 1) {
 						window.setTimeout(function(){ 
-						location.reload();
-					} ,1500);
+							location.reload();
+						} ,1500);
 					}
 				}
 			});

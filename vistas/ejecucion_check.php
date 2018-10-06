@@ -6,8 +6,6 @@ include '../controladores/ejecucion_controller.php';
 
 <h3>Lista de documentos para ejecución</h3>
 
-<!-- <div id="ejecucionCheck" class="modal"> -->
-	<!-- <div class="modal-content"> -->
 		<div class='row z-depth-4'>
 			<div class='col m10 offset-m1'>
 				<div class='col m2 offset-m10'>	
