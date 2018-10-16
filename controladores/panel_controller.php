@@ -83,10 +83,21 @@ class PanelController
 		$listaCancel = PanelModelo::listaCancelados();
 
 		foreach ($listaCancel as $key => $value) {
-			$response = '<tr><td>'.$value['nombre_completo'].'</td><td>'.$value['motivo'].'</td><td>'.$value['fecha_cancelacion'].'</td><td><button class="activar btn-small" value="'.$value['idlayout'].'">Re-Activar</button></td></tr>';
+			$response = '<tr><td>'.$value['nombre_completo'].'</td><td>'.$value['motivo'].'</td><td>'.$value['fecha_cancelacion'].'</td><td><button class="activar btn-small" value="'.$value['idlayout'].'">Re-Activar</button></td><td>'.$value['usuario'].'</td></tr>';
 		print_r($response);
 		}
 	}
+
+	function listaSustituidos()
+	{
+		$listaCancel = PanelModelo::listaSustituidos();
+
+		foreach ($listaCancel as $key => $value) {
+			$response = '<tr><td>'.$value['sustituido'].'</td><td>'.$value['motivo'].'</td><td>'.$value['fecha_sustitucion'].'</td><td>'.$value['sustituto'].'</td><td>'.$value['usuario'].'</td></tr>';
+		print_r($response);
+		}
+	}
+
 
 	function reactivarBeneficiario()
 	{

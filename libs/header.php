@@ -1,3 +1,14 @@
+<?php
+    /* Empezamos la sesión */
+    session_start();
+    /* Creamos la sesión */
+    /* Si no hay una sesión creada, redireccionar al index. */
+    if(!isset($_SESSION['usuario'])) { // Recuerda usar corchetes.
+    echo "<script language='javascript'>window.location='../index.php';</script>";
+    } // Recuerda usar corchetes
+ 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +22,6 @@
 <body>
 	<script src="../js/jquery-3.3.1.js"></script>
 	<script src="../js/materialize.js"></script>
-
-					<?php
-					session_start();?>
 				
 	<section>
 		<nav>

@@ -1,5 +1,6 @@
 <?php include '../libs/header.php';
-      include '../controladores/main_controller.php';?>
+      include '../controladores/main_controller.php';
+     ?>
 
 <h3>Lista de Proyectos</h3>
 <div class="row">
@@ -23,9 +24,32 @@
    
   </div>
   <script>
+    $(document).ready(function() {
+      $('#apartado').click(function() {
+        $('#fechaApartado').removeClass('show');
+        $('#fechaApartado').addClass('hide');
+        $('#nueva_fecha').removeClass('hide');
+        $('#nueva_fecha').addClass('show');
+      });
+
+      $('#nueva_fecha').change(function() {
+          var fecha = $('#nueva_fecha').val();
+          var id = $('#layout').val();
+ 
+          $.ajax({
+            url: '../controladores/layout_controller.php',
+            type: 'POST',
+            data: {layout: id, fecha_apartado: fecha, aparta: 1},
+            success: function(response) {
+            }
+          });
+      });
+    });
+  </script>
+  <script>
     function cancelacion() {
       var id = document.getElementById('btn-cancel').val;
-      console.log(id);
+      // console.log(id);
     }
   </script>
   <script>
@@ -33,7 +57,7 @@
      $(function(){
       $('#FormBuscador').change(function(){
         var buscador = document.getElementById('buscador').val;
-        console.log(buscador);
+        // console.log(buscador);
       })
      })
     

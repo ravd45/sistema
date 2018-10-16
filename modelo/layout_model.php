@@ -7,7 +7,7 @@ require_once '../libs/conectardb.php';
 class LayoutModelo{
 
 	function insertaLayout($data){
-		$stmt = Conexion::conectar()->prepare("INSERT INTO layout (id_proyecto, curp, nombre, apellido_paterno, apellido_materno, nombre_completo, genero, estado_civil, fecha_nacimiento, rfc, ingreso, antiguedad, ocupacion, telefono, solucion, subsidio, credito, enganche_efectivo, enganche_especie, otros_apoyos, modalidad, cuv, puntaje, estado, municipio, codigo_postal, localidad, colonia, domicilio_beneficiario, tipo_asentamiento, coordenadas, latitud, longitud, domicilio_terreno, pcu, zona, usuario) VALUES (:proyecto, :curp, :nombre, :apellido_p, :apellido_m, :nombre_completo, :genero, :estado_civil, :fecha_nacimiento, :rfc, :ingreso, :antiguedad, :ocupacion, :telefono, :solucion, :subsidio, :credito, :enganche_efectivo, :enganche_especie, :otros_apoyos, :modalidad, :cuv, :puntaje, :estado, :municipio, :cp, :localidad, :colonia, :domicilio_beneficiario, :tipo_asentamiento, :coordenada, :latitud, :longitud, :domicilio_terreno, :pcu, :zona, :usuario);");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO layout (id_proyecto, curp, nombre, apellido_paterno, apellido_materno, nombre_completo, genero, estado_civil, fecha_nacimiento, rfc, ingreso, antiguedad, ocupacion, telefono, solucion, subsidio, credito, enganche_efectivo, enganche_especie, otros_apoyos, modalidad, cuv, puntaje, estado, municipio, codigo_postal, localidad, colonia, domicilio_beneficiario, tipo_asentamiento, coordenadas, latitud, longitud, domicilio_terreno, pcu, zona, usuario) VALUES (:proyecto, :curp, :nombre, :apellido_p, :apellido_m, :nombre_completo, :genero, :estado_civil, :fecha_nacimiento, :rfc, :ingreso, :antiguedad, :ocupacion, :telefono, :solucion, :subsidio, :credito, :enganche_efectivo, :enganche_especie, :otros_apoyos, :modalidad, ':cuv, :puntaje, :estado, :municipio, :cp, :localidad, :colonia, :domicilio_beneficiario, :tipo_asentamiento, :coordenada, :latitud, :longitud, :domicilio_terreno, :pcu, :zona, :usuario);");
 
 		$stmt -> bindParam(":proyecto", $data['proyecto'], PDO::PARAM_STR);
 		$stmt -> bindParam(":curp", $data['curp'], PDO::PARAM_STR);
@@ -94,18 +94,21 @@ class LayoutModelo{
 		$stmt -> bindParam(":zona", $data['zona'], PDO::PARAM_STR);
 		$stmt -> bindParam(":usuario", $data['usuario'],PDO::PARAM_STR);
 
-		$result = ($stmt->execute()) ? 1 : 0; #Esta línea es un if () <- condicion ? <- then : <- else
+		$result = ($stmt->execute()) ? 1 : 'Insert'; #Esta línea es un if () <- condicion ? <- then : <- else
 
 		if($result == 1){
 			$stmt = Conexion::conectar()->prepare("UPDATE layout SET estado_contrato = 'sustituido' where id_layout = :id");
 				$stmt -> bindParam(":id", $data['layout'], PDO::PARAM_STR);
-				$result = ($stmt->execute()) ? 1 : 0;
+				$result = ($stmt->execute()) ? 1 : 'update';
 
 				if ($result == 1) {
-					$stmt = Conexion::conectar()->prepare("INSERT INTO sustitucion (motivo, id_layout) VALUES (:motivo, :id)");
+					// $stmt = Conexion::conectar()->prepare("INSERT INTO sustitucion (motivo, sustituido, nuevo) VALUES (:motivo, :id, 108)");
+					$stmt = Conexion::conectar()->prepare("call sustituir(:motivo, :id, :usuario)");
 					$stmt -> bindParam(":motivo", $data['motivo'], PDO::PARAM_STR);
 					$stmt -> bindParam(":id", $data['layout'], PDO::PARAM_STR);
+					$stmt -> bindParam(":usuario", $data['usuario'],PDO::PARAM_STR);
 					$stmt->execute();
+					$result = ($stmt->execute()) ? 1 : 'insert motivo';
 				}
 		}
 		return $result;

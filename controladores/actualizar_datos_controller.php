@@ -164,8 +164,14 @@ class ActualizarController
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>location_city</i>
           				<input name='municipio' type='text' value='".$item['municipio']."' class='validate' readonly required>
-          				<label>Municipio/Localidad</label>
+          				<label>Municipio</label>
           			</div>
+                <!-- localidad -->
+                <div class='input-field col m4'>
+                  <i class='material-icons prefix'>location_city</i>
+                  <input name='localidad' type='text' value='".$item['localidad']."' class='validate' readonly required>
+                  <label>Localidad</label>
+                </div>
           			<!-- código postal -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>local_post_office</i>

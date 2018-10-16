@@ -67,6 +67,20 @@ class PanelModelo
 		$stmt->close();
 	}
 
+	function listaSustituidos()
+	{
+		$stmt = Conexion::conectar()->prepare("SELECT c.motivo, c.fecha_sustitucion, l.nombre_completo as 'sustituido', lay.nombre_completo as 'sustituto', c.usuario  
+			FROM sustitucion c 
+			inner join layout l on l.id_layout = c.sustituido
+			inner join layout lay on lay.id_layout = c.nuevo 
+			where datediff(now(),c.fecha_sustitucion) < 60;");
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+	}
+
 	function reactivarBeneficiario($data)
 	{
 		$stmt = Conexion::conectar()->prepare("UPDATE layout SET estado_contrato = 'activo' WHERE id_layout = :id");

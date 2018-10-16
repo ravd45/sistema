@@ -103,31 +103,31 @@ public function obtenerBeneficiarios($id)
 
  echo"
  <div class='row'>
- <div class='col m12'>";
+ <div class='col s12'>";
  if ($_SESSION['rol'] != 'invitado') {
 
-  echo" <div class='col m2'>
+  echo" <div class='col s2'>
   <a class=' btn-small btn waves-effect waves-light btn-large waves-effect waves-light blue accent-3' href='../vistas/form_layout.php?w=$id' type='submit' name='action'>
-  <i class='material-icons right'>add</i>Agregar</a>
+  <i class='material-icons'>add</i>Agregar</a>
   </div>";
 }
 echo "
 <div class=row>
-<div class='col m12'>
-<div class='col m2 offset-m8'>  
+<div class='col s12'>
+<div class='col s2 offset-m8'>  
 <form method='POST' action='../controladores/excel_controller.php'>
 <input type='number' value='".$id."' style='display: none;' name='folio'>
 <button class='btn-small btn waves-effect waves-light waves-effect waves-light green accent-4' type='submit' name='action'>
-<i class='material-icons right'>print</i>Exportar
+<i class='material-icons'>print</i>Exportar
 </button>
 </form>
 </div>";
 if ($_SESSION['rol'] == 'administrador') {  
-  echo "<div class='col m2'>  
+  echo "<div class='col s2'>  
   <form method='POST' action='../controladores/eliminar_controller.php'>
   <input type='number' value='".$id."' style='display: none;' name='proyecto'>
   <button class='btn-small btn waves-effect waves-light waves-effect waves-light red accent-4' type='submit' name='action'>
-  <i class='material-icons right'>delete</i>Eliminar
+  <i class='material-icons'>delete</i>Eliminar
   </button>
   </form>
   </div>";
@@ -146,14 +146,14 @@ foreach ($result as $row => $item) {
 
     <div class='row'>";
 if ($_SESSION['rol'] != 'invitado') {
-   echo " <div class='col m9 offset-m4'>
-    <div class='col m2'>
+   echo " <div class='col s9 offset-m4'>
+    <div class='col s2'>
     <form method='POST' action='../vistas/actualiza_beneficiario.php'>
     <input type='text' value='actualiza' style='display: none;' name='actualiza'>
     <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
     <input type='text' value='".$item['nombre_completo']."' style='display: none;' name='nombre'>
-    <button class='btn-small cyan darken-3' type='submit' name='action'>Actualizar 
-    <i class='material-icons'>rate_review</i>
+    <button class='btn-small cyan darken-3' type='submit' name='action'> 
+    <i class='material-icons'>rate_review</i>Actualizar
     </button>
     </form>
     </div>";
@@ -167,7 +167,7 @@ if ($_SESSION['rol'] != 'invitado') {
 
       /**cuando ya se hayan subido todas las licencias volver a eliminar esta parte*/
       echo"<input name='id' value='".$item['id_layout']."' style='display:none;'>
-    <button class='btn-small  cyan darken-4' >Licencia ".$item['idproyecto']."<i class='material-icons'>playlist_add_check</i>
+    <button class='btn-small  cyan darken-4' ><i class='material-icons'>playlist_add_check</i>Licencia
     </button>
     </form></div>";
   }
@@ -179,7 +179,7 @@ if ($_SESSION['rol'] != 'invitado') {
      // }
     
     echo"<input name='id' value='".$item['id_layout']."' style='display:none;'>
-    <button class='btn-small   cyan darken-4' >checklist <i class='material-icons'>playlist_add_check</i>
+    <button class='btn-small   cyan darken-4' ><i class='material-icons'>playlist_add_check</i>checklist 
     </button>
     </form>
 
@@ -191,8 +191,8 @@ if ($_SESSION['rol'] != 'invitado') {
      <input type='number' value='ejecuta' style='display: none;' name='ejecuta'>
      <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
      <input type='text' value='".$item['nombre_completo']."' style='display: none;' name='nombre'>
-     <button class='btn-small  teal darken-4' type='submit' name='action'>Ejecución 
-     <i class='material-icons'>done</i>
+     <button class='btn-small  teal darken-4' type='submit' name='action'>
+     <i class='material-icons'>done</i>Ejecución 
      </button>
      </form>";
    } else {
@@ -200,11 +200,11 @@ if ($_SESSION['rol'] != 'invitado') {
       echo " <form method='POST' action='../controladores/layout_controller.php'>
       <input type='text' value='aparta' style='display: none;' name='aparta'>
       <!-- fecha de apartado -->
-      <button class='btn-small  teal darken-2' type='submit' name='action'>Apartado 
-      <i class='material-icons'>done</i>
+      <button class='btn-small  teal darken-2' type='submit' name='action'>
+      <i class='material-icons'>done</i>Apartado 
       </button>
       <div class = 'row'>                    
-      <div class = 'col m12'>                      
+      <div class = 'col s12'>                      
       <div class=''>
       <i class='material-icons prefix'>schedule</i>
       <input type='date' name='fecha_apartado' max='".$fecha."' placeholder='Fecha de apartado' required>
@@ -215,21 +215,21 @@ if ($_SESSION['rol'] != 'invitado') {
       <input type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>
       </form>";
     }else{
-      echo "APARTADO: ".$item['fecha_apartado'];
+      echo "<a id='apartado' href='#'>APARTADO:</a> <i id='fechaApartado' class='show'>".$item['fecha_apartado']."</i> <input id='nueva_fecha' type='date' name='fecha_apartado' class='hide' max='".$fecha."' placeholder='Fecha de apartado' required><input id='layout' type='number' value='".$item['id_layout']."' style='display: none;' name='layout'>";
     }
   }
   echo "</div>
   <div class='col s2'>
   <form method='POST' action='../vistas/cancela_beneficiario.php'>
   <input name='id' value='".$item['id_layout']."' style='display:none;'>
-  <button class='btn-small  green darken-4 ' onclick='cancelacion()' type='submit' name='action'>Cancelar <i class='material-icons'>cancel</i></button>
+  <button class='btn-small  green darken-4 ' onclick='cancelacion()' type='submit' name='action'> <i class='material-icons'>cancel</i>Cancelar</button>
   </form>
   </div>
   <div class='col s2'>
   <form method='POST' action='../vistas/actualiza_datos.php'>
   <input value='actualizacion' name='actualizacion' style='display:none;'>
   <input name='id' value='".$item['id_layout']."' style='display:none;'>
-  <button class='btn-small  light-green darken-4' >Sustituir <i class='material-icons'>update</i>
+  <button class='btn-small  light-green darken-4' > <i class='material-icons'>update</i>Sustituir
   </button>
   </form>
   </div>
@@ -389,6 +389,6 @@ if (isset($_POST['cp'])) {
 }
 // if (isset($_POST['colonia'])) {
 //   $col = new MainController();
-//   $col->asentamiento();
+//   $col >asentamiento();
 // }
 ?>

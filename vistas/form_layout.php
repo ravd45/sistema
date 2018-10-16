@@ -227,7 +227,7 @@ include '../controladores/main_controller.php';
 				<!-- PCU -->
 				<div class="input-field col m4">
 					<i class="material-icons prefix">list</i>
-					<select class="" name="pcu" required="true">
+					<select name="pcu" required="true">
 						<option value="" disabled selected>Selecciona el Perimetro de Contención Urbana</option>
 						<option value="U1">U1</option>
 						<option value="U2">U2</option>

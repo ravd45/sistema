@@ -32,6 +32,7 @@ class LayoutController{
 		#variables manipuladas
 
 		session_start();
+		$cuv = $_POST['cuv'] . "-";
 		$nom_comp = $_POST['nombre']." ".$_POST['apellido_p']." ".$_POST['apellido_m'];
 		$coordenada = $_POST['latitud']." ".$_POST['longitud'];
 		$rfc = substr($_POST['curp'], 0, 10);
@@ -84,7 +85,7 @@ class LayoutController{
 		'enganche_especie' => $enganche_especie,
 		'otros_apoyos' => $_POST['otros_apoyos'],
 		'modalidad' => $_POST['modalidad'],
-		'cuv' => $_POST['cuv'],
+		'cuv' => $cuv,
 		'puntaje' => $_POST['puntaje'],
 		'estado' => $_POST['estado'],
 		'municipio' => $_POST['municipio'],
@@ -94,8 +95,8 @@ class LayoutController{
 		'domicilio_beneficiario' => $domicilio,
 		'tipo_asentamiento' => $tipo_asentamiento,
 		'coordenada' => $coordenada,
-		'latitud' => $_POST['latitud'],
-		'longitud' => $_POST['longitud'],
+		'latitud' =>$_POST['latitud'],
+		'longitud' =>$_POST['longitud'],
 		'domicilio_terreno' => $_POST['domicilio_terreno'],
 		'pcu' => $_POST['pcu'],
 		'zona'=>$_POST['zona'],
@@ -161,9 +162,9 @@ class LayoutController{
 					if ($response==1) {
 						echo "<script>window.location = '../vistas/proyectos.php';</script>";
 					}else{
-						//var_dump($response);
-						echo "<br> Inserta :";
-						//var_dump($data);
+						var_dump($response);
+						// echo "<br> Inserta :";
+						var_dump($data);
 					}
 				}
 			}else{
@@ -205,14 +206,16 @@ class LayoutController{
 		}else{
 
 			echo "datos no insertado<br>";
-			//var_dump($data);
+			var_dump($response);
+			var_dump($data);
 
 		}
 	}
 
 	public function ejecucionLayout()
 	{
-		$data = ['id' => $_POST['layout'], 'cuv'=>$_POST['cuv'], 'puntaje'=>$_POST['puntaje']];
+		$cuv = "'".$_POST['cuv'];
+		$data = ['id' => $_POST['layout'], 'cuv'=>$cuv, 'puntaje'=>$_POST['puntaje']];
 		 
 		$result = LayoutModelo::ejecucionLayout($data);
 
@@ -244,7 +247,7 @@ class LayoutController{
 	public function cancelacionLayout()
 	{
 		$data = ['id' => $_POST['layout'],
-		'motivo' => $_POST['cancelacion']];
+		'motivo' => $_POST['cancelacion'], 'usuario' => $_SESSION['usuario']];
 		
 		$result = BeneficiarioModelo::cancelarBeneficiario($data);
 

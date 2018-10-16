@@ -9,8 +9,8 @@ require_once '../modelo/checklist_model.php';
 		function obtenerLista($id)
 		{
 			
-				
 			$data = ['id'=>$id];
+				
 
 			$result = ChecklistModelo::obtenerLista($data);
 			$nombre = ChecklistModelo::nombre($data);
@@ -19,23 +19,25 @@ require_once '../modelo/checklist_model.php';
 				$usuario = $value['nombre_completo'];
 			}
 			
-			if ($_SESSION['rol'] != 'invitado') {	
-			if (!isset($result[0])) {
 			echo "
 			<div class='row z-depth-4'>
 			<div class='col m10 offset-m1'>
-			<h5>".$usuario."</h5>
-			<div class='col m2 offset-m10'>	
+			<h5>".$usuario."</h5>";
+			echo "<div class='col m2 offset-m10'>	
 								<form method='POST' action='../controladores/excel_controller.php'>
 								    <input type='number' value='".$id."' style='display: none;' name='check'>
 								    <button class='btn-small btn waves-effect waves-light waves-effect waves-light green accent-4' type='submit' name='action'>
 								    <i class='material-icons right'>print</i>Exportar
 								    </button>
 							    </form>
-							</div>
-			 <form action='../modelo/checklist_model.php' method='POST'>
+							</div>";
+			if ($_SESSION['rol'] != 'invitado') {	
+			if (!isset($result[0])) {
+
+			echo" <form action='../modelo/checklist_model.php' method='POST'>
 				   <input name='vacio' value='t' style='display:none;'>
 				   <input name='id' value='$id' style='display:none;'>";
+
 			  echo "<p>
 						<label>
 							<input type='checkbox' name='ife' value='1'/>

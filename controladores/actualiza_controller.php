@@ -58,7 +58,7 @@ class ActualizaController
 		'enganche_especie' => $enganche_especie,
 		'otros_apoyos' => $_POST['otros_apoyos'],
 		'modalidad' => $_POST['modalidad'],
-		'cuv' => $_POST['cuv'],
+		'cuv' => "'".$_POST['cuv'],
 		'puntaje' => $_POST['puntaje'],
 		'estado' => $_POST['estado'],
 		'municipio' => $_POST['municipio'],
