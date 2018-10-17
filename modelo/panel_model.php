@@ -57,9 +57,10 @@ class PanelModelo
 		$stmt->close();
 	}
 
-	function listaCancelados()
+	function listaCancelados($data)
 	{
-		$stmt = Conexion::conectar()->prepare("SELECT c.*, l.nombre_completo FROM sistema.cancelacion c inner join layout l on l.id_layout = c.idlayout where datediff(now(),c.fecha_cancelacion) < 60 AND reactivado = 0;");
+		$stmt = Conexion::conectar()->prepare("SELECT c.*, l.nombre_completo FROM sistema.cancelacion c inner join layout l on l.id_layout = c.idlayout where datediff(now(),c.fecha_cancelacion) < 60 AND reactivado = :id;");
+		$stmt -> bindParam(':id', $data['cancelado'], PDO::PARAM_STR);
 		$stmt->execute();
 
 		return $stmt->fetchAll();

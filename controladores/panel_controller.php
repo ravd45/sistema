@@ -80,10 +80,18 @@ class PanelController
 
 	function listaCancelados()
 	{
-		$listaCancel = PanelModelo::listaCancelados();
+		$data = ['cancelado' => $_POST['cancelados']];
+		$listaCancel = PanelModelo::listaCancelados($data);
 
 		foreach ($listaCancel as $key => $value) {
-			$response = '<tr><td>'.$value['nombre_completo'].'</td><td>'.$value['motivo'].'</td><td>'.$value['fecha_cancelacion'].'</td><td><button class="activar btn-small" value="'.$value['idlayout'].'">Re-Activar</button></td><td>'.$value['usuario'].'</td></tr>';
+			if ($data['cancelado']==0) {
+				
+			
+			$response = '<tr><td>'.$value['nombre_completo'].'</td><td>'.$value['motivo'].'</td><td>'.$value['fecha_cancelacion'].'</td><td>'.$value['usuario'].'</td><td><button class="activar btn-small" value="'.$value['idlayout'].'">Re-Activar</button></td></tr>';
+		}else{
+			$response = '<tr><td>'.$value['nombre_completo'].'</td><td>'.$value['motivo'].'</td><td>'.$value['fecha_cancelacion'].'</td><td>'.$value['usuario'].'</td></tr>';
+		}
+
 		print_r($response);
 		}
 	}
@@ -136,5 +144,10 @@ if (isset($_POST['ccorreo'])) {
 if (isset($_POST['reactivar'])) {
 	$panel = new PanelController();
 	$panel -> reactivarBeneficiario();
+}
+
+if (isset($_POST['cancelados'])) {
+	$panel = new PanelController();
+	$panel -> listaCancelados();
 }
 ?>

@@ -32,7 +32,7 @@ class LayoutController{
 		#variables manipuladas
 
 		session_start();
-		$cuv = $_POST['cuv'] . "-";
+		$cuv ="'". $_POST['cuv'];
 		$nom_comp = $_POST['nombre']." ".$_POST['apellido_p']." ".$_POST['apellido_m'];
 		$coordenada = $_POST['latitud']." ".$_POST['longitud'];
 		$rfc = substr($_POST['curp'], 0, 10);
@@ -205,9 +205,9 @@ class LayoutController{
 			echo "<script>window.location = '../vistas/proyectos.php';</script>";
 		}else{
 
-			echo "datos no insertado<br>";
-			var_dump($response);
-			var_dump($data);
+			// echo "datos no insertado<br>";
+			// var_dump($response);
+			// var_dump($data);
 
 		}
 	}
@@ -246,12 +246,13 @@ class LayoutController{
 
 	public function cancelacionLayout()
 	{
+			session_start();
 		$data = ['id' => $_POST['layout'],
 		'motivo' => $_POST['cancelacion'], 'usuario' => $_SESSION['usuario']];
 		
 		$result = BeneficiarioModelo::cancelarBeneficiario($data);
 
-		$response = ($result==1) ? "<script>window.location='../vistas/proyectos.php';</script>" : "Error al insertar";
+		$response = ($result==1) ? "<script>window.location='../vistas/proyectos.php';</script>" : var_dump($response);
 
 		echo $response;
 	}

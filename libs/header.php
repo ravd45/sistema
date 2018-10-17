@@ -30,6 +30,7 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         
         <li><h5><?php echo $_SESSION['usuario']; ?></h5></li>
+        <li><a href="../vistas/faq.php"><i class="material-icons">help_outline</i></a></li>
         <li><a href="../index.php">Salir</a></li>
         <li><a></a></li>
         <li><a></a></li>

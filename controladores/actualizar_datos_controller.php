@@ -145,7 +145,7 @@ class ActualizarController
           			<!-- CUV -->
           			<div class='input-field col m4'>
           				<i class='material-icons prefix'>assignment_turned_in</i>
-          				<input name='cuv' type='text' value='".$item['cuv']."' class='validate'  >
+          				<input name='cuv' type='text' min='16' max='16' value='".$item['cuv']."' class='validate'  >
           				<label>CUV</label>
           			</div>
           			<!-- puntaje -->
@@ -368,7 +368,7 @@ class ActualizarController
                 <!-- CUV -->
                 <div class='input-field col m4'>
                   <i class='material-icons prefix'>assignment_turned_in</i>
-                  <input name='cuv' type='text' value='".$item['cuv']."' class='validate'  >
+                  <input name='cuv' type='text' min='16' max='16' value='".$item['cuv']."' class='validate'  >
                   <label>CUV</label>
                 </div>
                 <!-- puntaje -->

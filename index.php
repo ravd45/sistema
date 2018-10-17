@@ -22,6 +22,9 @@ session_destroy();
 		<nav>
 			<div class="nav-wrapper verde">
 				<img src="img/logo .png" id="logo" style="width: 105px; height: 75px; margin-left: 10%;" alt="Logo DP11">
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					  <li><a href="vistas/faq.php"><i class="material-icons">help_outline</i></a></li>
+				</ul>
 			</div>
 		</nav>
 
