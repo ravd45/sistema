@@ -87,13 +87,6 @@
 						Los "layouts" y los "checklist" unicamente se pueden descargar en formato .xls, en cambio es posible descargar la documentación del beneficiario en pdf, dependiendo de como se haya almacenado esa información.
 					</blockquote>
 				</li>
-
-				<!-- <li>
-					<b></b>
-					<blockquote>
-						
-					</blockquote>
-				</li> -->
 			</ol>
 		</div>
 	</div>

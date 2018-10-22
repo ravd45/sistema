@@ -49,7 +49,7 @@
   <script>
     function cancelacion() {
       var id = document.getElementById('btn-cancel').val;
-      // console.log(id);
+      
     }
   </script>
   <script>
@@ -57,7 +57,7 @@
      $(function(){
       $('#FormBuscador').change(function(){
         var buscador = document.getElementById('buscador').val;
-        // console.log(buscador);
+        
       })
      })
     

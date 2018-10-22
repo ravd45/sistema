@@ -72,7 +72,6 @@ session_destroy();
 					type:'POST',
 					data: {usuario: usuario, pass: pass},
 					success: function(response) {
-						// console.log(response);
 						switch (response){
 							case "0":
 							swal({

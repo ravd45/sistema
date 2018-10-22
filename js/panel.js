@@ -119,13 +119,13 @@
 			var correo = $('#mail').val();
 			var pass = $('#contrasenia').val();
 
-			// console.log("el correo es: " + correo + " La contraseña es: " + pass);
+			
 			$.ajax({
 				url: '../controladores/panel_controller.php',
 				type: 'POST',
 				data: {correo: correo, contrasenia:pass, consulta:1},
 				success: function(response) {
-					// console.log(response);
+					
 					if (response == 0) {
 						swal({
 							title: "Eliminando Usuario",
@@ -141,7 +141,7 @@
 									type: 'POST',
 									data: {correo: correo, contrasenia:pass, elimina:1},
 									success: function(response) {
-										// console.log(response);
+										
 										swal("D: Eliminaste al usuario", {
 											icon: "success",
 										});
@@ -292,7 +292,7 @@
 			var confirmacion = $('#confirmpass').val();
 			var financiera = $('#financiera').val();
 			
-			// console.log(nombre + " - " + correo + " - " + pass + " - " + rol + " - " + confirmacion + " - " + financiera);
+			
 
 			$.ajax({
 				url: '../controladores/panel_controller.php',
@@ -312,7 +312,7 @@
 
 		$('.activar').click(function() {
 			var id = $(this).val();
-			// console.log(id);
+			
 
 			$.ajax({
 				url: '../controladores/panel_controller.php',
